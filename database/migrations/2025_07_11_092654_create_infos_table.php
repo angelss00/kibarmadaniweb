@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('infos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('kategori_id')->constrained('kategoris')->onDelete('cascade');
+            $table->string('judul');
+            $table->text('isi')->nullable();
+            $table->string('gambar')->nullable();
             $table->timestamps();
         });
     }

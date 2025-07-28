@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
 @section('title', 'Data Kontak')
 
@@ -26,9 +26,9 @@
             @forelse ($kontaks as $index => $kontak)
             <tr>
                 <td>{{ $index + 1 }}</td>
-                <td>{{ $kontak->nama }}</td>
+                <td>{{ $kontak->name }}</td>
                 <td>{{ $kontak->email }}</td>
-                <td>{{ $kontak->pesan }}</td>
+                <td>{{ $kontak->message }}</td>
                 <td>
                     <a href="{{ route('kontaks.edit', $kontak->id) }}" class="btn btn-sm btn-warning">Edit</a>
                     <form action="{{ route('kontaks.destroy', $kontak->id) }}" method="POST" class="d-inline"

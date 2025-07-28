@@ -10,7 +10,7 @@ class KontakController extends Controller
     // Tampilkan semua pesan kontak
     public function index()
     {
-        $contacts = Kontak::orderBy('created_at', 'desc')->get();
+        $kontaks = Kontak::orderBy('created_at', 'desc')->get();
         return view('kontaks.index', compact('kontaks'));
     }
 
@@ -40,7 +40,7 @@ class KontakController extends Controller
             'status'  => 'new',
         ]);
 
-        return redirect()->route('contacts.index')->with('success', 'Pesan berhasil dikirim.');
+        return redirect()->route('kontaks.index')->with('success', 'Pesan berhasil dikirim.');
     }
 
     // Form edit status pesan (untuk admin)
@@ -51,18 +51,22 @@ class KontakController extends Controller
 
     // Update status pesan
     public function update(Request $request, Kontak $kontak)
-    {
-        $request->validate([
-            'status' => 'required|in:new,read,responded,archived',
-        ]);
+{
+    $request->validate([
+        'name'    => 'required|string|max:100',
+        'email'   => 'required|email|max:100',
+        'message' => 'required|string',
+    ]);
 
-        $kontak->update([
-            'status' => $request->status,
-            'responded_at' => $request->status === 'responded' ? now() : null,
-        ]);
+    $kontak->update([
+        'name'    => $request->name,
+        'email'   => $request->email,
+        'message' => $request->message,
+    ]);
 
-        return redirect()->route('kontaks.index')->with('success', 'Status pesan berhasil diperbarui.');
-    }
+    return redirect()->route('kontaks.index')->with('success', 'Kontak berhasil diperbarui.');
+}
+
 
     // Hapus pesan
     public function destroy(Kontak $kontak)

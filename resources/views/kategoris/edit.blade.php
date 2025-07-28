@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
 @section('title', 'Edit Kategori')
 
@@ -23,7 +23,7 @@
         @method('PUT')
 
         <div class="mb-3">
-            <label for="nama" class="form-label">Nama Kategori</label>
+            <label for="name" class="form-label">Nama Kategori</label>
             <input type="text" name="nama" class="form-control" id="nama"
                 value="{{ old('nama', $kategori->nama) }}" required>
         </div>

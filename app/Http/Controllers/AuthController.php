@@ -9,26 +9,35 @@ use Illuminate\Validation\ValidationException;
 class AuthController extends Controller
 {
     //
-    public function showLogin() {
+    public function showLogin()
+    {
         return view('auth.login');
     }
 
-    public function login(Request $request) {
-        $credentials = $request->only('email','password');
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
 
-        if(Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/admin/dashboard');
-        } 
+            return redirect('/admin/dashboard');
+        }
 
         return $this->sendFailedLoginResponse($request);
     }
-    
-    protected function sendFailedLoginResponse(Request $request) 
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/login');
+    }
+
+    protected function sendFailedLoginResponse(Request $request)
     {
         return redirect()->back()
-        ->withInput($request->only('email'))
-        ->with('error','Email atau passsword salah');
+            ->withInput($request->only('email'))
+            ->with('error', 'Email atau passsword salah');
     }
-    
 }

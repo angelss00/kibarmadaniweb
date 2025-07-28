@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>
+      Forms Advanced Plugins | Minia - Minimal Admin & Dashboard Template
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      content="Premium Multipurpose Admin & Dashboard Template"
+      name="description"
+    />
+    <meta content="Themesbrand" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico" />
+
+    <!-- choices css -->
+    <link
+      href="assets/libs/choices.js/public/assets/styles/choices.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+     
+    <!-- 'monolith' theme -->
+    <link
+      rel="stylesheet"
+      href="assets/libs/@simonwep/pickr/themes/nano.min.css"
+    />
+     
+
+    <!-- preloader css -->
+    <link
+      rel="stylesheet"
+      href="assets/css/preloader.min.css"
+      type="text/css"
+    />
+
+    <!-- Bootstrap Css -->
+    <link
+      href="assets/css/bootstrap.min.css"
+      id="bootstrap-style"
+      rel="stylesheet"
+      type="text/css"
+    /> 
+    <!-- App Css-->
+    <link
+      href="assets/css/app.min.css"
+      id="app-style"
+      rel="stylesheet"
+      type="text/css"
+    />
+  </head>
+
+  <body>
+    <!-- <body data-layout="horizontal"> -->
+
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+      
+
+      <!-- ============================================================== -->
+      <!-- Start right Content here -->
+      <!-- ============================================================== -->
+      <div class="main-content">
+        <div class="page-content">
+          <div class="container-fluid">
+           
+            
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-body">
+                    <div>
+                       
+                      <div class="row">
+
+                        <div class="col-lg-4 col-md-6">
+                          <div class="mb-3">
+                            <label
+                              for="choices-single-no-search"
+                              class="form-label font-size-13 text-muted"
+                              >Options added via config with no search</label
+                            >
+                            <select
+                              class="form-control"
+                              name="choices-single-no-search"
+                              id="choices-single-no-search"
+                            >
+                              <option value="0">Zero</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6">
+                          <div class="mb-3">
+                            <label
+                              for="choices-single-no-sorting"
+                              class="form-label font-size-13 text-muted"
+                              >Options added via config with no search</label
+                            >
+                            <select
+                              class="form-control"
+                              name="choices-single-no-sorting"
+                              id="choices-single-no-sorting"
+                            >
+                              <option value="Madrid">Madrid</option>
+                              <option value="Toronto">Toronto</option>
+                              <option value="Vancouver">Vancouver</option>
+                              <option value="London">London</option>
+                              
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- end row -->
+                    </div>
+                    <!-- Single select input Example -->
+
+                    <div class="mt-4">
+                      <h5 class="font-size-14 mb-3">Multiple select input</h5>
+
+                      <div class="row">
+                         
+
+                        <div class="col-lg-4 col-md-6">
+                          <div class="mb-3">
+                            <label
+                              for="choices-multiple-remove-button"
+                              class="form-label font-size-13 text-muted"
+                              >With remove button</label
+                            >
+                            <select
+                              class="form-control"
+                              name="choices-multiple-remove-button"
+                              id="choices-multiple-remove-button"
+                              placeholder="This is a placeholder"
+                              multiple
+                            >
+                              <option value="Choice 1" selected>
+                                Choice 1
+                              </option>
+                              <option value="Choice 2">Choice 2</option>
+                              <option value="Choice 3">Choice 3</option>
+                              <option value="Choice 4">Choice 4</option>
+                            </select>
+                          </div>
+                        </div>
+
+                      </div>
+                      <!-- end row -->
+                    </div>
+                    <!-- multi select input Example -->
+                  </div>
+                  <!-- end card body -->
+                </div>
+                <!-- end card -->
+              </div>
+              <!-- end col -->
+            </div>
+            <!-- end row -->
+          </div>
+          <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+      </div>
+      <!-- end main content-->
+    </div>
+    <!-- END layout-wrapper -->
+
+      
+
+    <!-- JAVASCRIPT -->
+    <script src="assets/libs/jquery/jquery.min.js"></script>
+  
+    <!-- choices js -->
+    <script src="assets/libs/choices.js/public/assets/scripts/choices.min.js"></script>
+	
+    
+    <script>
+	// singleNoSearch
+    var singleNoSearch = new Choices('#choices-single-no-search', {
+        searchEnabled: false,
+        removeItemButton: true,
+        choices: [
+            { value: 'One', label: 'Label One' },
+            { value: 'Two', label: 'Label Two', disabled: true },
+            { value: 'Three', label: 'Label Three' },
+        ],
+    }).setChoices(
+        [
+            { value: 'Four', label: 'Label Four', disabled: true },
+            { value: 'Five', label: 'Label Five' },
+            { value: 'Six', label: 'Label Six', selected: true },
+        ],
+        'value',
+        'label',
+        false
+    );
+
+    // singleNoSorting
+    var singleNoSorting = new Choices('#choices-single-no-sorting', {
+        shouldSort: false,
+    });
+	// multiple Remove CancelButton
+    var multipleCancelButton = new Choices(
+        '#choices-multiple-remove-button',
+        {
+            removeItemButton: true,
+        }
+    );
+	</script>
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>
