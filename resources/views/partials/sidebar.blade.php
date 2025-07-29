@@ -1,14 +1,20 @@
 <!-- ========== Left Sidebar Start ========== -->
 <div class="vertical-menu">
-
     <div data-simplebar class="h-100">
 
         <!-- Sidebar Menu -->
         <div id="sidebar-menu">
-            <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
 
-                <li class="menu-title" data-key="t-menu">Menu</li>
+                <li class="menu-title" data-key="t-main">Navigasi</li>
+
+                <li>
+                    <a href="{{ route('home') }}">
+                        <i class="bx bx-home-circle"></i>
+                        <span data-key="t-home">Home</span>
+                    </a>
+                </li>
+
 
                 <li>
                     <a href="{{ route('dashboard') }}">
@@ -17,6 +23,15 @@
                     </a>
                 </li>
 
+
+                <li class="menu-title">Halaman Statis</li>
+
+                <li>
+                    <a href="{{ route('about') }}" class="nav-link">
+                        <i class="mdi mdi-information-outline"></i>
+                        <span>Tentang Kami</span>
+                    </a>
+                </li>
                 <li>
                     <a href="{{ route('users.index') }}">
                         <i class="bx bx-user"></i>
@@ -52,12 +67,13 @@
                     </a>
                 </li>
 
-                 <li>
+                <li>
                     <a href="{{ route('kontaks.index') }}">
                         <i class="bx bx-phone"></i>
                         <span data-key="t-kontak">Kontak</span>
                     </a>
                 </li>
+
                 <li>
                     <a href="{{ route('menus.index') }}">
                         <i class="bx bx-food-menu"></i>
@@ -68,40 +84,38 @@
                 <li class="menu-title mt-2" data-key="t-other">Lainnya</li>
 
                 <li>
-    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-        <i class="bx bx-power-off"></i>
-        <span data-key="t-logout">Logout</span>
-    </a>
-
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-        @csrf
-    </form>
-</li>
-
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="bx bx-power-off"></i>
+                        <span data-key="t-logout">Logout</span>
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </li>
             </ul>
         </div>
-        <!-- Sidebar -->
-         {{-- Menu Dinamis dari Database --}}
-    @if(isset($mainMenus) && $mainMenus->count())
+
+        <!-- Sidebar Dynamic Menu -->
+        @if(isset($mainMenus) && $mainMenus->count())
         @foreach($mainMenus as $menu)
-            @if($menu->children->count())
-                <div class="list-group-item">
-                    <strong>{{ $menu->title }}</strong>
-                    <div class="list-group ps-3">
-                        @foreach($menu->children as $child)
-                            <a href="{{ url($child->url) }}" class="list-group-item list-group-item-action">
-                                {{ $child->title }}
-                            </a>
-                        @endforeach
-                    </div>
-                </div>
-            @else
-                <a href="{{ url($menu->url) }}" class="list-group-item list-group-item-action">
-                    {{ $menu->title }}
+        @if($menu->children->count())
+        <div class="list-group-item">
+            <strong>{{ $menu->title }}</strong>
+            <div class="list-group ps-3">
+                @foreach($menu->children as $child)
+                <a href="{{ url($child->url) }}" class="list-group-item list-group-item-action">
+                    {{ $child->title }}
                 </a>
-            @endif
+                @endforeach
+            </div>
+        </div>
+        @else
+        <a href="{{ url($menu->url) }}" class="list-group-item list-group-item-action">
+            {{ $menu->title }}
+        </a>
+        @endif
         @endforeach
-    @endif
+        @endif
 
     </div>
 </div>

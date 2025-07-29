@@ -18,6 +18,12 @@ class GaleriController extends Controller
         return view('galeris.index', compact('galeris'));
     }
 
+    public function showPublic()
+    {
+        $galeris = Galeri::where('status', 'published')->latest()->get();
+        return view('frontend.galeri', compact('galeris'));
+    }
+
     // Form tambah galeri
     public function create()
     {

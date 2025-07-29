@@ -6,12 +6,13 @@
     <a href="{{ route('galeris.create') }}" class="btn btn-primary mb-3">+ Tambah Galeri</a>
 
     @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+    <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
     <table class="table table-bordered">
         <thead>
             <tr>
+                <th>Gambar</th>
                 <th>Judul</th>
                 <th>Kategori</th>
                 <th>Album</th>
@@ -22,20 +23,24 @@
         </thead>
         <tbody>
             @foreach($galeris as $galeri)
-                <tr>
-                    <td>{{ $galeri->title }}</td>
-                    <td>{{ $galeri->category->name ?? '-' }}</td>
-                    <td>{{ $galeri->album->name ?? '-' }}</td>
-                    <td>{{ ucfirst($galeri->status) }}</td>
-                    <td>{{ $galeri->is_featured ? 'Ya' : 'Tidak' }}</td>
-                    <td>
-                        <a href="{{ route('galeris.edit', $galeri->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                        <form action="{{ route('galeris.destroy', $galeri->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus?')">
-                            @csrf @method('DELETE')
-                            <button class="btn btn-sm btn-danger">Hapus</button>
-                        </form>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    <img src="{{ asset($galeri->image_path) }}" alt="{{ $galeri->title }}" width="100" class="img-thumbnail">
+                </td>
+
+                <td>{{ $galeri->title }}</td>
+                <td>{{ $galeri->category->name ?? '-' }}</td>
+                <td>{{ $galeri->album->name ?? '-' }}</td>
+                <td>{{ ucfirst($galeri->status) }}</td>
+                <td>{{ $galeri->is_featured ? 'Ya' : 'Tidak' }}</td>
+                <td>
+                    <a href="{{ route('galeris.edit', $galeri->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                    <form action="{{ route('galeris.destroy', $galeri->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus?')">
+                        @csrf @method('DELETE')
+                        <button class="btn btn-sm btn-danger">Hapus</button>
+                    </form>
+                </td>
+            </tr>
             @endforeach
         </tbody>
     </table>
