@@ -16,7 +16,7 @@
             <input type="text" name="title" class="form-control @error('title') is-invalid @enderror"
                 value="{{ old('title', $galeri->title) }}" required>
             @error('title')
-                <div class="invalid-feedback">{{ $message }}</div>
+            <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
 
@@ -26,7 +26,7 @@
             <textarea name="description" class="form-control @error('description') is-invalid @enderror"
                 rows="3">{{ old('description', $galeri->description) }}</textarea>
             @error('description')
-                <div class="invalid-feedback">{{ $message }}</div>
+            <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
 
@@ -36,9 +36,9 @@
             <select name="category_id" class="form-select">
                 <option value="">-- Pilih Kategori --</option>
                 @foreach ($categories as $cat)
-                    <option value="{{ $cat->id }}" {{ old('category_id', $galeri->category_id) == $cat->id ? 'selected' : '' }}>
-                        {{ $cat->name }}
-                    </option>
+                <option value="{{ $cat->id }}" {{ old('category_id', $galeri->category_id) == $cat->id ? 'selected' : '' }}>
+                    {{ $cat->name }}
+                </option>
                 @endforeach
             </select>
         </div>
@@ -49,9 +49,9 @@
             <select name="album_id" class="form-select">
                 <option value="">-- Pilih Album --</option>
                 @foreach ($albums as $album)
-                    <option value="{{ $album->id }}" {{ old('album_id', $galeri->album_id) == $album->id ? 'selected' : '' }}>
-                        {{ $album->name }}
-                    </option>
+                <option value="{{ $album->id }}" {{ old('album_id', $galeri->album_id) == $album->id ? 'selected' : '' }}>
+                    {{ $album->title }}
+                </option>
                 @endforeach
             </select>
         </div>
@@ -65,10 +65,10 @@
 
         {{-- Preview gambar lama --}}
         @if ($galeri->image_path)
-            <div class="mb-3">
-                <label class="form-label">Gambar Saat Ini:</label><br>
-                <img src="{{ asset($galeri->image_path) }}" width="200" style="object-fit: cover;">
-            </div>
+        <div class="mb-3">
+            <label class="form-label">Gambar Saat Ini:</label><br>
+            <img src="{{ asset($galeri->image_path) }}" width="200" style="object-fit: cover;">
+        </div>
         @endif
 
         {{-- Uploader --}}
@@ -105,6 +105,7 @@
         {{-- Tombol --}}
         <button type="submit" class="btn btn-success">Update</button>
         <a href="{{ route('galeris.index') }}" class="btn btn-secondary">Batal</a>
+
     </form>
 </div>
 @endsection

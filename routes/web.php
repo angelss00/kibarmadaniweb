@@ -13,34 +13,39 @@ use App\Http\Controllers\FileDownloadController;
 use App\Http\Controllers\DownloadCategoryController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\GaleriFrontendController;
+use App\Http\Controllers\GalerryCategoryController;
+use App\Http\Controllers\AlbumController;
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+*/
 
-// ✅ Halaman Welcome (tanpa middleware)
-Route::get('/', function () {
-    return view('welcome');
+
+
+Route::middleware(['auth'])->group(function () {
+    // ...
+    Route::resource('galerry_categories', GalerryCategoryController::class);
+    Route::resource('albums', AlbumController::class);
 });
 
-// routes/web.php
+
+// ✅ Halaman Welcome / Home
+Route::get('/', function () {
+    return view('index'); // Ganti "welcome" ke "index" sesuai permintaan kamu sebelumnya
+})->name('home');
+
+// ✅ Halaman Statis Umum (Frontend)
+Route::get('/tentang-kami', [PageController::class, 'about'])->name('about');
+Route::get('/galeri', [GaleriFrontendController::class, 'index'])->name('galeri');
 Route::post('/kontak', [KontakController::class, 'store'])->name('kontak.store');
 
-Route::get('/galeri', [App\Http\Controllers\GaleriFrontendController::class, 'index'])->name('galeri.frontend');
-
-Route::get('/tentang-kami', [PageController::class, 'about'])->name('about');
-
-
-// ✅ Login & Logout Routes
+// ✅ Login & Logout
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/', function () {
-    return view('index');
-})->name('home');
-
-
-Route::post('/kontak', [KontakController::class, 'store'])->name('kontak.store');
-
-
-// ✅ Semua route berikut hanya untuk user yang sudah login
+// ✅ Route Backend / Admin (dengan middleware auth)
 Route::middleware(['auth'])->group(function () {
 
     // Dashboard
@@ -48,8 +53,8 @@ Route::middleware(['auth'])->group(function () {
         return view('admin.dashboard');
     })->name('dashboard');
 
-    // Resource Routes (CRUD otomatis)
-    Route::resource('menus', MenuController::class); // ✅ pastikan konsisten pakai "menus"
+    // Resource CRUD
+    Route::resource('menus', MenuController::class);
     Route::resource('users', UserController::class);
     Route::resource('infos', InfoController::class);
     Route::resource('kontaks', KontakController::class);
@@ -58,4 +63,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('kategoris', KategoriController::class);
     Route::resource('file_downloads', FileDownloadController::class);
     Route::resource('download_categories', DownloadCategoryController::class);
+    
 });

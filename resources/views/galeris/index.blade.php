@@ -2,8 +2,20 @@
 
 @section('content')
 <div class="container">
-    <h3>Manajemen Galeri</h3>
-    <a href="{{ route('galeris.create') }}" class="btn btn-primary mb-3">+ Tambah Galeri</a>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4>Manajemen Galeri</h4>
+        <div>
+            <a href="{{ route('galeris.create') }}" class="btn btn-success me-2">
+                + Tambah Galeri
+            </a>
+            <a href="{{ route('galerry_categories.create') }}" class="btn btn-primary me-2">
+                + Tambah Kategori Galeri
+            </a>
+            <a href="{{ route('albums.create') }}" class="btn btn-secondary">
+                + Tambah Album
+            </a>
+        </div>
+    </div>
 
     @if(session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
@@ -30,7 +42,7 @@
 
                 <td>{{ $galeri->title }}</td>
                 <td>{{ $galeri->category->name ?? '-' }}</td>
-                <td>{{ $galeri->album->name ?? '-' }}</td>
+                <td>{{ $galeri->album->title ?? '-' }}</td>
                 <td>{{ ucfirst($galeri->status) }}</td>
                 <td>{{ $galeri->is_featured ? 'Ya' : 'Tidak' }}</td>
                 <td>
