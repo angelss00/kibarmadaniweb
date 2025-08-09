@@ -5,13 +5,13 @@
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h4>Manajemen Galeri</h4>
         <div>
-            <a href="{{ route('galeris.create') }}" class="btn btn-success me-2">
+            <a href="{{ route('galeris.index') }}" class="btn btn-success me-2">
                 + Tambah Galeri
             </a>
-            <a href="{{ route('galerry_categories.create') }}" class="btn btn-primary me-2">
+            <a href="{{ route('galerry_categories.index') }}" class="btn btn-primary me-2">
                 + Tambah Kategori Galeri
             </a>
-            <a href="{{ route('albums.create') }}" class="btn btn-secondary">
+            <a href="{{ route('albums.index') }}" class="btn btn-secondary">
                 + Tambah Album
             </a>
         </div>

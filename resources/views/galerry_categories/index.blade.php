@@ -4,11 +4,15 @@
 
 @section('content')
 <div class="container mt-4">
-    <h3>Kategori Galeri</h3>
-    <a href="{{ route('galerry_categories.create') }}" class="btn btn-primary mb-3">+ Tambah Kategori</a>
-
+    <h3>GalerI Kategori</h3>
+    <a href="{{ route('galerry_categories.create') }}" class="btn btn-primary mb-3 me-2">
+        + Tambah Galeri Category
+    </a>
+    <a href="{{ route('galeris.index') }}" class="btn btn-secondary mb-3">
+        <i class="bi bi-arrow-left"></i> Kembali ke Galeri
+    </a>
     @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+    <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
     <table class="table table-bordered">

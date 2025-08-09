@@ -23,11 +23,13 @@ class GalerryCategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
         ]);
 
         GalerryCategory::create([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
+            'description' => $request->description,
         ]);
 
         return redirect()->route('galerry_categories.index')->with('success', 'Kategori berhasil ditambahkan.');
@@ -42,11 +44,13 @@ class GalerryCategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
         ]);
 
         $galerry_category->update([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
+            'description' => $request->description,
         ]);
 
         return redirect()->route('galerry_categories.index')->with('success', 'Kategori berhasil diperbarui.');

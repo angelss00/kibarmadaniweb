@@ -5,10 +5,15 @@
 @section('content')
 <div class="container mt-4">
     <h3>Album Galeri</h3>
-    <a href="{{ route('albums.create') }}" class="btn btn-primary mb-3">+ Tambah Album</a>
+    <a href="{{ route('albums.create') }}" class="btn btn-primary mb-3 me-2">
+        + Tambah Album
+    </a>
+    <a href="{{ route('galeris.index') }}" class="btn btn-secondary mb-3">
+        <i class="bi bi-arrow-left"></i> Kembali ke Galeri
+    </a>
 
     @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+    <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
     <table class="table table-bordered">

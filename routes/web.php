@@ -64,4 +64,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('file_downloads', FileDownloadController::class);
     Route::resource('download_categories', DownloadCategoryController::class);
     
+    
 });

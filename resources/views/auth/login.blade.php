@@ -236,7 +236,6 @@
     <script src="{{ asset('themes/minia/assets/libs/simplebar/simplebar.min.js') }}"></script>
     <script src="{{ asset('themes/minia/assets/libs/node-waves/waves.min.js') }}"></script>
     <script src="{{ asset('themes/minia/assets/libs/feather-icons/feather.min.js') }}"></script>
-    <script src="{{ asset('themes/minia/assets/libs/pace-js/pace.min.js') }}"></script>
     <script src="{{ asset('themes/minia/assets/js/pages/pass-addon.init.js') }}"></script>
 
     <!-- pace js -->
