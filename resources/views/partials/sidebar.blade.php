@@ -22,16 +22,6 @@
                         <span data-key="t-dashboard">Dashboard</span>
                     </a>
                 </li>
-
-
-                <li class="menu-title">Halaman Statis</li>
-
-                <li>
-                    <a href="{{ route('about') }}" class="nav-link">
-                        <i class="mdi mdi-information-outline"></i>
-                        <span>Tentang Kami</span>
-                    </a>
-                </li>
                 <li>
                     <a href="{{ route('users.index') }}">
                         <i class="bx bx-user"></i>
@@ -78,6 +68,18 @@
                     <a href="{{ route('menus.index') }}">
                         <i class="bx bx-food-menu"></i>
                         <span data-key="t-menu">Menu</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('beritas.admin.index') }}">
+                        <i class="bx bx-news"></i>
+                        <span>Berita</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.visi-misi.index') }}">
+                        <i class="bx bx-rocket"></i>
+                        <span>Halaman Statis</span>
                     </a>
                 </li>
 

@@ -59,7 +59,7 @@
 
     {{-- Footer --}}
     <footer class="text-center py-4 text-muted">
-        <small>&copy; {{ date('Y') }} STMIK El Rahma Yogyakarta</small>
+        <small>&copy; {{ date('Y') }} LPK KIBAR MADANI/small>
     </footer>
 
     {{-- Bootstrap JS --}}

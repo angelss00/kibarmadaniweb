@@ -130,84 +130,82 @@
     <section id="about" class="py-5 bg-light">
       <div class="container" data-aos="fade-up">
 
-        <!-- Baris Atas: Gambar + Deskripsi -->
-        <div class="row align-items-center mb-5">
-          <div class="col-md-5" data-aos="fade-right">
-            <img src="{{ asset('themes/Medicio/assets/img/about.jpg') }}" class="img-fluid rounded shadow-sm" alt="Tentang Kami">
-          </div>
-          <div class="col-md-7" data-aos="fade-left">
-            <h2 class="mb-3 fw-bold">Makna Kibar Madani</h2>
-            <p><strong>Kibar</strong> menurut KBBI berarti: <br> - Bergerak Aktif. <br> - Menjadi Masyhur.</p>
-            <p><strong>Madani</strong> menurut KBBI adalah menjunjung tinggi nilai, norma dan hukum yang ditopang oleh penguasaan iman, ilmu, dan teknologi yang berperadaban.</p>
-            <p>Kibar Madani berkomitmen membentuk masyarakat yang cerdas spiritual, unggul dalam kompetensi, dan kaya akan soft skill berbasis nilai-nilai religius.</p>
-          </div>
-        </div>
+        <section id="visi-misi" class="my-5">
+          <div class="container">
 
-        <!-- Visi -->
-        <div class="text-center mb-4">
-          <h3 class="fw-bold">Visi Kami</h3>
-          <p class="fst-italic mx-auto" style="max-width: 800px;">
-            Menjadi lembaga pelatihan yang unggul dalam mengembangkan sumber daya manusia melalui pendidikan berbasis spiritual, kompetensi, dan soft skill yang adaptif terhadap perkembangan zaman.
-          </p>
-        </div>
-
-        <!-- Misi -->
-        <div class="row justify-content-center">
-          <div class="col-md-10" data-aos="fade-up">
-            <div class="p-4 border rounded bg-white shadow-sm">
-              <h5 class="fw-bold mb-3"><i class="bi bi-check-circle text-primary me-2"></i>Misi Kami</h5>
-              <ul class="list-unstyled">
-                <li><i class="bi bi-dot text-primary"></i> Mengembangkan kecerdasan spiritual dan kompetensi individu.</li>
-                <li><i class="bi bi-dot text-primary"></i> Menyiapkan generasi adaptif terhadap perubahan Core Value.</li>
-                <li><i class="bi bi-dot text-primary"></i> Kreatif dalam metode pengembangan soft skill.</li>
-                <li><i class="bi bi-dot text-primary"></i> Inovatif dalam produk & layanan pelatihan.</li>
-                <li><i class="bi bi-dot text-primary"></i> Brilian dalam menyajikan program kekinian dan relevan.</li>
-                <li><i class="bi bi-dot text-primary"></i> Aktif merespons perubahan kebutuhan kompetensi.</li>
-                <li><i class="bi bi-dot text-primary"></i> Religius sebagai pondasi pengembangan soft skill.</li>
-              </ul>
+            <div class="mb-5 p-4 bg-white shadow-sm rounded">
+              <h2 class="mb-3 border-bottom pb-2"><i class="bi bi-eye-fill me-2"></i>Visi</h2>
+              <p class="lead">{!! nl2br(e($visiMisi->visi ?? 'Belum ada data visi')) !!}</p>
             </div>
+
+            <div class="mb-5 p-4 bg-white shadow-sm rounded">
+              <h2 class="mb-3 border-bottom pb-2"><i class="bi bi-flag-fill me-2"></i>Misi</h2>
+              <p class="lead">{!! nl2br(e($visiMisi->misi ?? 'Belum ada data misi')) !!}</p>
+            </div>
+
+            <div class="mb-5 p-4 bg-white shadow-sm rounded">
+              <h2 class="mb-3 border-bottom pb-2"><i class="bi bi-info-circle-fill me-2"></i>Makna Kibar Madani</h2>
+              <p class="lead">{!! nl2br(e($visiMisi->makna_kibar ?? 'Belum ada data makna')) !!}</p>
+            </div>
+
           </div>
-        </div>
+        </section>
 
       </div>
     </section>
 
-    <!-- ======= Section Berita Kibar Madani ======= -->
-    <section id="berita" class="py-5" style="background: #f9f9fc;">
-      <div class="container" data-aos="fade-up">
-        <h3 class="text-center mb-5 text-primary fw-bold">BERITA KIBAR MADANI</h3>
 
-        <div class="row justify-content-center">
-          <!-- Kartu Berita -->
-          <div class="col-md-4 mb-4">
-            <div class="p-4 rounded bg-white text-center shadow-sm h-100" style="border-radius: 15px;">
-              <img src="{{ asset('themes/Medicio/assets/img/logo.png') }}" alt="Logo Kibar" class="mb-3" style="height: 40px;">
-              <p class="text-primary fw-medium">
-                Raih Sertifikat Trainer Nasional Bersama LPK Kibar Madani & LSP Trainer Kompeten Indonesia
-              </p>
+
+    </div>
+    </section>
+
+
+    <!--  berita  -->
+    <section id="berita" class="my-5">
+      <div class="container">
+        <h2 class="text-center mb-4">Berita Terbaru</h2>
+        <div class="row justify-content-center g-4">
+          <div class="text-center mt-4">
+            <a href="{{ route('berita.frontend.index') }}" class="btn btn-outline-primary">Lihat Semua Berita</a>
+          </div>
+          @forelse($berita as $b)
+          <div class="col-md-4 col-sm-6 position-relative" data-aos="fade-up">
+            <div class="card h-100 shadow-sm" style="min-height: 180px;">
+              <img src="{{ asset('themes/minia/assets/images/logo.png') }}"
+                alt="Logo"
+                style="
+                            width: 40px;
+                            height: 40px;
+                            object-fit: contain;
+                            position: absolute;
+                            top: 12px;
+                            left: 12px;
+                            border-radius: 4px;
+                            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+                            background: transparent;
+                         ">
+              <div class="card-body d-flex flex-column" style="padding-top: 60px;">
+                <h5 class="card-title">{{ $b->judul }}</h5>
+                <a href="{{ route('berita.frontend.show', $b->id) }}" class="btn btn-sm btn-primary mt-auto align-self-start">Baca Selengkapnya</a>
+              </div>
+              <div class="card-footer text-muted small" style="font-size: 0.75rem;">
+                {{ $b->created_at->format('d M Y') }}
+              </div>
             </div>
           </div>
-
-          <div class="col-md-4 mb-4">
-            <div class="p-4 rounded bg-white text-center shadow-sm h-100" style="border-radius: 15px;">
-              <img src="{{ asset('themes/Medicio/assets/img/logo.png') }}" alt="Logo Kibar" class="mb-3" style="height: 40px;">
-              <p class="text-primary fw-medium">
-                Training of Trainer (ToT) Sertifikasi BNSP - Level 3
-              </p>
-            </div>
-          </div>
-
-          <div class="col-md-4 mb-4">
-            <div class="p-4 rounded bg-white text-center shadow-sm h-100" style="border-radius: 15px;">
-              <img src="{{ asset('themes/Medicio/assets/img/logo.png') }}" alt="Logo Kibar" class="mb-3" style="height: 40px;">
-              <p class="text-primary fw-medium">
-                Sertifikat Trainer Nasional - Skema Training Organizer
-              </p>
-            </div>
-          </div>
+          @empty
+          <p class="text-center">Belum ada berita.</p>
+          @endforelse
         </div>
       </div>
     </section>
+
+
+
+
+
+
+
 
     <!-- ======= Section Layanan Interaktif ======= -->
     <section class="py-5 bg-light">
@@ -401,33 +399,33 @@
     </section>
 
     <!-- Form Kontak -->
-<div class="row justify-content-center mt-5">
-  <div class="col-lg-10">
-    <div class="shadow rounded p-4 bg-white">
-      <form action="{{ route('kontak.store') }}" method="POST">
-        @csrf
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <input type="text" name="nama" class="form-control" placeholder="Nama Anda" required>
-          </div>
-          <div class="col-md-6 mb-3">
-            <input type="email" name="email" class="form-control" placeholder="Email" required>
-          </div>
+    <div class="row justify-content-center mt-5">
+      <div class="col-lg-10">
+        <div class="shadow rounded p-4 bg-white">
+          <form action="{{ route('kontak.store') }}" method="POST">
+            @csrf
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <input type="text" name="nama" class="form-control" placeholder="Nama Anda" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <input type="email" name="email" class="form-control" placeholder="Email" required>
+              </div>
+            </div>
+            <div class="mb-3">
+              <input type="text" name="subjek" class="form-control" placeholder="Subjek" required>
+            </div>
+            <div class="mb-3">
+              <textarea name="pesan" rows="5" class="form-control" placeholder="Tulis pesan Anda di sini..." required></textarea>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary px-4">Kirim Pesan</button>
+            </div>
+          </form>
         </div>
-        <div class="mb-3">
-          <input type="text" name="subjek" class="form-control" placeholder="Subjek" required>
-        </div>
-        <div class="mb-3">
-          <textarea name="pesan" rows="5" class="form-control" placeholder="Tulis pesan Anda di sini..." required></textarea>
-        </div>
-        <div class="text-center">
-          <button type="submit" class="btn btn-primary px-4">Kirim Pesan</button>
-        </div>
-      </form>
+      </div>
     </div>
-  </div>
-</div>
-<!-- End Form Kontak -->
+    <!-- End Form Kontak -->
 
     <!-- End Contact Section -->
 

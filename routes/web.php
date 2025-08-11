@@ -15,11 +15,56 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\GaleriFrontendController;
 use App\Http\Controllers\GalerryCategoryController;
 use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\VisiMisiController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 */
+
+
+
+
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::prefix('beritas/admin')->name('beritas.admin.')->group(function () {
+    Route::get('/', [BeritaController::class, 'index'])->name('index');
+    Route::get('/create', [BeritaController::class, 'create'])->name('create');
+    Route::post('/', [BeritaController::class, 'store'])->name('store');
+    Route::get('/{berita}/edit', [BeritaController::class, 'edit'])->name('edit');
+    Route::put('/{berita}', [BeritaController::class, 'update'])->name('update');
+    Route::delete('/{berita}', [BeritaController::class, 'destroy'])->name('destroy');
+});
+
+
+Route::post('admin/visi-misi/{id}/upload-image', [VisiMisiController::class, 'uploadImage'])->name('admin.visi-misi.upload-image');
+Route::post('visi-misi/upload-image/{id}', [VisiMisiController::class, 'uploadImage'])->name('admin.visi-misi.upload-image');
+
+
+
+
+Route::prefix('admin')->middleware(['auth'])->group(function () {
+    Route::get('visi-misi', [VisiMisiController::class, 'index'])->name('admin.visi-misi.index');
+    Route::get('visi-misi/edit/{id}', [VisiMisiController::class, 'edit'])->name('admin.visi-misi.edit');
+    Route::put('visi-misi/update/{id}', [VisiMisiController::class, 'update'])->name('admin.visi-misi.update');
+    Route::get('visi-misi/create', [VisiMisiController::class, 'create'])->name('admin.visi-misi.create');
+    Route::post('visi-misi/store', [VisiMisiController::class, 'store'])->name('admin.visi-misi.store');
+    Route::delete('visi-misi/delete/{id}', [VisiMisiController::class, 'destroy'])->name('admin.visi-misi.destroy');
+});
+
+
+
+Route::resource('berita', BeritaController::class);
+
+// Route frontend berita (publik)
+Route::get('/berita', [BeritaController::class, 'frontendIndex'])->name('berita.frontend.index');
+Route::get('/berita/{id}', [BeritaController::class, 'show'])->name('berita.frontend.show');
+
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 
@@ -30,10 +75,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-// ✅ Halaman Welcome / Home
-Route::get('/', function () {
-    return view('index'); // Ganti "welcome" ke "index" sesuai permintaan kamu sebelumnya
-})->name('home');
+
 
 // ✅ Halaman Statis Umum (Frontend)
 Route::get('/tentang-kami', [PageController::class, 'about'])->name('about');
@@ -63,6 +105,4 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('kategoris', KategoriController::class);
     Route::resource('file_downloads', FileDownloadController::class);
     Route::resource('download_categories', DownloadCategoryController::class);
-    
-    
 });
