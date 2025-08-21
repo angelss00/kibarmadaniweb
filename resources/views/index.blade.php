@@ -62,9 +62,9 @@
           <li><a class="nav-link scrollto" href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#berita">Berita</a></li>
           <li><a class="nav-link scrollto" href="#about">Tentang Kami</a></li>
-          <li><a class="nav-link scrollto" href="#pelatihan">Jadwal Pelatihan</a></li>
+          <li><a class="nav-link scrollto" href="{{ route('pelatihans.jadwal') }}">Jadwal Pelatihan</a></li>
           <li><a class="nav-link" href="{{ route('galeri') }}">Galeri</a></li>
-          <li><a class="nav-link scrollto" href="#daftar">Pendaftaran</a></li>
+          <li><a class="nav-link scrollto" href="{{ route('pendaftarans.create') }}">Pendaftaran</a></li>
           </li>
           <li><a class="nav-link scrollto" href="#contact">Kontak Kami</a></li>
         </ul>

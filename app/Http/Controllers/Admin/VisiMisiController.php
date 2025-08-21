@@ -13,7 +13,6 @@ class VisiMisiController extends Controller
     public function index()
     {
         $visiMisi = VisiMisi::all(); 
-        $visiMisi = VisiMisi::with('images')->get();  // ngambil semua data visi misi, sesuai yang kamu pakai di view
         return view('admin.visi_misi.index', compact('visiMisi'));
     }
 
@@ -66,26 +65,5 @@ class VisiMisiController extends Controller
         $item->delete();
 
         return redirect()->route('admin.visi-misi.index')->with('success', 'Data berhasil dihapus');
-    }
-
-    // Method upload gambar
-    public function uploadImage(Request $request, $visiMisiId)
-    {
-        $request->validate([
-            'image' => 'required|image|max:2048', // max 2MB
-        ]);
-
-        $visiMisi = VisiMisi::findOrFail($visiMisiId);
-
-        $file = $request->file('image');
-        $filename = time() . '_' . $file->getClientOriginalName();
-        $file->storeAs('public/visi_misi_images', $filename);
-
-        // Simpan data gambar ke db
-        $visiMisi->images()->create([
-            'image_path' => $filename,
-        ]);
-
-        return redirect()->back()->with('success', 'Gambar berhasil diupload');
     }
 }

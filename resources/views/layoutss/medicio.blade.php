@@ -18,7 +18,7 @@
 
 <body>
     @include('partialss.topbar')
-    @include('partialss.header') {{-- kita akan buat ini juga --}}
+    @include('partialss.header')
 
     <main id="main">
         @yield('content')

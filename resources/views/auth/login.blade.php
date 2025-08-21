@@ -4,7 +4,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Login | Minia - Minimal Admin & Dashboard Template</title>
+    <title>Login | LPK KIBAR MADANI</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
@@ -122,7 +122,7 @@
                                 <div class="mt-4 mt-md-5 text-center">
                                     <p class="mb-0">© <script>
                                             document.write(new Date().getFullYear())
-                                        </script> Minia . Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand</p>
+                                        </script> <i class="mdi mdi-heart text-danger"></i> by kibarmadani</p>
                                 </div>
                             </div>
                         </div>

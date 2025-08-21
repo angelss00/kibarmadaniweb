@@ -18,6 +18,9 @@ use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\VisiMisiController;
+use App\Http\Controllers\Admin\PelatihanController;
+use App\Http\Controllers\PendaftaranController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +29,18 @@ use App\Http\Controllers\Admin\VisiMisiController;
 
 
 
+// untuk user daftar
+Route::get('pendaftaran', [PendaftaranController::class, 'create'])->name('pendaftarans.create');
+Route::post('pendaftaran', [PendaftaranController::class, 'store'])->name('pendaftarans.store');
+
+// untuk manajemen (tanpa prefix admin)
+Route::get('pendaftarans', [PendaftaranController::class, 'index'])->name('pendaftarans.index');
+Route::delete('pendaftarans/{id}', [PendaftaranController::class, 'destroy'])->name('pendaftarans.destroy');
+
+
+
+Route::get('/pelatihans/jadwal', [PelatihanController::class, 'jadwal'])
+    ->name('pelatihans.jadwal');
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -43,6 +58,11 @@ Route::prefix('beritas/admin')->name('beritas.admin.')->group(function () {
 Route::post('admin/visi-misi/{id}/upload-image', [VisiMisiController::class, 'uploadImage'])->name('admin.visi-misi.upload-image');
 Route::post('visi-misi/upload-image/{id}', [VisiMisiController::class, 'uploadImage'])->name('admin.visi-misi.upload-image');
 
+
+
+
+
+Route::resource('pelatihans', PelatihanController::class);
 
 
 

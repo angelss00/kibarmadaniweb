@@ -10,7 +10,7 @@
 
     <form action="{{ route('admin.visi-misi.update', $visiMisi->id) }}" method="POST">
         @csrf
-        @method('PUT') {{-- Method spoofing untuk PUT --}}
+        @method('PUT') 
         <div class="mb-3">
             <label for="visi" class="form-label">Visi</label>
             <textarea name="visi" id="visi" class="form-control" rows="3" required>{{ old('visi', $visiMisi->visi) }}</textarea>
@@ -23,7 +23,6 @@
             <label for="makna_kibar" class="form-label">Makna Kibar Madani</label>
             <textarea name="makna_kibar" id="makna_kibar" class="form-control" rows="3" required>{{ old('makna_kibar', $visiMisi->makna_kibar) }}</textarea>
         </div>
-
         <button type="submit" class="btn btn-primary">Simpan</button>
         <a href="{{ route('admin.visi-misi.index') }}" class="btn btn-secondary">Batal</a>
     </form>

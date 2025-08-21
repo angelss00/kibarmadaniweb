@@ -77,9 +77,22 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('pendaftarans.index') }}">
+                        <i class="bx bx-group"></i>
+                        <span>Manajemen Pendaftaran</span>
+                    </a>
+
+                </li>
+                <li>
                     <a href="{{ route('admin.visi-misi.index') }}">
                         <i class="bx bx-rocket"></i>
                         <span>Halaman Statis</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('pelatihans.index') }}">
+                        <i class="bx bx-calendar"></i>
+                        <span>Jadwal Pelatihan</span>
                     </a>
                 </li>
 

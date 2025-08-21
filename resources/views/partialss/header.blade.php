@@ -20,26 +20,28 @@
 
 
 <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center">
+<header id="header" class="fixed-top">
+  <div class="container d-flex align-items-center">
 
-      <a href="index.html" class="logo me-auto"><img src="themes/Medicio/assets/img/logo.png" alt=""></a>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <h1 class="logo me-auto"><a href="index.html">Medicio</a></h1> -->
+    <a href="{{ url('/') }}" class="logo me-auto">
+      <img src="{{ asset('themes/Medicio/assets/img/logo.png') }}" alt="">
+    </a>
 
-      <nav id="navbar" class="navbar order-last order-lg-0">
-        <ul>
-          <li><a class="nav-link scrollto" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#berita">Berita</a></li>
-          <li><a class="nav-link scrollto" href="#about">Tentang Kami</a></li>
-          <li><a class="nav-link scrollto" href="#pelatihan">Jadwal Pelatihan</a></li>
-          <li><a class="nav-link" href="{{ route('galeri') }}">Galeri</a></li>
-          <li><a class="nav-link scrollto" href="#daftar">Pendaftaran</a></li>
-          </li>
-          <li><a class="nav-link scrollto" href="#contact">Kontak Kami</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
+    <nav id="navbar" class="navbar order-last order-lg-0">
+      <ul>
+        <li><a class="nav-link scrollto" href="#hero">Home</a></li>
+        <li><a class="nav-link scrollto" href="#berita">Berita</a></li>
+        <li><a class="nav-link scrollto" href="#about">Tentang Kami</a></li>
 
-    </div>
-  </header><!-- End Header -->
+        <li><a class="nav-link" href="{{ route('pelatihans.jadwal') }}" target="_self">Jadwal Pelatihan</a></li>
+        <li><a class="nav-link" href="{{ route('galeri') }}" target="_self">Galeri</a></li>
+
+        <li><a class="nav-link scrollto" href="{{ route('pendaftarans.create') }}">Pendaftaran</a></li>
+        <li><a class="nav-link scrollto" href="#contact">Kontak Kami</a></li>
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav><!-- .navbar -->
+
+  </div>
+</header>
+<!-- End Header -->
