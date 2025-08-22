@@ -20,7 +20,7 @@
                 <th style="width: 50px;">No</th>
                 <th>Nama Kategori</th>
                 <th>Deskripsi</th>
-                <th style="width: 150px;">Aksi</th>
+                <th style="width: 180px;">Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -30,15 +30,18 @@
                 <td>{{ $kategori->nama }}</td>
                 <td>{{ $kategori->deskripsi }}</td>
                 <td>
-                    <a href="{{ route('kategoris.edit', $kategori->id) }}"
-                        class="btn btn-sm btn-warning">Edit</a>
-                    <form action="{{ route('kategoris.destroy', $kategori->id)
-}}" method="POST" class="d-inline"
-                        onsubmit="return confirm('Yakin ingin menghapus kategori ini?')">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-sm btn-danger">Hapus</button>
-                    </form>
+                     <div class="d-flex gap-1 justify-content-center">
+                            <a href="{{ route('kategoris.edit', $kategori) }}" class="btn btn-warning btn-sm">
+                                <i class="fa fa-edit"></i> Edit
+                            </a>
+                            <form action="{{ route('kategoris.destroy', $kategori) }}" method="POST" onsubmit="return confirm('Yakin?')">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger btn-sm">
+                                    <i class="fa fa-trash"></i> Hapus
+                                </button>
+                            </form>
+                        </div>
                 </td>
             </tr>
             @empty

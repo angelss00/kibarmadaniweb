@@ -16,7 +16,7 @@
                 <th>Isi</th>
                 <th>Kategori</th>
                 <th>Tanggal</th>
-                <th>Aksi</th>
+                <th width="180px" >Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -27,13 +27,18 @@
                 <td>{{ $info->kategori->nama }}</td>
                 <td>{{ $info->created_at->format('d-m-Y') }}</td>
                 <td class="text-center">
-                    <a href="{{ route('infos.edit', $info->id) }}" class="btn btn-sm btn-warning">Edit</a>
-
-                    <form action="{{ route('infos.destroy', $info->id) }}" method="POST" class="d-inline"
-                        onsubmit="return confirm('Yakin ingin menghapus?')">
-                        @csrf @method('DELETE')
-                        <button class="btn btn-sm btn-danger">Hapus</button>
-                    </form>
+                     <div class="d-flex gap-1 justify-content-center">
+                            <a href="{{ route('infos.edit', $info) }}" class="btn btn-warning btn-sm">
+                                <i class="fa fa-edit"></i> Edit
+                            </a>
+                            <form action="{{ route('infos.destroy', $info) }}" method="POST" onsubmit="return confirm('Yakin?')">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger btn-sm">
+                                    <i class="fa fa-trash"></i> Hapus
+                                </button>
+                            </form>
+                        </div>
                 </td>
             </tr>
             @endforeach

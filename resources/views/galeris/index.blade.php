@@ -24,7 +24,7 @@
                     <th>Album</th>
                     <th>Status</th>
                     <th>Beranda</th>
-                    <th>Aksi</th>
+                    <th width="180px" >Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,11 +39,18 @@
                     <td>{{ ucfirst($galeri->status) }}</td>
                     <td>{{ $galeri->is_featured ? 'Ya' : 'Tidak' }}</td>
                     <td>
-                        <a href="{{ route('galeris.edit', $galeri->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                        <form action="{{ route('galeris.destroy', $galeri->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus?')">
-                            @csrf @method('DELETE')
-                            <button class="btn btn-sm btn-danger">Hapus</button>
-                        </form>
+                        <div class="d-flex gap-1 justify-content-center">
+                            <a href="{{ route('galeris.edit', $galeri) }}" class="btn btn-warning btn-sm">
+                                <i class="fa fa-edit"></i> Edit
+                            </a>
+                            <form action="{{ route('galeris.destroy', $galeri) }}" method="POST" onsubmit="return confirm('Yakin?')">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger btn-sm">
+                                    <i class="fa fa-trash"></i> Hapus
+                                </button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
                 @endforeach

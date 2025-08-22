@@ -20,7 +20,7 @@
                 <th>Ukuran</th>
                 <th>Status</th>
                 <th>Unduhan</th>
-                <th style="width: 120px;">Aksi</th>
+                <th style="width: 180px;">Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -33,12 +33,18 @@
                 <td>{{ ucfirst($file->status) }}</td>
                 <td>{{ $file->download_count }}</td>
                 <td>
-                    <a href="{{ route('file_downloads.edit', $file->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                    <form action="{{ route('file_downloads.destroy', $file->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus file ini?')">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-sm btn-danger">Hapus</button>
-                    </form>
+                    <div class="d-flex gap-1 justify-content-center">
+                            <a href="{{ route('file_downloads.edit', $file->id) }}" class="btn btn-warning btn-sm">
+                                <i class="fa fa-edit"></i> Edit
+                            </a>
+                            <form action="{{ route('file_downloads.destroy', $file->id) }}" method="POST" onsubmit="return confirm('Yakin?')">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger btn-sm">
+                                    <i class="fa fa-trash"></i> Hapus
+                                </button>
+                            </form>
+                        </div>
                 </td>
             </tr>
             @empty

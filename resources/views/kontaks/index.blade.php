@@ -19,7 +19,7 @@
                 <th>Nama</th>
                 <th>Email</th>
                 <th>Pesan</th>
-                <th style="width: 150px;">Aksi</th>
+                <th style="width: 100px;">Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -30,12 +30,14 @@
                 <td>{{ $kontak->email }}</td>
                 <td>{{ $kontak->message }}</td>
                 <td>
-                    <a href="{{ route('kontaks.edit', $kontak->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                    <form action="{{ route('kontaks.destroy', $kontak->id) }}" method="POST" class="d-inline"
-                        onsubmit="return confirm('Yakin ingin menghapus kontak ini?')">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-sm btn-danger">Hapus</button>
+                            <form action="{{ route('kontaks.destroy', $kontak) }}" method="POST" onsubmit="return confirm('Yakin?')">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger btn-sm">
+                                    <i class="fa fa-trash"></i> Hapus
+                                </button>
+                            </form>
+                        </div>
                     </form>
                 </td>
             </tr>

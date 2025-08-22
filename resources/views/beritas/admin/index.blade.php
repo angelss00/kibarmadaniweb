@@ -21,7 +21,7 @@
                     <th>ID</th>
                     <th>Judul</th>
                     <th>Konten</th>
-                    <th>Aksi</th>
+                    <th width="180px" >Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,12 +31,18 @@
                     <td class="text-start">{{ $item->judul }}</td>
                     <td class="text-start">{{ $item->konten }}</td>
                     <td>
-                        <a href="{{ route('beritas.admin.edit', $item->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                        <form action="{{ route('beritas.admin.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin mau hapus?')">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
-                        </form>
+                        <div class="d-flex gap-1 justify-content-center">
+                            <a href="{{ route('beritas.admin.edit', $berita) }}" class="btn btn-warning btn-sm">
+                                <i class="fa fa-edit"></i> Edit
+                            </a>
+                            <form action="{{ route('beritas.admin.destroy', $berita) }}" method="POST" onsubmit="return confirm('Yakin?')">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger btn-sm">
+                                    <i class="fa fa-trash"></i> Hapus
+                                </button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
                 @endforeach

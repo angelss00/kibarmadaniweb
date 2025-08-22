@@ -59,6 +59,9 @@ Route::post('admin/visi-misi/{id}/upload-image', [VisiMisiController::class, 'up
 Route::post('visi-misi/upload-image/{id}', [VisiMisiController::class, 'uploadImage'])->name('admin.visi-misi.upload-image');
 
 
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('visi-misi', VisiMisiController::class);
+});
 
 
 
