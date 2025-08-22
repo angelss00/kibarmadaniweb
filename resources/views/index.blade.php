@@ -201,12 +201,6 @@
     </section>
 
 
-
-
-
-
-
-
     <!-- ======= Section Layanan Interaktif ======= -->
     <section class="py-5 bg-light">
       <div class="container" data-aos="fade-up">
@@ -369,10 +363,6 @@
       </div>
     </section>
     <!-- End Keunggulan Section -->
-
-    <li class="nav-item">
-      <a class="nav-link" href="{{ route('galeri') }}">Galeri</a>
-    </li>
 
 
     <!-- ======= Contact Section (Maps Only) ======= -->
