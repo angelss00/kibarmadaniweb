@@ -15,7 +15,7 @@
         Kategori</a>
 
     <table class="table table-bordered table-striped">
-        <thead class="table-dark">
+        <thead class="table-dark text-center">
             <tr>
                 <th style="width: 50px;">No</th>
                 <th>Nama Kategori</th>

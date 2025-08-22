@@ -10,10 +10,10 @@
     <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <a href="{{ route('kontaks.create') }}" class="btn btn-primary mb-3">+ Tambah Kontak</a>
+    <a href="{{ route('kontaks.create') }}" class="btn btn-primary mb-3">+ Tambah</a>
 
     <table class="table table-bordered table-striped">
-        <thead class="table-dark">
+        <thead class="table-dark text-center">
             <tr>
                 <th style="width: 50px;">No</th>
                 <th>Nama</th>

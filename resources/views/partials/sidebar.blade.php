@@ -99,7 +99,7 @@
                 <li class="menu-title mt-2" data-key="t-other">Lainnya</li>
 
                 <li>
-                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <a href="{{route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="bx bx-power-off"></i>
                         <span data-key="t-logout">Logout</span>
                     </a>

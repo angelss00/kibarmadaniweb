@@ -24,11 +24,18 @@
                 <td>{{ $item->deskripsi }}</td>
                 <td><a href="{{ asset('storage/' . $item->file) }}" target="_blank">Unduh</a></td>
                 <td>
-                    <a href="{{ route('media.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                    <form action="{{ route('media.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin?')">
-                        @csrf @method('DELETE')
-                        <button class="btn btn-danger btn-sm">Hapus</button>
-                    </form>
+                     <div class="d-flex gap-1 justify-content-center">
+                            <a href="{{ route('medias.edit', $item->id) }}" class="btn btn-warning btn-sm">
+                                <i class="fa fa-edit"></i> Edit
+                            </a>
+                            <form action="{{ route('medias.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Yakin?')">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger btn-sm">
+                                    <i class="fa fa-trash"></i> Hapus
+                                </button>
+                            </form>
+                        </div>
                 </td>
             </tr>
             @endforeach
