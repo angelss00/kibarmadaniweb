@@ -53,30 +53,34 @@ class BeritaController extends Controller
         return redirect()->route('beritas.admin.index')->with('success', 'Berita berhasil ditambahkan.');
     }
 
-    public function edit(Berita $berita)
+    public function edit($id)
     {
+        $berita = Berita::findOrFail($id);
         return view('beritas.admin.edit', compact('berita'));
     }
 
-    public function update(Request $request, Berita $berita)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'judul' => 'required',
             'konten' => 'required',
         ]);
 
+        $berita = Berita::findOrFail($id);
         $berita->update([
             'judul'  => $request->judul,
-            'slug'   => Str::slug($request->judul), // pakai judul
+            'slug'   => Str::slug($request->judul),
             'konten' => $request->konten,
         ]);
 
         return redirect()->route('beritas.admin.index')->with('success', 'Berita berhasil diperbarui.');
     }
 
-    public function destroy(Berita $berita)
+    public function destroy($id)
     {
+        $berita = Berita::findOrFail($id);
         $berita->delete();
+
         return redirect()->route('beritas.admin.index')->with('success', 'Berita berhasil dihapus.');
     }
 }

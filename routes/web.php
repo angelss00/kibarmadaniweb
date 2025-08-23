@@ -49,10 +49,14 @@ Route::prefix('beritas/admin')->name('beritas.admin.')->group(function () {
     Route::get('/', [BeritaController::class, 'index'])->name('index');
     Route::get('/create', [BeritaController::class, 'create'])->name('create');
     Route::post('/', [BeritaController::class, 'store'])->name('store');
-    Route::get('/{berita}/edit', [BeritaController::class, 'edit'])->name('edit');
-    Route::put('/{berita}', [BeritaController::class, 'update'])->name('update');
+
+    // pakai format custom edit/update
+    Route::get('/edit/{id}', [BeritaController::class, 'edit'])->name('edit');
+    Route::put('/edit/{id}', [BeritaController::class, 'update'])->name('update');
+
     Route::delete('/{berita}', [BeritaController::class, 'destroy'])->name('destroy');
 });
+
 
 
 Route::post('admin/visi-misi/{id}/upload-image', [VisiMisiController::class, 'uploadImage'])->name('admin.visi-misi.upload-image');

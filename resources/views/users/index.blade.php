@@ -21,11 +21,11 @@
         <table class="table table-bordered table-striped">
             <thead class="table-dark text-center">
                 <tr>
-                    <th>No</th>
+                    <th width="20px">No</th>
                     <th>Nama</th>
                     <th>Email</th>
                     <th>Role</th>
-                    <th width="18%">Aksi</th>
+                    <th width="180px">Aksi</th>
                 </tr>
             </thead>
             <tbody>

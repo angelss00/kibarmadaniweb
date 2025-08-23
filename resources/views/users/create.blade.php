@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
 @section('title', 'Tambah User')
 
@@ -22,7 +22,6 @@
 
         <div class="mb-3">
             <label for="name" class="form-label">Nama Lengkap</label>
-
             <input type="text" name="name" value="{{ old('name') }}" class="form-control" required>
         </div>
 
@@ -36,8 +35,7 @@
             <select name="role" class="form-select" required>
                 <option value="">-- Pilih Role --</option>
                 <option value="admin">Admin</option>
-                <option value="dosen">Dosen</option>
-                <option value="mahasiswa">Mahasiswa</option>
+                <option value="dosen">Users</option>
             </select>
         </div>
 
@@ -51,9 +49,14 @@
             <input type="password" name="password_confirmation" class="form-control" required minlength="6">
         </div>
 
-        <a href="{{ route('users.index') }}" class="btn btn-secondary">Batal</a>
-        <button type="submit" class="btn btn-primary">Simpan</button>
+        <div class="mt-3">
+            <button type="submit" class="btn btn-success me-2">
+                <i class="fa fa-save"></i> Simpan
+            </button>
+            <a href="{{ route('users.index') }}" class="btn btn-secondary">
+                <i class="fa fa-arrow-left"></i> Kembali
+            </a>
+        </div>
     </form>
 </div>
-
 @endsection
