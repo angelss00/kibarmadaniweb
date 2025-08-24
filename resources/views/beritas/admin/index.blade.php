@@ -18,8 +18,9 @@
         <table class="table table-bordered table-striped">
             <thead class="table-dark text-center">
                 <tr>
-                    <th>ID</th>
+                    <th>No</th>
                     <th>Judul</th>
+                    <th>Slug</th> {{-- Tambahan kolom slug --}}
                     <th width="170px">Aksi</th>
                 </tr>
             </thead>
@@ -28,6 +29,7 @@
                 <tr class="text-center">
                     <td>{{ $item->id }}</td>
                     <td class="text-start">{{ $item->judul }}</td>
+                    <td>{{ $item->slug }}</td> {{-- Tampilkan slug --}}
                     <td>
                         <div class="d-flex gap-1 justify-content-center">
                             {{-- Edit --}}

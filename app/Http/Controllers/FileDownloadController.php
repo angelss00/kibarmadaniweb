@@ -12,7 +12,7 @@ class FileDownloadController extends Controller
 {
     public function index()
     {
-        $downloads = FileDownload::with('Kategori')->latest()->get();
+        $downloads = FileDownload::with('kategori')->latest()->get();
         return view('file_downloads.index', compact('downloads'));
     }
 
@@ -75,7 +75,7 @@ class FileDownloadController extends Controller
             'uploader'    => $request->uploader,
         ]);
 
-        return redirect()->route('file-downloads.index')->with('success', 'File berhasil diperbarui.');
+        return redirect()->route('file_downloads.index')->with('success', 'File berhasil diperbarui.');
     }
 
     public function destroy(FileDownload $fileDownload)
@@ -86,6 +86,6 @@ class FileDownloadController extends Controller
         }
 
         $fileDownload->delete();
-        return redirect()->route('file-downloads.index')->with('success', 'File berhasil dihapus.');
+        return redirect()->route('file_downloads.index')->with('success', 'File berhasil dihapus.');
     }
 }

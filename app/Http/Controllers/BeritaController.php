@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Berita; // Pastikan huruf besar
+use App\Models\Berita;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -16,15 +16,17 @@ class BeritaController extends Controller
 
     public function frontendIndex()
     {
-        $berita = Berita::latest()->paginate(9); // sesuaikan jumlah berita per halaman
+        $berita = Berita::latest()->paginate(9);
         return view('berita.frontend.index', compact('berita'));
     }
 
-    public function show($id)
+    public function show($slug)
     {
-        $berita = Berita::findOrFail($id);
+        $berita = Berita::where('slug', $slug)->firstOrFail();
         return view('berita.frontend.show', compact('berita'));
     }
+
+
 
     public function home()
     {
@@ -40,13 +42,16 @@ class BeritaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'judul' => 'required',
+            'judul'  => 'required',
             'konten' => 'required',
+            'slug'   => 'nullable|unique:beritas,slug',
         ]);
+
+        $slug = $request->slug ? Str::slug($request->slug) : Str::slug($request->judul);
 
         Berita::create([
             'judul'  => $request->judul,
-            'slug'   => Str::slug($request->judul), // pakai judul
+            'slug'   => $slug,
             'konten' => $request->konten,
         ]);
 
@@ -62,14 +67,17 @@ class BeritaController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'judul' => 'required',
+            'judul'  => 'required',
             'konten' => 'required',
+            'slug'   => 'required|unique:beritas,slug,' . $id,
         ]);
 
         $berita = Berita::findOrFail($id);
+        $slug = $request->slug ? Str::slug($request->slug) : Str::slug($request->judul);
+
         $berita->update([
             'judul'  => $request->judul,
-            'slug'   => Str::slug($request->judul),
+            'slug'   => $slug,
             'konten' => $request->konten,
         ]);
 

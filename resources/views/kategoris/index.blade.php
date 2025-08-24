@@ -8,7 +8,6 @@
 
     @if (session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
-
     @endif
 
     <a href="{{ route('kategoris.create') }}" class="btn btn-primary mb-3">+ Tambah</a>
@@ -27,24 +26,23 @@
             <tr>
                 <td>{{ $index + 1 }}</td>
                 <td>{{ $kategori->nama }}</td>
-                <td>{{ $kategori->deskripsi }}</td>
+                <td>{!! $kategori->deskripsi !!}</td> <!-- render HTML dari CKEditor -->
                 <td>
-                     <div class="d-flex gap-1 justify-content-center">
-                            <a href="{{ route('kategoris.edit', $kategori) }}" class="btn btn-warning btn-sm">
-                                <i class="fa fa-edit"></i> Edit
-                            </a>
-                            <form action="{{ route('kategoris.destroy', $kategori) }}" method="POST" onsubmit="return confirm('Yakin?')">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger btn-sm">
-                                    <i class="fa fa-trash"></i> Hapus
-                                </button>
-                            </form>
-                        </div>
+                    <div class="d-flex gap-1 justify-content-center">
+                        <a href="{{ route('kategoris.edit', $kategori) }}" class="btn btn-warning btn-sm">
+                            <i class="fa fa-edit"></i> Edit
+                        </a>
+                        <form action="{{ route('kategoris.destroy', $kategori) }}" method="POST" onsubmit="return confirm('Yakin?')">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger btn-sm">
+                                <i class="fa fa-trash"></i> Hapus
+                            </button>
+                        </form>
+                    </div>
                 </td>
             </tr>
             @empty
-
             <tr>
                 <td colspan="4" class="text-center">Belum ada data kategori.</td>
             </tr>

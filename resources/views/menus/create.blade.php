@@ -1,36 +1,38 @@
 @extends('layouts.master')
 
-@section('title', 'Tambah Menu')
-
 @section('content')
-<div class="container mt-4">
-    <h3 class="mb-4">Tambah Menu</h3>
-
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <strong>Periksa kembali input Anda:</strong>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+<div class="container">
+    <h2>Tambah Menu</h2>
 
     <form action="{{ route('menus.store') }}" method="POST">
         @csrf
         <div class="mb-3">
-            <label for="name" class="form-label">Nama Menu</label>
-            <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required>
+            <label>Nama</label>
+            <input type="text" name="nama" class="form-control" value="{{ old('nama') }}" required>
         </div>
 
         <div class="mb-3">
-            <label for="description" class="form-label">Deskripsi</label>
-            <textarea class="form-control" id="description" name="description" rows="3">{{ old('description') }}</textarea>
+            <label>URL / Route / Section</label>
+            <input type="text" name="url" class="form-control"
+                value="{{ old('url') }}"
+                placeholder="contoh: hero (untuk scroll), galeri (untuk route), https://google.com (untuk url)" required>
         </div>
 
-        <button type="submit" class="btn btn-success">Simpan</button>
-        <a href="{{ route('menus.index') }}" class="btn btn-secondary">Kembali</a>
+        <div class="mb-3">
+            <label>Tipe</label>
+            <select name="type" class="form-control" required>
+                <option value="scroll" {{ old('type') == 'scroll' ? 'selected' : '' }}>Scroll</option>
+                <option value="route" {{ old('type') == 'route' ? 'selected' : '' }}>Route</option>
+                <option value="url" {{ old('type') == 'url' ? 'selected' : '' }}>URL</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            <i class="fa fa-save"></i> Simpan
+        </button>
+        <a href="{{ route('menus.index') }}" class="btn btn-secondary">
+            <i class="fa fa-arrow-left"></i> Kembali
+        </a>
     </form>
 </div>
 @endsection

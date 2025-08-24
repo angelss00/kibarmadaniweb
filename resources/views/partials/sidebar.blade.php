@@ -86,7 +86,7 @@
                 <li>
                     <a href="{{ route('admin.visi-misi.index') }}">
                         <i class="bx bx-rocket"></i>
-                        <span>Halaman Statis</span>
+                        <span>Halaman Visi Misi</span>
                     </a>
                 </li>
                 <li>
@@ -95,6 +95,13 @@
                         <span>Jadwal Pelatihan</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('admin.sections.index') }}">
+                        <i class="bx bx-cog"></i>
+                        <span>Halaman Statis</span>
+                    </a>
+                </li>
+
 
                 <li class="menu-title mt-2" data-key="t-other">Lainnya</li>
 

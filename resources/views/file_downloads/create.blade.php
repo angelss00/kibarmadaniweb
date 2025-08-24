@@ -23,13 +23,14 @@
 
             <div class="mb-3">
                 <label>Kategori</label>
-                <select name="categori_id" class="form-select">
+                <select name="category_id" class="form-select">
                     <option value="">- Pilih Kategori -</option>
                     @foreach ($categories as $cat)
-                        <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                    <option value="{{ $cat->id }}">{{ $cat->name }}</option>
                     @endforeach
                 </select>
             </div>
+
 
             <div class="mb-3">
                 <label>File Upload</label>

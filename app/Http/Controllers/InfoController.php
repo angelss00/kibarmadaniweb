@@ -9,87 +9,135 @@ use Illuminate\Support\Facades\Storage;
 
 class InfoController extends Controller
 {
-    public function index()
+    // LIST DATA
+    public function index(Request $r)
     {
-        $infos = Info::with('kategori')->latest()->get();
+        $q = Info::with('kategori');
+
+        // filter opsional
+        if ($r->filled('q')) {
+            $q->where(function ($w) use ($r) {
+                $w->where('judul', 'like', '%' . $r->q . '%')
+                    ->orWhere('isi', 'like', '%' . $r->q . '%');
+            });
+        }
+        if ($r->filled('slider_name')) {
+            $q->where('slider_name', $r->slider_name);
+        }
+        if ($r->filled('active')) {
+            $q->where('is_active', (bool) $r->active);
+        }
+
+        $infos = $q->orderBy('sort_order')->orderByDesc('id')->paginate(15);
         return view('infos.index', compact('infos'));
     }
 
-    public function create()
+    // FORM CREATE
+    public function create(Request $r)
     {
-        $kategoris = Kategori::all();
-
-        return view('infos.create', compact('kategoris'));
+        $kategoris = Kategori::orderBy('nama')->get();
+        $defaultSlider = $r->get('slider_name', 'homepage-hero');
+        return view('infos.create', compact('kategoris', 'defaultSlider'));
     }
 
+    // SIMPAN DATA BARU
     public function store(Request $request)
     {
-        $request->validate([
-            'kategori_id' => 'required|exists:kategoris,id',
-            'judul' => 'required|string|max:255',
-            'isi' => 'nullable|string',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        $data = $request->validate([
+            'kategori_id' => 'nullable|exists:kategoris,id',
+            'judul'       => 'required|string|max:255',
+            'subtitle'    => 'nullable|string|max:255',
+            'isi'         => 'nullable|string',
+            'slider_name' => 'nullable|string|max:100',
+            'button_text' => 'nullable|string|max:50',
+            'link_url'    => 'nullable|url|max:255',
+            'sort_order'  => 'nullable|integer|min:0',
+            'is_active'   => 'sometimes|boolean',
+            'start_at'    => 'nullable|date',
+            'end_at'      => 'nullable|date|after_or_equal:start_at',
+            'gambar'      => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
-        $data = $request->only('kategori_id', 'judul', 'isi');
+        $data['is_active'] = (bool) ($data['is_active'] ?? 0);
+
+        // sort_order default = max+1
+        if (!isset($data['sort_order'])) {
+            $max = Info::when($data['slider_name'] ?? null, fn($q, $name) => $q->where('slider_name', $name))
+                ->max('sort_order');
+            $data['sort_order'] = (int) $max + 1;
+        }
 
         if ($request->hasFile('gambar')) {
-            $data['gambar'] = $request->file('gambar')->store(
-                'gambar_info',
-                'public'
-            );
+            $data['gambar'] = $request->file('gambar')->store('sliders', 'public');
         }
 
         Info::create($data);
-
-        return redirect()->route('infos.index')->with('success', 'Info berhasil
-ditambahkan.');
+        return redirect()->route('infos.index')->with('status', 'Slide/Info berhasil ditambahkan.');
     }
 
+    // FORM EDIT
     public function edit(Info $info)
     {
-        $kategoris = Kategori::all();
+        $kategoris = Kategori::orderBy('nama')->get();
         return view('infos.edit', compact('info', 'kategoris'));
     }
 
+    // UPDATE DATA
     public function update(Request $request, Info $info)
     {
-        $request->validate([
-
-            'kategori_id' => 'required|exists:kategoris,id',
-            'judul' => 'required|string|max:255',
-            'isi' => 'nullable|string',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        $data = $request->validate([
+            'kategori_id' => 'nullable|exists:kategoris,id',
+            'judul'       => 'required|string|max:255',
+            'subtitle'    => 'nullable|string|max:255',
+            'isi'         => 'nullable|string',
+            'slider_name' => 'nullable|string|max:100',
+            'button_text' => 'nullable|string|max:50',
+            'link_url'    => 'nullable|url|max:255',
+            'sort_order'  => 'nullable|integer|min:0',
+            'is_active'   => 'sometimes|boolean',
+            'start_at'    => 'nullable|date',
+            'end_at'      => 'nullable|date|after_or_equal:start_at',
+            'gambar'      => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
-        $data = $request->only('kategori_id', 'judul', 'isi');
+        $data['is_active'] = (bool) ($data['is_active'] ?? 0);
 
         if ($request->hasFile('gambar')) {
-            // hapus gambar lama
-            if ($info->gambar) {
-                Storage::disk('public')->delete($info->gambar);
-            }
-            $data['gambar'] = $request->file('gambar')->store(
-                'gambar_info',
-                'public'
-            );
+            if ($info->gambar) Storage::disk('public')->delete($info->gambar);
+            $data['gambar'] = $request->file('gambar')->store('sliders', 'public');
         }
 
         $info->update($data);
-
-        return redirect()->route('infos.index')->with('success', 'Info berhasil
-diperbarui.');
+        return redirect()->route('infos.index')->with('status', 'Slide/Info berhasil diperbarui.');
     }
 
+    // HAPUS
     public function destroy(Info $info)
     {
-        if ($info->gambar) {
-            Storage::disk('public')->delete($info->gambar);
-        }
-
+        if ($info->gambar) Storage::disk('public')->delete($info->gambar);
         $info->delete();
+        return redirect()->route('infos.index')->with('status', 'Slide/Info berhasil dihapus.');
+    }
+    public function deleteConfirm(Info $info)
+    {
+        return view('infos.delete', compact('info'));
+    }
 
-        return redirect()->route('infos.index')->with('success', 'Info berhasil
-dihapus.');
+    // OPSIONAL: REORDER
+    public function reorder(Request $request)
+    {
+        $data = $request->validate(['orders' => 'required|array']);
+        foreach ($data['orders'] as $id => $order) {
+            Info::where('id', $id)->update(['sort_order' => (int)$order]);
+        }
+        return back()->with('status', 'Urutan disimpan.');
+    }
+
+    // OPSIONAL: TOGGLE
+    public function toggle(Info $info)
+    {
+        $info->is_active = !$info->is_active;
+        $info->save();
+        return back()->with('status', 'Status slide diubah.');
     }
 }

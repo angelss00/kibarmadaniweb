@@ -13,8 +13,11 @@
             @foreach($pelatihans as $p)
             <div class="col-md-6 mb-4">
                 <div class="card shadow-sm h-100">
+                    @if($p->gambar)
+                        <img src="{{ asset('storage/' . $p->gambar) }}" class="card-img-top" alt="{{ $p->nama_pelatihan }}" style="height:200px; object-fit:cover;">
+                    @endif
                     <div class="card-body">
-                        <h5 class="card-title">{{ $p->judul }}</h5>
+                        <h5 class="card-title">{{ $p->nama_pelatihan }}</h5>
                         <p class="card-text text-muted">
                             📍 {{ $p->lokasi ?? '-' }} <br>
                             🗓 {{ \Carbon\Carbon::parse($p->tanggal_mulai)->translatedFormat('d F Y') }}
@@ -22,7 +25,7 @@
                             {{ \Carbon\Carbon::parse($p->tanggal_selesai)->translatedFormat('d F Y') }}
                         </p>
                         @if($p->deskripsi)
-                            <p>{{ Str::limit($p->deskripsi, 150) }}</p>
+                            <p>{{ Str::limit(strip_tags($p->deskripsi), 150) }}</p>
                         @endif
                     </div>
                 </div>

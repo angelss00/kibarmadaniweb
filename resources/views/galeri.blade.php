@@ -1,7 +1,7 @@
 @extends('layoutss.medicio')
 
 @section('content')
-<section class="py-5" style="margin-top: 100px;"> {
+<section class="py-5" style="margin-top: 100px;">
   <div class="container">
     <h2 class="mb-4 text-center">Galeri Foto</h2>
 
@@ -13,7 +13,7 @@
         </a>
         <div class="card-body">
           <h5 class="card-title">{{ $galeri->title }}</h5>
-          <p class="card-text">{{ $galeri->description }}</p>
+          <p class="card-text">{!! $galeri->description !!}</p>
         </div>
       </div>
       @empty

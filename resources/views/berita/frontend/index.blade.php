@@ -14,7 +14,7 @@
                     <img src="{{ asset('themes/minia/assets/images/logo.png') }}" class="card-img-top p-10" alt="Logo" style="height: 70px; object-fit: contain; background: #f8f9fa;">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">{{ $b->judul }}</h5>
-                        <a href="{{ route('berita.frontend.show', $b->id) }}" class="btn btn-primary mt-auto align-self-start">Baca Selengkapnya</a>
+                        <a href="{{ route('berita.frontend.show', $b->slug) }}" class="btn btn-primary mt-auto align-self-start">Baca Selengkapnya</a>
                     </div>
                     <div class="card-footer text-muted small">
                         {{ $b->created_at->format('d M Y') }}

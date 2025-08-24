@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container">
-    <h4>Daftar Info</h4>
+    <h4>Daf</h4>
     <a href="{{ route('file_downloads.create') }}" class="btn btn-primary mb-3">+ Tambah</a>
 
     @if (session('success'))

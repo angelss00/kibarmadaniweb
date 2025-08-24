@@ -1,48 +1,44 @@
 @extends('layouts.master')
 
-@section('title', 'Data Menu')
-
 @section('content')
-<div class="container mt-4">
-    <h3 class="mb-4">Daftar Menu</h3>
+<div class="container">
+    <h2>Manajemen Menu</h2>
+    <a href="{{ route('menus.create') }}" class="btn btn-primary mb-3">+ Tambah</a>
 
-    @if (session('success'))
+    @if(session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <div class="mb-3">
-        <a href="{{ route('menus.create') }}" class="btn btn-primary">+ Tambah</a>
-    </div>
-
-
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped align-middle">
-            <thead class="table-dark text-center">
-                <tr>
-                    <th style="width: 50px;">No</th>
-                    <th>Nama Menu</th>
-                    <th>Deskripsi</th>
-                    <th style="width: 150px;">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($menus as $menu)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $menu->name }}</td>
-                    <td>{{ $menu->description }}</td>
-                    <td class="d-flex gap-1">
-                        <a href="{{ route('menus.edit', $menu->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                        <form action="{{ route('menus.destroy', $menu->id) }}" method="POST" onsubmit="return confirm('Hapus menu ini?')">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-sm btn-danger">Hapus</button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+    <table class="table table-bordered">
+        <thead class="table-dark text-center">
+            <tr>
+                <th width="170px">Nama</th>
+                <th>URL / Route</th>
+                <th>Type</th>
+                <th width="180px">Aksi</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            @foreach($menus as $menu)
+            <tr>
+                <td>{{ $menu->nama }}</td>
+                <td>{{ $menu->url }}</td>
+                <td>{{ ucfirst($menu->type) }}</td>
+                <td>
+                    <a href="{{ route('menus.edit', $menu->id) }}" class="btn btn-sm btn-warning">
+                        <i class="fa fa-edit"></i> Edit
+                    </a>
+                    <form action="{{ route('menus.destroy', $menu->id) }}" method="POST" style="display:inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Hapus menu ini?')">
+                            <i class="fa fa-trash"></i> Hapus
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>
 @endsection

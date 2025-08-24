@@ -5,7 +5,7 @@
     <h4 class="mb-3">Manajemen Galeri</h4>
 
     <div class="mb-3">
-        <a href="{{ route('galeris.index') }}" class="btn btn-success me-2">+ Tambah Galeri</a>
+        <a href="{{ route('galeris.create') }}" class="btn btn-success me-2">+ Tambah Galeri</a>
         <a href="{{ route('galerry_categories.index') }}" class="btn btn-primary me-2">+ Tambah Kategori Galeri</a>
         <a href="{{ route('albums.index') }}" class="btn btn-secondary">+ Tambah Album</a>
     </div>

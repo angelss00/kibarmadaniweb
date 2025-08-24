@@ -2,48 +2,72 @@
 
 @section('content')
 <div class="container">
-    <h4>Daftar Info</h4>
-    <a href="{{ route('infos.create') }}" class="btn btn-primary mb-3">+ Tambah</a>
+  <h1 class="h4 mb-3">Manajemen Slider (Infos)</h1>
 
-    @if (session('success'))
-    <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
+  {{-- Flash --}}
+  @if(session('status'))
+    <div class="alert alert-success">{{ session('status') }}</div>
+  @endif
 
-    <table class="table table-bordered table-striped">
-        <thead class="table-dark text-center">
-            <tr>
-                <th>Judul</th>
-                <th>Isi</th>
-                <th>Kategori</th>
-                <th>Tanggal</th>
-                <th width="180px" >Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($infos as $info)
-            <tr>
-                <td>{{ $info->judul }}</td>
-                <td>{{ $info->isi }}</td>
-                <td>{{ $info->kategori->nama }}</td>
-                <td>{{ $info->created_at->format('d-m-Y') }}</td>
-                <td class="text-center">
-                     <div class="d-flex gap-1 justify-content-center">
-                            <a href="{{ route('infos.edit', $info) }}" class="btn btn-warning btn-sm">
-                                <i class="fa fa-edit"></i> Edit
-                            </a>
-                            <form action="{{ route('infos.destroy', $info) }}" method="POST" onsubmit="return confirm('Yakin?')">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger btn-sm">
-                                    <i class="fa fa-trash"></i> Hapus
-                                </button>
-                            </form>
-                        </div>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
+  <div class="mb-3">
+    <a href="{{ route('infos.create') }}" class="btn btn-primary btn-sm">+ Tambah Data</a>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered align-middle">
+      <thead class="table-light">
+        <tr>
+          <th style="width:70px;">Gambar</th>
+          <th>Judul</th>
+          <th>Slider</th>
+          <th>Urutan</th>
+          <th>Status</th>
+          <th>Jadwal</th>
+          <th style="width:160px;">Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        @forelse($infos as $info)
+          <tr>
+            <td>
+              @if($info->gambar)
+                <img src="{{ Storage::disk('public')->url($info->gambar) }}"
+                     class="img-thumbnail"
+                     style="width:60px;height:40px;object-fit:cover;">
+              @endif
+            </td>
+            <td>
+              <strong>{{ $info->judul }}</strong>
+              @if($info->subtitle)
+                <div class="text-muted small">{{ $info->subtitle }}</div>
+              @endif
+            </td>
+            <td><code>{{ $info->slider_name }}</code></td>
+            <td>{{ $info->sort_order }}</td>
+            <td>
+              @if($info->is_active)
+                <span class="badge bg-success">Aktif</span>
+              @else
+                <span class="badge bg-secondary">Nonaktif</span>
+              @endif
+            </td>
+            <td class="small">
+              {{ optional($info->start_at)->format('d M Y H:i') ?? '—' }}
+              –
+              {{ optional($info->end_at)->format('d M Y H:i') ?? '—' }}
+            </td>
+            <td>
+              <a href="{{ route('infos.edit', $info) }}" class="btn btn-sm btn-warning">Edit</a>
+              <a href="{{ route('infos.delete', $info) }}" class="btn btn-sm btn-danger">Hapus</a>
+            </td>
+          </tr>
+        @empty
+          <tr>
+            <td colspan="7" class="text-center text-muted">Belum ada data</td>
+          </tr>
+        @endforelse
+      </tbody>
     </table>
-
+  </div>
 </div>
 @endsection

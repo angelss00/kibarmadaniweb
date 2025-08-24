@@ -8,6 +8,8 @@ class Pelatihan extends Model
 {
     protected $fillable = [
         'nama_pelatihan',
+        'gambar',
+        'deskripsi',
         'tanggal_mulai',
         'tanggal_selesai',
         'lokasi',

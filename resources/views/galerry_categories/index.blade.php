@@ -6,12 +6,15 @@
 <div class="container mt-4">
     <h3 class="mb-3">Kategori Galeri</h3>
 
-    <div class="mb-3">
-        <a href="{{ route('galerry_categories.create') }}" class="btn btn-primary me-2">
+    <div class="mb-3 d-flex gap-2">
+        <!-- Tombol Tambah -->
+        <a href="{{ route('galerry_categories.create') }}" class="btn btn-primary">
             + Tambah
         </a>
+
+        <!-- Tombol Kembali dengan FA, mepet ke tombol Tambah -->
         <a href="{{ route('galeris.index') }}" class="btn btn-secondary">
-            <i class="bi bi-arrow-left"></i> Kembali ke Galeri
+            <i class="fa fa-arrow-left"></i> Kembali
         </a>
     </div>
 
@@ -25,14 +28,14 @@
                 <tr>
                     <th>Nama</th>
                     <th>Deskripsi</th>
-                    <th width="180px" >Aksi</th>
+                    <th width="180px">Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($categories as $cat)
                 <tr class="text-center">
                     <td class="text-start">{{ $cat->name }}</td>
-                    <td class="text-start">{{ $cat->description }}</td>
+                    <td class="text-start">{!! $cat->description !!}</td>
                     <td>
                         <div class="d-flex gap-1 justify-content-center">
                             <a href="{{ route('galerry_categories.edit', $cat) }}" class="btn btn-warning btn-sm">

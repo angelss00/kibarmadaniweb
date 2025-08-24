@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container">
-    <h2 class="text-center mb-4">Edit Berita</h2>
+    <h2 class="mb-4">Edit Berita</h2>
 
     <form action="{{ route('beritas.admin.update', $berita->id) }}" method="POST">
         @csrf

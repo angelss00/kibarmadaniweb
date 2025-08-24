@@ -32,8 +32,27 @@
             <textarea name="description" id="description" class="form-control" rows="4">{{ old('description', $galerry_category->description) }}</textarea>
         </div>
 
-        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-        <a href="{{ route('galerry_categories.index') }}" class="btn btn-secondary">Batal</a>
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-success">
+                <i class="fa fa-save"></i> Simpan
+            </button>
+            <a href="{{ route('galerry_categories.index') }}" class="btn btn-secondary">
+                <i class="fa fa-arrow-left"></i> Kembali
+            </a>
+        </div>
     </form>
 </div>
+
+{{-- CKEditor 5 --}}
+@push('scripts')
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#description'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>
+@endpush
+
 @endsection

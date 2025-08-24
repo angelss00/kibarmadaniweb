@@ -1,179 +1,109 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layoutss.medicio')
 
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+@section('title', 'LPK KIBAR MADANI')
 
-  <title>LPK KIBAR MADANI</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+@section('content')
 
-  <!-- Favicons -->
-  <link href="themes/Medicio/assets/img/favicon.jpg" rel="icon">
-  <link href="themes/Medicio/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+<!-- ======= Hero Section ======= -->
+<section id="hero">
+  <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
 
-  <!-- Vendor CSS Files -->
-  <link href="themes/Medicio/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-  <link href="themes/Medicio/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-  <link href="themes/Medicio/assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="themes/Medicio/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="themes/Medicio/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="themes/Medicio/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="themes/Medicio/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="themes/Medicio/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
 
-  <!-- Template Main CSS File -->
-  <link href="themes/Medicio/assets/css/style.css" rel="stylesheet">
+    <div class="carousel-inner" role="listbox">
 
-  <!-- =======================================================
-  * Template Name: Medicio
-  * Updated: Mar 10 2023 with Bootstrap v5.2.3
-  * Template URL: https://bootstrapmade.com/medicio-free-bootstrap-theme/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-</head>
-
-<body>
-
-  <!-- ======= Top Bar ======= -->
-  <div id="topbar" class="d-flex align-items-center fixed-top">
-    <div class="container d-flex align-items-center justify-content-center justify-content-md-between">
-      <div class="align-items-center d-none d-md-flex">
-        <i class="bi bi-phone"></i> Hubungi Kami 0819806140 / 081364098250
+      <!-- Slide 1 -->
+      <div class="carousel-item active" style="background-image: url(themes/Medicio/assets/img/slide/slide-1.jpg)">
+        <div class="container">
+          <h2>Welcome to <span>Kibar Madani</span></h2>
+          <p>LPK Kibar Madani menjadi narasumber dalam kegiatan Pelatihan Berbasis Kompetensi (PBK) pada skema “Training Need Analysis” untuk 25 SDM Sekolah Tinggi Ilmu Pelayaran Seluruh Indonesia, di bawah pembinaan direktorat perhubungan laut Kementerian Perhubungaan RI. Kegiatan diselenggarakan di Hotel Grand Mercure Yogyakarta</p>
+          <a href="#about" class="btn-get-started scrollto">Read More</a>
+        </div>
       </div>
+
+      <!-- Slide 2 -->
+      <div class="carousel-item" style="background-image: url(themes/Medicio/assets/img/slide/slide-2.jpg)">
+        <div class="container">
+          <h2>Pelatihan Berbasis Kompetensi (PBK) Skema “Master Trainer”</h2>
+          <p>LPK Kibar Madani memberikan Pelatihan Berbasis Kompetensi pada skema “Master Trainer” di Universitas Negeri Yogyakarta. Peserta terdiri dari Guru Besar dan dosen senior di lingkungan UNY. Uji kompetensi bekerjasama dengan LSP Trainer Kompeten Indonesia.</p>
+          <a href="#about" class="btn-get-started scrollto">Read More</a>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="carousel-item" style="background-image: url(themes/Medicio/assets/img/slide/slide-3.jpg)">
+        <div class="container">
+          <h2>Training Need Analysis</h2>
+          <p>LPK Kibar Madani menjadi narasumber dalam kegiatan Pelatihan Berbasis Kompetensi (PBK) pada skema “Training Need Analysis” untuk 25 SDM Sekolah Tinggi Ilmu Pelayaran Seluruh Indonesia, di bawah pembinaan direktorat perhubungan laut Kementerian Perhubungaan RI. Kegiatan diselenggarakan di Hotel Grand Mercure Yogyakarta</p>
+          <a href="#about" class="btn-get-started scrollto">Read More</a>
+        </div>
+      </div>
+
     </div>
+
+    <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+    </a>
+
+    <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+      <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+    </a>
+
   </div>
+</section><!-- End Hero -->
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center">
+<main id="main">
 
-      <a href="index.html" class="logo me-auto"><img src="themes/Medicio/assets/img/logo.png" alt=""></a>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <h1 class="logo me-auto"><a href="index.html">Medicio</a></h1> -->
 
-      <nav id="navbar" class="navbar order-last order-lg-0">
-        <ul>
-          <li><a class="nav-link scrollto" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#berita">Berita</a></li>
-          <li><a class="nav-link scrollto" href="#about">Tentang Kami</a></li>
-          <li><a class="nav-link scrollto" href="{{ route('pelatihans.jadwal') }}">Jadwal Pelatihan</a></li>
-          <li><a class="nav-link" href="{{ route('galeri') }}">Galeri</a></li>
-          <li><a class="nav-link scrollto" href="{{ route('pendaftarans.create') }}">Pendaftaran</a></li>
-          </li>
-          <li><a class="nav-link scrollto" href="#contact">Kontak Kami</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-
+  <!-- ======= Tentang Kami (Tanpa Nilai Inti) ======= -->
+  <section id="about">
+    <div class="mb-5 p-4 bg-white shadow-sm rounded">
+      <h2 class="mb-3 border-bottom pb-2"><i class="bi bi-eye-fill me-2"></i>Visi</h2>
+      <p class="lead" style="white-space: pre-line;">
+        {{ strip_tags($visiMisi->visi ?? 'Belum ada data visi') }}
+      </p>
     </div>
-  </header><!-- End Header -->
 
-
-  <!-- ======= Hero Section ======= -->
-  <section id="hero">
-    <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
-
-      <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
-
-      <div class="carousel-inner" role="listbox">
-
-        <!-- Slide 1 -->
-        <div class="carousel-item active" style="background-image: url(themes/Medicio/assets/img/slide/slide-1.jpg)">
-          <div class="container">
-            <h2>Welcome to <span>Kibar Madani</span></h2>
-            <p>LPK Kibar Madani menjadi narasumber dalam kegiatan Pelatihan Berbasis Kompetensi (PBK) pada skema “Training Need Analysis” untuk 25 SDM Sekolah Tinggi Ilmu Pelayaran Seluruh Indonesia, di bawah pembinaan direktorat perhubungan laut Kementerian Perhubungaan RI. Kegiatan diselenggarakan di Hotel Grand Mercure Yogyakarta</p>
-            <a href="#about" class="btn-get-started scrollto">Read More</a>
-          </div>
-        </div>
-
-        <!-- Slide 2 -->
-        <div class="carousel-item" style="background-image: url(themes/Medicio/assets/img/slide/slide-2.jpg)">
-          <div class="container">
-            <h2>Pelatihan Berbasis Kompetensi (PBK) Skema “Master Trainer”</h2>
-            <p>LPK Kibar Madani memberikan Pelatihan Berbasis Kompetensi pada skema “Master Trainer” di Universitas Negeri Yogyakarta. Peserta terdiri dari Guru Besar dan dosen senior di lingkungan UNY. Uji kompetensi bekerjasama dengan LSP Trainer Kompeten Indonesia.</p>
-            <a href="#about" class="btn-get-started scrollto">Read More</a>
-          </div>
-        </div>
-
-        <!-- Slide 3 -->
-        <div class="carousel-item" style="background-image: url(themes/Medicio/assets/img/slide/slide-3.jpg)">
-          <div class="container">
-            <h2>Training Need Analysis</h2>
-            <p>LPK Kibar Madani menjadi narasumber dalam kegiatan Pelatihan Berbasis Kompetensi (PBK) pada skema “Training Need Analysis” untuk 25 SDM Sekolah Tinggi Ilmu Pelayaran Seluruh Indonesia, di bawah pembinaan direktorat perhubungan laut Kementerian Perhubungaan RI. Kegiatan diselenggarakan di Hotel Grand Mercure Yogyakarta</p>
-            <a href="#about" class="btn-get-started scrollto">Read More</a>
-          </div>
-        </div>
-
-      </div>
-
-      <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
-      </a>
-
-      <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
-        <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
-      </a>
-
+    <div class="mb-5 p-4 bg-white shadow-sm rounded">
+      <h2 class="mb-3 border-bottom pb-2"><i class="bi bi-flag-fill me-2"></i>Misi</h2>
+      <p class="lead" style="white-space: pre-line;">
+        {{ strip_tags($visiMisi->misi ?? 'Belum ada data misi') }}
+      </p>
     </div>
-  </section><!-- End Hero -->
 
-  <main id="main">
-
-
-    <!-- ======= Tentang Kami (Tanpa Nilai Inti) ======= -->
-    <section id="about" class="py-5 bg-light">
-      <div class="container" data-aos="fade-up">
-
-        <section id="visi-misi" class="my-5">
-          <div class="container">
-
-            <div class="mb-5 p-4 bg-white shadow-sm rounded">
-              <h2 class="mb-3 border-bottom pb-2"><i class="bi bi-eye-fill me-2"></i>Visi</h2>
-              <p class="lead">{!! nl2br(e($visiMisi->visi ?? 'Belum ada data visi')) !!}</p>
-            </div>
-
-            <div class="mb-5 p-4 bg-white shadow-sm rounded">
-              <h2 class="mb-3 border-bottom pb-2"><i class="bi bi-flag-fill me-2"></i>Misi</h2>
-              <p class="lead">{!! nl2br(e($visiMisi->misi ?? 'Belum ada data misi')) !!}</p>
-            </div>
-
-            <div class="mb-5 p-4 bg-white shadow-sm rounded">
-              <h2 class="mb-3 border-bottom pb-2"><i class="bi bi-info-circle-fill me-2"></i>Makna Kibar Madani</h2>
-              <p class="lead">{!! nl2br(e($visiMisi->makna_kibar ?? 'Belum ada data makna')) !!}</p>
-            </div>
-
-          </div>
-        </section>
-
-      </div>
-    </section>
-
-
-
+    <div class="mb-5 p-4 bg-white shadow-sm rounded">
+      <h2 class="mb-3 border-bottom pb-2"><i class="bi bi-info-circle-fill me-2"></i>Makna Kibar Madani</h2>
+      <p class="lead" style="white-space: pre-line;">
+        {{ strip_tags($visiMisi->makna_kibar ?? 'Belum ada data makna') }}
+      </p>
     </div>
-    </section>
+  </section>
 
 
-    <!--  berita  -->
-    <section id="berita" class="my-5">
-      <div class="container">
-        <h2 class="text-center mb-4">Berita Terbaru</h2>
-        <div class="row justify-content-center g-4">
-          <div class="text-center mt-4">
-            <a href="{{ route('berita.frontend.index') }}" class="btn btn-outline-primary">Lihat Semua Berita</a>
-          </div>
-          @forelse($berita as $b)
-          <div class="col-md-4 col-sm-6 position-relative" data-aos="fade-up">
-            <div class="card h-100 shadow-sm" style="min-height: 180px;">
-              <img src="{{ asset('themes/minia/assets/images/logo.png') }}"
-                alt="Logo"
-                style="
+  </div>
+  </section>
+
+
+
+  </div>
+  </section>
+
+
+  <!--  berita  -->
+  <section id="berita" class="my-5">
+    <div class="container">
+      <h2 class="text-center mb-4">Berita Terbaru</h2>
+      <div class="row justify-content-center g-4">
+        <div class="text-center mt-4">
+          <a href="{{ route('berita.frontend.index') }}" class="btn btn-outline-primary">Lihat Semua Berita</a>
+        </div>
+        @forelse($berita as $b)
+        <div class="col-md-4 col-sm-6 position-relative" data-aos="fade-up">
+          <div class="card h-100 shadow-sm" style="min-height: 180px;">
+            <img src="{{ asset('themes/minia/assets/images/logo.png') }}"
+              alt="Logo"
+              style="
                             width: 40px;
                             height: 40px;
                             object-fit: contain;
@@ -184,318 +114,221 @@
                             box-shadow: 0 0 5px rgba(0,0,0,0.1);
                             background: transparent;
                          ">
-              <div class="card-body d-flex flex-column" style="padding-top: 60px;">
-                <h5 class="card-title">{{ $b->judul }}</h5>
-                <a href="{{ route('berita.frontend.show', $b->id) }}" class="btn btn-sm btn-primary mt-auto align-self-start">Baca Selengkapnya</a>
-              </div>
-              <div class="card-footer text-muted small" style="font-size: 0.75rem;">
-                {{ $b->created_at->format('d M Y') }}
-              </div>
+            <div class="card-body d-flex flex-column" style="padding-top: 60px;">
+              <h5 class="card-title">{{ $b->judul }}</h5>
+              <a href="{{ route('berita.frontend.show', $b->id) }}" class="btn btn-sm btn-primary mt-auto align-self-start">Baca Selengkapnya</a>
             </div>
-          </div>
-          @empty
-          <p class="text-center">Belum ada berita.</p>
-          @endforelse
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ======= Section Layanan Interaktif ======= -->
-    <section class="py-5 bg-light">
-      <div class="container" data-aos="fade-up">
-        <div class="row align-items-start">
-
-          <!-- Kolom Kiri: Accordion -->
-          <div class="col-lg-6">
-            <h3 class="mb-4 text-primary fw-bold">Layanan Kami</h3>
-            <div class="accordion" id="layananAccordion">
-
-              <!-- 1. TFT Sertifikasi BNSP -->
-              <div class="accordion-item mb-3">
-                <h2 class="accordion-header" id="headingOne">
-                  <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-                    TFT Sertifikasi BNSP
-                  </button>
-                </h2>
-                <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#layananAccordion">
-                  <div class="accordion-body">
-                    Pelatihan menjadi trainer bersertifikat nasional yang diakui oleh BNSP. Menyediakan pemahaman mendalam tentang metodologi pelatihan dan sertifikasi profesi.
-                  </div>
-                </div>
-              </div>
-
-              <!-- 2. Pelatihan Manajemen SDM Sertifikasi BNS -->
-              <div class="accordion-item mb-3">
-                <h2 class="accordion-header" id="headingTwo">
-                  <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
-                    Pelatihan Manajemen SDM Sertifikasi BNS
-                  </button>
-                </h2>
-                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#layananAccordion">
-                  <div class="accordion-body">
-                    Mengembangkan kompetensi profesional dalam mengelola sumber daya manusia dengan sertifikasi yang sesuai standar nasional.
-                  </div>
-                </div>
-              </div>
-
-              <!-- 3. Sertifikasi Neo NLP -->
-              <div class="accordion-item mb-3">
-                <h2 class="accordion-header" id="headingThree">
-                  <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
-                    Sertifikasi Neo NLP
-                  </button>
-                </h2>
-                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#layananAccordion">
-                  <div class="accordion-body">
-                    Program sertifikasi NLP (Neuro Linguistic Programming) yang membekali peserta dengan keterampilan komunikasi, motivasi, dan pengembangan diri.
-                  </div>
-                </div>
-              </div>
-
-              <!-- 4. Soft Skill's Training -->
-              <div class="accordion-item mb-3">
-                <h2 class="accordion-header" id="headingFour">
-                  <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
-                    Soft Skill's Training
-                  </button>
-                </h2>
-                <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#layananAccordion">
-                  <div class="accordion-body">
-                    Pelatihan untuk meningkatkan keterampilan interpersonal, komunikasi, leadership, dan kerjasama tim yang sangat dibutuhkan di dunia kerja modern.
-                  </div>
-                </div>
-              </div>
-
-              <!-- 5. In House Training -->
-              <div class="accordion-item mb-3">
-                <h2 class="accordion-header" id="headingFive">
-                  <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive">
-                    In House Training
-                  </button>
-                </h2>
-                <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#layananAccordion">
-                  <div class="accordion-body">
-                    Pelatihan yang dirancang khusus untuk kebutuhan internal organisasi atau institusi, dilakukan secara fleksibel di tempat peserta.
-                  </div>
-                </div>
-              </div>
-
-              <!-- 6. Pelatihan untuk Sekolah/Lembaga Pendidikan -->
-              <div class="accordion-item mb-3">
-                <h2 class="accordion-header" id="headingSix">
-                  <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix">
-                    Pelatihan untuk Sekolah/Lembaga Pendidikan
-                  </button>
-                </h2>
-                <div id="collapseSix" class="accordion-collapse collapse" data-bs-parent="#layananAccordion">
-                  <div class="accordion-body">
-                    Program khusus untuk guru, kepala sekolah, dan tenaga kependidikan dalam meningkatkan kualitas pembelajaran, manajemen sekolah, dan spiritual leadership.
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <!-- Kolom Kanan: Gambar -->
-          <div class="col-lg-6 text-center mt-5 mt-lg-0">
-            <img src="{{ asset('themes/Medicio/assets/img/logo.png') }}" alt="Logo Kibar" class="mb-3" style="height: 60px;">
-            <div style="position: relative; display: inline-block;">
-              <img src="{{ asset('themes/Medicio/assets/img/pelatihan.png') }}" alt="Pembicara" class="img-fluid position-relative z-1" style="max-width: 100%;">
+            <div class="card-footer text-muted small" style="font-size: 0.75rem;">
+              {{ $b->created_at->format('d M Y') }}
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- ======= Keunggulan Kami Section ======= -->
-    <section id="keunggulan" class="py-5 bg-light">
-      <div class="container" data-aos="fade-up">
-        <div class="section-title text-center mb-5">
-          <h2>Keunggulan Kami</h2>
-          <p class="text-muted">Mengapa memilih Kibar Madani?</p>
-        </div>
-
-        <div class="row g-4">
-
-          <div class="col-lg-3 col-md-6">
-            <div class="text-center bg-white p-4 shadow-sm rounded h-100">
-              <div class="mb-3">
-                <i class="bi bi-lightbulb display-4 text-primary"></i>
-              </div>
-              <h5 class="fw-bold">Easily to Apply</h5>
-              <p class="text-muted small">Pendekatan pembelajaran mudah diterapkan dan langsung bisa diimplementasikan dalam kehidupan nyata.</p>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <div class="text-center bg-white p-4 shadow-sm rounded h-100">
-              <div class="mb-3">
-                <i class="bi bi-emoji-smile display-4 text-success"></i>
-              </div>
-              <h5 class="fw-bold">Fun Learning</h5>
-              <p class="text-muted small">Lingkungan belajar yang menyenangkan dan mendorong kolaborasi serta partisipasi aktif.</p>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <div class="text-center bg-white p-4 shadow-sm rounded h-100">
-              <div class="mb-3">
-                <i class="bi bi-award display-4 text-warning"></i>
-              </div>
-              <h5 class="fw-bold">Meaningful Program</h5>
-              <p class="text-muted small">Program dirancang secara teliti untuk dampak karier dan pengembangan pribadi yang bermakna.</p>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <div class="text-center bg-white p-4 shadow-sm rounded h-100">
-              <div class="mb-3">
-                <i class="bi bi-graph-up-arrow display-4 text-danger"></i>
-              </div>
-              <h5 class="fw-bold">Powerful</h5>
-              <p class="text-muted small">Dukungan kurikulum kuat & komprehensif untuk hasil pembelajaran yang relevan dan mendalam.</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-    <!-- End Keunggulan Section -->
-
-
-    <!-- ======= Contact Section (Maps Only) ======= -->
-    <section id="contact" class="contact py-5">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title text-center mb-4">
-          <h2>Kontak Kami</h2>
-          <p>Temukan lokasi kami dengan mudah melalui peta di bawah ini.</p>
-        </div>
-
-        <div class="row justify-content-center">
-          <div class="col-lg-10">
-            <div class="shadow rounded overflow-hidden">
-              <iframe style="border:0; width: 100%; height: 400px;"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.8399820123126!2d110.39145601477644!3d-7.807675394373471!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a582dca6f98d3%3A0x52230eaefcdd915!2sKibar%20Madani!5e0!3m2!1sen!2sid!4v1690724306590!5m2!1sen!2sid"
-                frameborder="0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-              </iframe>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Form Kontak -->
-    <div class="row justify-content-center mt-5">
-      <div class="col-lg-10">
-        <div class="shadow rounded p-4 bg-white">
-          <form action="{{ route('kontak.store') }}" method="POST">
-            @csrf
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <input type="text" name="nama" class="form-control" placeholder="Nama Anda" required>
-              </div>
-              <div class="col-md-6 mb-3">
-                <input type="email" name="email" class="form-control" placeholder="Email" required>
-              </div>
-            </div>
-            <div class="mb-3">
-              <input type="text" name="subjek" class="form-control" placeholder="Subjek" required>
-            </div>
-            <div class="mb-3">
-              <textarea name="pesan" rows="5" class="form-control" placeholder="Tulis pesan Anda di sini..." required></textarea>
-            </div>
-            <div class="text-center">
-              <button type="submit" class="btn btn-primary px-4">Kirim Pesan</button>
-            </div>
-          </form>
-        </div>
+        @empty
+        <p class="text-center">Belum ada berita.</p>
+        @endforelse
       </div>
     </div>
-    <!-- End Form Kontak -->
+  </section>
 
-    <!-- End Contact Section -->
 
-  </main><!-- End #main -->
+ {{-- ===================== LAYANAN KAMI ===================== --}}
+<section class="py-5 bg-light">
+  <div class="container">
+    <h2 class="fw-bold mb-4 text-primary">Layanan Kami</h2>
 
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-    <div class="footer-top">
-      <div class="container">
-        <div class="row">
+    <div class="row g-4 align-items-start">
+      {{-- Kiri: Accordion --}}
+      <div class="col-lg-6">
+        <div class="accordion" id="layananAccordion">
+          @foreach ($layanan as $idx => $item)
+          @php
+            $collapseId = 'layanan-'.$loop->index;
+            $show = $idx === 0 ? 'show' : '';
+            $collapsed = $idx === 0 ? '' : 'collapsed';
+          @endphp
 
-          <div class="col-lg-3 col-md-6">
-            <div class="footer-info">
-              <h3>Kibar Madani</h3>
-              <p>
-                Tiban Housing B4 No 10 Batam <br><br>
-                <strong>Phone:</strong> 0819806140 / 081364098250 <br>
-                <strong>Email:</strong> kibarmadani@gmail.com <br>
+          <div class="accordion-item mb-2 border rounded-3 overflow-hidden">
+            <h2 class="accordion-header">
+              <button class="accordion-button {{ $collapsed }} py-3"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#{{ $collapseId }}"
+                aria-expanded="{{ $idx===0 ? 'true':'false' }}"
+                aria-controls="{{ $collapseId }}">
+                <span class="fw-semibold">{{ $item->title }}</span>
+              </button>
+            </h2>
+            <div id="{{ $collapseId }}"
+              class="accordion-collapse collapse {{ $show }}"
+              data-bs-parent="#layananAccordion">
+              <div class="accordion-body text-muted">
+                {{ strip_tags($item->description) }}
+              </div>
+            </div>
+          </div>
+          @endforeach
+
+          @if($layanan->isEmpty())
+          <div class="text-muted">Belum ada layanan.</div>
+          @endif
+        </div>
+      </div>
+
+      {{-- Kanan: Hanya gambar --}}
+      <div class="col-lg-6 text-center">
+        <img src="{{ asset('themes/Medicio/assets/img/pelatihan.png') }}" 
+             alt="Pembicara" 
+             class="img-fluid" 
+             style="max-width: 100%; height: auto;">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <style>
+    .accordion-button:not(.collapsed) {
+      box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .15);
+    }
+  </style>
+
+
+  {{-- tambahan kecil biar header yang aktif kelihatan "highlight" --}}
+  <style>
+    .accordion-button:not(.collapsed) {
+      box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .15);
+      border-radius: .75rem;
+    }
+
+    .accordion-item {
+      border-radius: .75rem;
+      overflow: hidden;
+    }
+  </style>
+
+
+ {{-- ===================== KEUNGGULAN KAMI ===================== --}}
+<section class="py-5">
+  <div class="container">
+    {{-- Heading --}}
+    <div class="text-center mb-4">
+      <h2 class="fw-bold">KEUNGGULAN KAMI</h2>
+      <div class="small text-muted">Mengapa memilih Kibar Madani?</div>
+    </div>
+
+    {{-- Cards --}}
+    @php
+      // List icon sesuai urutan item
+      $icons = [
+        'fa-solid fa-user-tie',        // item 1
+        'fa-solid fa-book-open',       // item 2
+        'fa-solid fa-network-wired',   // item 3
+        'fa-solid fa-certificate',     // item 4
+      ];
+    @endphp
+
+    <div class="row g-4 row-cols-1 row-cols-md-2 row-cols-lg-4">
+      @forelse ($keunggulan as $item)
+        <div class="col">
+          <div class="card h-100 border-0 shadow-sm rounded-4 text-center hover-shadow">
+            <div class="card-body p-4 d-flex flex-column align-items-center">
+              
+              {{-- Icon manual berdasarkan index --}}
+              <i class="{{ $icons[$loop->index] ?? 'fa-solid fa-circle-info' }} 
+                        mb-3 fs-1 text-primary"></i>
+
+              <h5 class="card-title fw-semibold mb-2">
+                {{ $item->title }}
+              </h5>
+              <p class="card-text text-muted mb-0">
+                {{ \Illuminate\Support\Str::limit(strip_tags($item->description), 140) }}
               </p>
-              <div class="social-links mt-3">
-                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-              </div>
             </div>
           </div>
+        </div>
+      @empty
+        <div class="col-12 text-center text-muted">
+          Belum ada keunggulan.
+        </div>
+      @endforelse
+    </div>
+  </div>
+</section>
 
-          <div class="col-lg-2 col-md-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">BNSP</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">KEMNAKER</a></li>
-            </ul>
-          </div>
 
-          <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Our Services</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">TFT Sertifikasi BNSP</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Pelatihan Manajemen SDM</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Sertifikasi Neo NLP</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Soft Skill's Training</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">In House Training (Customize)</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">IPelatihan Untuk Sekolah/Lembaga Pendidikan</a></li>
-            </ul>
+  <style>
+    .hover-shadow:hover {
+      box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .08) !important;
+      transform: translateY(-2px);
+      transition: .2s;
+    }
+  </style>
+
+
+  <style>
+    .hover-shadow:hover {
+      box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .08) !important;
+      transform: translateY(-2px);
+      transition: .2s;
+    }
+  </style>
+
+
+
+  <!-- ======= Contact Section (Maps Only) ======= -->
+  <section id="contact" class="contact py-5">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-title text-center mb-4">
+        <h2>Kontak Kami</h2>
+        <p>Temukan lokasi kami dengan mudah melalui peta di bawah ini.</p>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="shadow rounded overflow-hidden">
+            <iframe style="border:0; width: 100%; height: 400px;"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.8399820123126!2d110.39145601477644!3d-7.807675394373471!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a582dca6f98d3%3A0x52230eaefcdd915!2sKibar%20Madani!5e0!3m2!1sen!2sid!4v1690724306590!5m2!1sen!2sid"
+              frameborder="0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
           </div>
         </div>
       </div>
+
     </div>
+  </section>
 
-    <div class="container">
-      <div class="copyright">
-        &copy; Copyright <strong><span>LPK KIBAR MADANI</span></strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/medicio-free-bootstrap-theme/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+  <!-- Form Kontak -->
+  <div class="row justify-content-center mt-5">
+    <div class="col-lg-10">
+      <div class="shadow rounded p-4 bg-white">
+        <form action="{{ route('kontak.store') }}" method="POST">
+          @csrf
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <input type="text" name="nama" class="form-control" placeholder="Nama Anda" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <input type="email" name="email" class="form-control" placeholder="Email" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <input type="text" name="subjek" class="form-control" placeholder="Subjek" required>
+          </div>
+          <div class="mb-3">
+            <textarea name="pesan" rows="5" class="form-control" placeholder="Tulis pesan Anda di sini..." required></textarea>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary px-4">Kirim Pesan</button>
+          </div>
+        </form>
       </div>
     </div>
-  </footer><!-- End Footer -->
+  </div>
+  <!-- End Form Kontak -->
 
-  <div id="preloader"></div>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <!-- End Contact Section -->
 
-  <!-- Vendor JS Files -->
-  <script src="themes/Medicio/assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="themes/Medicio/assets/vendor/aos/aos.js"></script>
-  <script src="themes/Medicio/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="themes/Medicio/assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="themes/Medicio/assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="themes/Medicio/assets/vendor/php-email-form/validate.js"></script>
+</main><!-- End #main -->
 
-  <!-- Template Main JS File -->
-  <script src="themes/Medicio/assets/js/main.js"></script>
-
-</body>
-
-</html>
+@endsection
