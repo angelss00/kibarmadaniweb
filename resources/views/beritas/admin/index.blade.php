@@ -21,41 +21,38 @@
                     <th>No</th>
                     <th>Judul</th>
                     <th>Slug</th> {{-- Tambahan kolom slug --}}
-                    <th width="170px">Aksi</th>
+                    <th width="180px">Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($berita as $item)
-                <tr class="text-center">
+                <tr>
                     <td>{{ $item->id }}</td>
                     <td class="text-start">{{ $item->judul }}</td>
                     <td>{{ $item->slug }}</td> {{-- Tampilkan slug --}}
                     <td>
-                        <div class="d-flex gap-1 justify-content-center">
-                            {{-- Edit --}}
-                            <a href="{{ route('beritas.admin.edit', $item->id) }}" class="btn btn-warning btn-sm">
-                                <i class="fa fa-edit"></i> Edit
-                            </a>
-
-                            {{-- Hapus --}}
-                            <form action="{{ route('beritas.admin.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Yakin?')">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger btn-sm">
-                                    <i class="fa fa-trash"></i> Hapus
-                                </button>
+                        <div class="btn btn-group">
+                            <a href="{{ route('beritas.admin.edit', $item) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> Edit</a>
+                            <form action="{{ route('beritas.admin.destroy', $item) }}" method="POST" class="d-inline">
+                                @csrf @method('DELETE')
+                                <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin?')"><i class="fa fa-trash"></i> Hapus</button>
                             </form>
                         </div>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
     </div>
+    </td>
+    </tr>
+    @endforeach
+    </tbody>
+    </table>
+</div>
 
-    {{-- Pagination --}}
-    <div class="mt-3">
-        {{ $berita->links() }}
-    </div>
+{{-- Pagination --}}
+<div class="mt-3">
+    {{ $berita->links() }}
+</div>
+<!-- Pagination links -->
+<div class="d-flex justify-content-center">
+    {{ $berita->links() }}
+</div>
 </div>
 @endsection

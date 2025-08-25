@@ -1,6 +1,5 @@
 <header id="header" class="fixed-top">
   <div class="container d-flex align-items-center">
-
     <a href="{{ url('/') }}" class="logo me-auto">
       <img src="{{ asset('themes/Medicio/assets/img/logo.png') }}" alt="Logo">
     </a>
@@ -12,14 +11,14 @@
           <a
             class="nav-link {{ $menu->type === 'scroll' ? 'scrollto' : '' }}"
             href="
-                @if($menu->type === 'route')
-                    {{ route($menu->url) }}
-                @elseif($menu->type === 'scroll')
-                    {{ url('/') }}#{{ $menu->url }}
-                @else
-                    {{ $menu->url }}
-                @endif
-              ">
+                                @if($menu->type === 'route')
+                                    {{ route($menu->url) }}
+                                @elseif($menu->type === 'scroll')
+                                    {{ url('/') }}#{{ $menu->url }}
+                                @else
+                                    {{ $menu->url }}
+                                @endif
+                            ">
             {{ $menu->nama }}
           </a>
         </li>

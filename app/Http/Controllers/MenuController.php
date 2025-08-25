@@ -9,10 +9,12 @@ class MenuController extends Controller
 {
     public function index()
     {
-        $menus = Menu::all();
-        return view('menus.index', compact('menus'));
-    }
+        // Ambil menu utama (yang parent_id-nya null) dan urutkan berdasarkan 'urutan'
+        $menus = Menu::whereNull('parent_id')->orderBy('urutan')->get();
 
+        // Kirim data menu ke view 'index'
+        return view('index', compact('menus'));
+    }
     public function create()
     {
         return view('menus.create');

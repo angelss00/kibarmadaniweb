@@ -10,6 +10,7 @@ use App\Http\Controllers\KontakController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\GaleriFrontendController;
+use App\Http\Controllers\TestimonialController;
 
 // Admin controllers (middleware: auth)
 use App\Http\Controllers\MenuController;
@@ -34,8 +35,10 @@ use App\Http\Controllers\AlbumController;
 
 // ✅ Homepage — ini SATU-SATUNYA route "/"
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/infos/{info}/delete', [InfoController::class, 'deleteConfirm'])->name('infos.delete');
+Route::resource('infos', InfoController::class);
 
 // Halaman statis
 Route::get('/tentang-kami', [PageController::class, 'about'])->name('about');
@@ -75,13 +78,20 @@ Route::get('/pelatihans/jadwal', [PelatihanController::class, 'jadwal'])->name('
 Route::get('/berita', [BeritaController::class, 'frontendIndex'])->name('berita.frontend.index');
 Route::get('/berita/{slug}', [BeritaController::class, 'show'])->name('berita.frontend.show');
 
-Route::resource('beritas', BeritaController::class);
+Route::get('pendaftarans/{id}/show', [PendaftaranController::class, 'show'])->name('pendaftarans.show');
+ // Mengarahkan ke index() di BeritaController
 
+Route::resource('beritas', BeritaController::class);
+Route::get('kontaks/{id}/show', [KontakController::class, 'show'])->name('kontaks.show');
 Route::resource('infos', InfoController::class);
 
 // kalau mau fitur tambahan
 Route::post('infos/reorder', [InfoController::class, 'reorder'])->name('infos.reorder');
 Route::patch('infos/{info}/toggle', [InfoController::class, 'toggle'])->name('infos.toggle');
+
+
+
+Route::resource('testimonials', TestimonialController::class);
 
 
 /*

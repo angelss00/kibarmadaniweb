@@ -454,12 +454,13 @@ h6 {
 
 #hero .container {
   text-align: center;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.5); /* 50% transparan */
   padding-top: 30px;
   padding-bottom: 30px;
   margin-bottom: 50px;
   border-top: 4px solid #242692;
 }
+
 
 @media (max-width: 1200px) {
   #hero .container {
@@ -1795,4 +1796,104 @@ section {
   padding-top: 10px;
   text-align: center;
   font-size: 13px;
+}
+
+/* Styling untuk Slider dan Testimoni */
+.testimonials {
+  padding: 80px 0;
+}
+
+.testimonials .section-title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.testimonials .swiper-wrapper {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.testimonials .swiper-slide {
+  flex: 0 0 300px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonials .testimonial-item {
+  background: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.testimonials .testimonial-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.testimonials .testimonial-item p {
+  font-size: 16px;
+  line-height: 1.5;
+  font-style: italic;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.testimonials .testimonial-item h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.testimonials .testimonial-item h4 {
+  font-size: 16px;
+  color: #888;
+}
+
+.testimonials .swiper-button-prev,
+.testimonials .swiper-button-next {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+  font-size: 18px;
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+}
+
+.testimonials .swiper-button-prev {
+  left: 20px;
+}
+
+.testimonials .swiper-button-next {
+  right: 20px;
+}
+
+.testimonials .swiper-button-prev:hover,
+.testimonials .swiper-button-next:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.testimonials .swiper-pagination {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+}
+
+.testimonials .swiper-pagination .swiper-pagination-bullet {
+  background-color: #6c757d;
+  width: 10px;
+  height: 10px;
+  margin: 0 5px;
+  border-radius: 50%;
+}
+
+.testimonials .swiper-pagination .swiper-pagination-bullet-active {
+  background-color: #007bff;
 }

@@ -1,114 +1,33 @@
-@extends('layouts.master)
+<!-- resources/views/infos/create.blade.php -->
+@extends('layouts.master')
 
 @section('content')
-<div class="container" style="max-width: 1000px;">
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h1 class="h5 mb-0">Tambah Slide</h1>
-    <a href="{{ route('infos.index') }}" class="btn btn-outline-secondary btn-sm">Kembali</a>
-  </div>
+<div class="container">
+    <h2 class="mb-4">Tambah Info</h2>
 
-  @if ($errors->any())
-    <div class="alert alert-danger">
-      <ul class="mb-0">@foreach ($errors->all() as $e)<li>{{ $e }}</li>@endforeach</ul>
-    </div>
-  @endif
-
-  <form action="{{ route('infos.store') }}" method="POST" enctype="multipart/form-data" class="card shadow-sm">
-    @csrf
-    <div class="card-body">
-      <div class="row g-4">
-        {{-- Kiri --}}
-        <div class="col-md-6">
-          <div class="mb-3">
-            <label class="form-label">Nama Slider</label>
-            <input type="text" name="slider_name" class="form-control"
-                   value="{{ old('slider_name', $defaultSlider ?? 'homepage-hero') }}"
-                   placeholder="contoh: homepage-hero">
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">Judul <span class="text-danger">*</span></label>
-            <input type="text" name="judul" class="form-control @error('judul') is-invalid @enderror"
-                   value="{{ old('judul') }}">
-            @error('judul')<div class="invalid-feedback">{{ $message }}</div>@enderror
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">Subjudul</label>
-            <input type="text" name="subtitle" class="form-control" value="{{ old('subtitle') }}">
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">Kategori</label>
-            <select name="kategori_id" class="form-select">
-              <option value="">— Pilih Kategori —</option>
-              @foreach($kategoris as $k)
-                <option value="{{ $k->id }}" @selected(old('kategori_id')==$k->id)>{{ $k->nama ?? 'Kategori #'.$k->id }}</option>
-              @endforeach
-            </select>
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">Konten</label>
-            <textarea name="isi" rows="5" class="form-control" placeholder="Deskripsi/caption...">{{ old('isi') }}</textarea>
-          </div>
+    <form action="{{ route('infos.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="mb-3">
+            <label for="judul" class="form-label">Judul</label>
+            <input type="text" class="form-control" id="judul" name="judul" required>
         </div>
 
-        {{-- Kanan --}}
-        <div class="col-md-6">
-          <div class="mb-3">
-            <label class="form-label">Gambar (jpg/png/webp, maks 2MB)</label>
-            <input type="file" name="gambar" class="form-control" accept="image/*" onchange="previewImg(this)">
-            <div class="mt-2">
-              <img id="imgPreview" src="" style="display:none;max-width:100%;height:220px;object-fit:cover" class="rounded border">
-            </div>
-          </div>
-
-          <div class="row g-3">
-            <div class="col-md-8">
-              <label class="form-label">Link URL</label>
-              <input type="url" name="link_url" class="form-control" value="{{ old('link_url') }}" placeholder="https://...">
-            </div>
-            <div class="col-md-4">
-              <label class="form-label">Teks Tombol</label>
-              <input type="text" name="button_text" class="form-control" value="{{ old('button_text','Read More') }}">
-            </div>
-            <div class="col-md-4">
-              <label class="form-label">Urutan</label>
-              <input type="number" min="0" name="sort_order" class="form-control" value="{{ old('sort_order') }}" placeholder="auto">
-            </div>
-            <div class="col-md-4">
-              <label class="form-label">Mulai Tayang</label>
-              <input type="datetime-local" name="start_at" class="form-control" value="{{ old('start_at') }}">
-            </div>
-            <div class="col-md-4">
-              <label class="form-label">Selesai Tayang</label>
-              <input type="datetime-local" name="end_at" class="form-control" value="{{ old('end_at') }}">
-            </div>
-          </div>
-
-          <div class="form-check form-switch mt-3">
-            <input class="form-check-input" type="checkbox" name="is_active" value="1" {{ old('is_active',1) ? 'checked' : '' }}>
-            <label class="form-check-label">Aktif</label>
-          </div>
+        <div class="mb-3">
+            <label for="isi" class="form-label">Isi</label>
+            <textarea class="form-control" id="isi" name="isi" rows="4" required></textarea>
         </div>
-      </div>
-    </div>
 
-    <div class="card-footer d-flex justify-content-end gap-2">
-      <a href="{{ route('infos.index') }}" class="btn btn-light">Batal</a>
-      <button class="btn btn-primary">Simpan</button>
-    </div>
-  </form>
+        <div class="mb-3">
+            <label for="gambar" class="form-label">Gambar</label>
+            <input type="file" class="form-control" id="gambar" name="gambar">
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            <i class="fa fa-save"></i> Simpan
+        </button>
+        <a href="{{ route('infos.index') }}" class="btn btn-secondary">
+            <i class="fa fa-arrow-left"></i> Kembali
+        </a>
+    </form>
 </div>
-
-<script>
-function previewImg(input){
-  const img = document.getElementById('imgPreview');
-  if (input.files && input.files[0]) {
-    img.src = URL.createObjectURL(input.files[0]);
-    img.style.display = 'block';
-  }
-}
-</script>
 @endsection

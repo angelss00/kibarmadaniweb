@@ -7,7 +7,7 @@
     <h2 class="mb-4">Manajemen Pendaftaran</h2>
 
     @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+    <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
     <div class="table-responsive">
@@ -19,8 +19,9 @@
                     <th>Telepon</th>
                     <th>Alamat</th>
                     <th>Pelatihan</th>
-                    <th>Catatan</th>
-                    <th>Aksi</th>
+                    <th width="180px">Catatan</th>
+                    <th>Tanggal Pendaftaran</th> <!-- Kolom untuk tanggal pendaftaran -->
+                    <th width="180px">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,20 +33,23 @@
                     <td>{{ $p->alamat }}</td>
                     <td>{{ $p->pelatihan->nama_pelatihan ?? '-' }}</td>
                     <td>{{ $p->catatan }}</td>
+                    <td>{{ $p->created_at->format('d M Y H:i') }}</td> <!-- Tampilkan tanggal pendaftaran -->
                     <td>
-                         <div class="d-flex gap-1 justify-content-center">
-                            <form action="{{ route('pendaftarans.destroy', $p->id) }}" method="POST" onsubmit="return confirm('Yakin?')">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger btn-sm">
-                                    <i class="fa fa-trash"></i> Hapus
-                                </button>
+                        <div class="btn btn-group">
+                            <form action="{{ route('pendaftarans.destroy', $p->id) }}" method="POST" class="d-inline">
+                                @csrf @method('DELETE')
+                                <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin?')"><i class="fa fa-trash"></i> Hapus</button>
                             </form>
+                            <a href="{{ route('pendaftarans.show', $p->id) }}" class="btn btn-info btn-sm">
+                                <i class="fa fa-eye"></i> Lihat
+                            </a>
                         </div>
                     </td>
                 </tr>
                 @empty
-                <tr><td colspan="7" class="text-center">Belum ada pendaftar.</td></tr>
+                <tr>
+                    <td colspan="8" class="text-center">Belum ada pendaftar.</td>
+                </tr>
                 @endforelse
             </tbody>
         </table>

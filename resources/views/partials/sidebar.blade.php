@@ -102,6 +102,13 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="{{ route('testimonials.index') }}">
+                        <i class="bx bx-comment-detail"></i>
+                        <span>Testimonial</span>
+                    </a>
+                </li>
+
 
                 <li class="menu-title mt-2" data-key="t-other">Lainnya</li>
 

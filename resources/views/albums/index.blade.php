@@ -16,7 +16,7 @@
 
     {{-- Notifikasi sukses --}}
     @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+    <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
     {{-- Tabel album --}}
@@ -35,16 +35,11 @@
                     <td class="text-start">{{ $album->title }}</td>
                     <td class="text-start">{{ strip_tags($album->description) }}</td>
                     <td>
-                        <div class="d-flex gap-1 justify-content-center">
-                            <a href="{{ route('albums.edit', $album) }}" class="btn btn-warning btn-sm">
-                                <i class="fa fa-edit"></i> Edit
-                            </a>
-                            <form action="{{ route('albums.destroy', $album) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus album ini?')">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger btn-sm">
-                                    <i class="fa fa-trash"></i> Hapus
-                                </button>
+                        <div class="btn btn-group">
+                            <a href="{{ route('albums.edit', $album) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> Edit</a>
+                            <form action="{{ route('albums.destroy', $album) }}" method="POST" class="d-inline">
+                                @csrf @method('DELETE')
+                                <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin?')"><i class="fa fa-trash"></i> Hapus</button>
                             </form>
                         </div>
                     </td>

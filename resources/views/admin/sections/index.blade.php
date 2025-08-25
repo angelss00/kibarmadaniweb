@@ -60,16 +60,13 @@ $currentType = $type ?? request('type');
                     <td>{{ \Illuminate\Support\Str::limit(strip_tags($item->description), 120) }}</td>
                     <td>{{ $item->order ?? '—' }}</td>
                     <td>
-                        <a href="{{ route('sections.edit', $item->id) }}" class="btn btn-warning btn-sm me-1">
-                            <i class="fa fa-edit"></i> Edit
-                        </a>
-                        <form action="{{ route('sections.destroy', $item->id) }}" method="POST" class="d-inline"
-                            onsubmit="return confirm('Yakin hapus data ini?');">
-                            @csrf @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">
-                                <i class="fa fa-trash"></i> Hapus
-                            </button>
-                        </form>
+                        <div class="btn btn-group">
+                            <a href="{{ route('admin.sections.edit', $item) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> Edit</a>
+                            <form action="{{ route('admin.sections.destroy', $item) }}" method="POST" class="d-inline">
+                                @csrf @method('DELETE')
+                                <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin?')"><i class="fa fa-trash"></i> Hapus</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
                 @empty
@@ -84,10 +81,5 @@ $currentType = $type ?? request('type');
             </tbody>
         </table>
     </div>
-
-    {{-- Pagination --}}
-    @if(method_exists($sections, 'links'))
-    {{ $sections->appends(['type' => $currentType])->links() }}
-    @endif
 </div>
 @endsection

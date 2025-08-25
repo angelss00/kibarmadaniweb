@@ -41,4 +41,14 @@ class PendaftaranController extends Controller
         Pendaftaran::findOrFail($id)->delete();
         return back()->with('success', 'Data berhasil dihapus!');
     }
+
+    // Menampilkan data lengkap pendaftaran
+    public function show($id)
+    {
+        // Ambil data berdasarkan id
+        $pendaftaran = Pendaftaran::findOrFail($id);
+
+        // Kirim data ke view 'pendaftarans.show'
+        return view('pendaftarans.show', compact('pendaftaran'));
+    }
 }

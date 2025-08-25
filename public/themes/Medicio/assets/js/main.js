@@ -271,3 +271,31 @@
   new PureCounter();
 
 })()
+
+// Swiper JS Initialization
+document.addEventListener("DOMContentLoaded", function() {
+    var swiper = new Swiper('.testimonials-slider', {
+        slidesPerView: 3,  // Menampilkan 3 testimoni per slide
+        spaceBetween: 20,   // Jarak antar testimoni
+        autoplay: {
+            delay: 3000,  // Otomatis bergulir setiap 3 detik
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,  // Klik untuk navigasi ke slide
+        },
+        breakpoints: {
+            // Responsif
+            1024: {
+                slidesPerView: 2,  // Menampilkan 2 testimoni pada ukuran layar lebih kecil
+            },
+            600: {
+                slidesPerView: 1,  // Menampilkan 1 testimoni pada layar ponsel
+            },
+        }
+    });
+});

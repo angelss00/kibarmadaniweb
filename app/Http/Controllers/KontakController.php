@@ -95,4 +95,12 @@ class KontakController extends Controller
         $kontak->delete();
         return redirect()->route('kontaks.index')->with('success', 'Pesan berhasil dihapus.');
     }
+    public function show($id)
+    {
+        // Ambil data kontak berdasarkan id
+        $kontak = Kontak::findOrFail($id);
+
+        // Kirim data kontak ke view 'contacts.show'
+        return view('kontaks.show', compact('kontak'));
+    }
 }

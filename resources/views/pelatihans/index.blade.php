@@ -32,9 +32,9 @@
                     <td>
                         @if($p->gambar)
                         <img src="{{ asset('storage/' . $p->gambar) }}"
-                             alt="{{ $p->nama_pelatihan }}"
-                             width="100"
-                             class="img-thumbnail";>
+                            alt="{{ $p->nama_pelatihan }}"
+                            width="100"
+                            class="img-thumbnail" ;>
                         @else
                         -
                         @endif
@@ -49,16 +49,11 @@
                     <td class="text-start">{!! Str::limit($p->deskripsi, 100) !!}</td>
                     <td class="text-start">{{ $p->lokasi }}</td>
                     <td>
-                        <div class="d-flex gap-1 justify-content-center">
-                            <a href="{{ route('pelatihans.edit', $p->id) }}" class="btn btn-warning btn-sm">
-                                <i class="fa fa-edit"></i> Edit
-                            </a>
-                            <form action="{{ route('pelatihans.destroy', $p->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus?')">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger btn-sm">
-                                    <i class="fa fa-trash"></i> Hapus
-                                </button>
+                        <div class="btn btn-group">
+                            <a href="{{ route('pelatihans.edit', $p->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> Edit</a>
+                            <form action="{{ route('pelatihans.destroy', $p->id) }}" method="POST" class="d-inline">
+                                @csrf @method('DELETE')
+                                <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin?')"><i class="fa fa-trash"></i> Hapus</button>
                             </form>
                         </div>
                     </td>

@@ -37,16 +37,11 @@
                     <td>{{ $user->email }}</td>
                     <td>{{ ucfirst($user->role) }}</td>
                     <td>
-                        <div class="d-flex gap-1 justify-content-center">
-                            <a href="{{ route('users.edit', $user) }}" class="btn btn-warning btn-sm">
-                                <i class="fa fa-edit"></i> Edit
-                            </a>
-                            <form action="{{ route('users.destroy', $user) }}" method="POST" onsubmit="return confirm('Yakin?')">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger btn-sm">
-                                    <i class="fa fa-trash"></i> Hapus
-                                </button>
+                        <div class="btn btn-group">
+                            <a href="{{ route('users.edit', $user) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> Edit</a>
+                            <form action="{{ route('users.destroy', $user) }}" method="POST" class="d-inline">
+                                @csrf @method('DELETE')
+                                <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin?')"><i class="fa fa-trash"></i> Hapus</button>
                             </form>
                         </div>
                     </td>

@@ -37,18 +37,13 @@
                     <td class="text-start">{{ $cat->name }}</td>
                     <td class="text-start">{!! $cat->description !!}</td>
                     <td>
-                        <div class="d-flex gap-1 justify-content-center">
-                            <a href="{{ route('galerry_categories.edit', $cat) }}" class="btn btn-warning btn-sm">
-                                <i class="fa fa-edit"></i> Edit
-                            </a>
-                            <form action="{{ route('galerry_categories.destroy', $cat) }}" method="POST" onsubmit="return confirm('Yakin?')">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger btn-sm">
-                                    <i class="fa fa-trash"></i> Hapus
-                                </button>
-                            </form>
-                        </div>
+                        <div class="btn btn-group">
+                     <a href="{{ route('galerry_categories.edit', $cat) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> Edit</a>
+                    <form action="{{ route('galerry_categories.destroy', $cat) }}" method="POST" class="d-inline">
+                        @csrf @method('DELETE')
+                        <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin?')"><i class="fa fa-trash"></i> Hapus</button>
+                    </form>
+                   </div>
                     </td>
                 </tr>
                 @endforeach
