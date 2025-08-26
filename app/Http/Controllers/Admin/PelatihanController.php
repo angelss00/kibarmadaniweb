@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 class PelatihanController extends Controller
 {
     // Tampilkan semua pelatihan dengan pagination
+     public function latestForHomepage()
+    {
+        return Pelatihan::latest()->take(3)->get();
+    }
+    
     public function index()
     {
         $pelatihans = Pelatihan::latest()->paginate(10);

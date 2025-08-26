@@ -23,25 +23,7 @@
             <label>Tipe</label>
             <select name="type" class="form-control" required>
                 <option value="scroll" {{ old('type', $menu->type) == 'scroll' ? 'selected' : '' }}>Scroll</option>
-                <option value="route" {{ old('type', $menu->type) == 'route' ? 'selected' : '' }}>Route</option>
                 <option value="url" {{ old('type', $menu->type) == 'url' ? 'selected' : '' }}>URL</option>
-            </select>
-        </div>
-
-        <div class="mb-3">
-            <label>Urutan Menu</label>
-            <input type="number" name="urutan" class="form-control" value="{{ old('urutan', $menu->urutan) }}" required>
-        </div>
-
-        <div class="mb-3">
-            <label>Parent Menu (Opsional)</label>
-            <select name="parent_id" class="form-control">
-                <option value="">-- Pilih Parent Menu --</option>
-                @foreach($parentMenus as $parent)
-                <option value="{{ $parent->id }}" {{ old('parent_id', $menu->parent_id) == $parent->id ? 'selected' : '' }}>
-                    {{ $parent->nama }}
-                </option>
-                @endforeach
             </select>
         </div>
 

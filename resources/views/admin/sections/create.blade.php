@@ -12,6 +12,9 @@
             <select name="type" class="form-select" required>
                 <option value="keunggulan" @selected(old('type')=='keunggulan' )>Keunggulan</option>
                 <option value="layanan" @selected(old('type')=='layanan' )>Layanan</option>
+                <option value="tentang" @selected(old('type')=='tentang' )>tentang</option>
+                <option value="visi" @selected(old('type')=='visi' )>Visi</option>
+                <option value="misi" @selected(old('type')=='misi' )>Misi</option>
             </select>
             @error('type') <div class="text-danger small">{{ $message }}</div> @enderror
         </div>

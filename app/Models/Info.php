@@ -15,16 +15,17 @@ class Info extends Model
         'isi',
         'gambar',
         'is_active',
+        'kategori_id',
     ];
 
     // Jika menggunakan 'timestamps' (created_at dan updated_at)
     public $timestamps = true;
 
     // Definisikan relasi dengan kategori jika diperlukan
-    // public function kategori()
-    // {
-    //     return $this->belongsTo(Kategori::class);
-    // }
+    public function kategori()
+    {
+         return $this->belongsTo(Kategori::class);
+    }
 
     // Accessor untuk gambar (jika perlu)
     public function getGambarUrlAttribute()

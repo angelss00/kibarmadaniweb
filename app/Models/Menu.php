@@ -11,6 +11,8 @@ class Menu extends Model
     protected $fillable = [
         'nama',
         'url',
+        'slug',
         'type',
+        'urutan',
     ];
 }

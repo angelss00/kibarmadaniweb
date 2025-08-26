@@ -7,6 +7,7 @@ use App\Models\VisiMisi;
 use App\Models\Section;
 use App\Models\Info;
 use App\Models\Testimonial;
+use App\Models\Pelatihan;
 
 class HomeController extends Controller
 {
@@ -17,12 +18,13 @@ class HomeController extends Controller
         $keunggulan = Section::where('type', 'keunggulan')->orderBy('order')->get();
         $layanan = Section::where('type', 'layanan')->orderBy('order')->get();
         $testimonials = Testimonial::latest()->take(3)->get();
+        $pelatihans = Pelatihan::latest()->take(3)->get();
 
         $infos = Info::where('is_active', 1)
             ->orderByDesc('id')
             ->take(3)
             ->get();
 
-        return view('index', compact('testimonials', 'berita', 'visiMisi', 'keunggulan', 'layanan', 'infos'));
+        return view('index', compact('pelatihans','testimonials', 'berita', 'visiMisi', 'keunggulan', 'layanan', 'infos'));
     }
 }

@@ -4,15 +4,14 @@
 @section('content')
 <div class="container">
     <h2 class="mb-4">Daftar Slider</h2>
-    
+
     <!-- Tombol Tambah Data -->
-    <a href="{{ route('infos.create') }}" class="btn btn-primary mb-3">
-        <i class="fa fa-plus"></i> Tambah Info
+    <a href="{{ route('infos.create') }}" class="btn btn-primary mb-3"> + Tambah 
     </a>
 
     <!-- Tabel Data Slider -->
-    <table class="table table-bordered">
-        <thead style="background-color: black; color: white;">
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark text-center">
             <tr>
                 <th>Gambar</th>
                 <th>Judul</th>
@@ -23,21 +22,18 @@
         <tbody>
             @foreach ($infos as $info)
             <tr>
-                <td><img src="{{ Storage::url('sliders/' . $info->gambar) }}" width="100" alt="Gambar Info"></td>
+                <td><img src="{{ Storage::url($info->gambar) }}" width="100" alt="Gambar Info">
+                </td>
                 <td>{{ $info->judul }}</td>
-                <td>{{ Str::limit($info->isi, 50) }}</td>
+                <td>{!! Str::limit($info->isi, 50) !!}</td>
                 <td>
-                    <!-- Edit dan Delete -->
-                    <a href="{{ route('infos.edit', $info->id) }}" class="btn btn-warning btn-sm">
-                        <i class="fa fa-edit"></i> Edit
-                    </a>
-                    <form action="{{ route('infos.destroy', $info->id) }}" method="POST" style="display:inline-block;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus?')">
-                            <i class="fa fa-trash"></i> Hapus
-                        </button>
-                    </form>
+                    <div class="btn btn-group">
+                        <a href="{{ route('infos.edit', $info) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> Edit</a>
+                        <form action="{{ route('infos.destroy', $info) }}" method="POST" class="d-inline">
+                            @csrf @method('DELETE')
+                            <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin?')"><i class="fa fa-trash"></i> Hapus</button>
+                        </form>
+                    </div>
                 </td>
             </tr>
             @endforeach

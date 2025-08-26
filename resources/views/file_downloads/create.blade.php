@@ -22,11 +22,11 @@
             </div>
 
             <div class="mb-3">
-                <label>Kategori</label>
-                <select name="category_id" class="form-select">
-                    <option value="">- Pilih Kategori -</option>
-                    @foreach ($categories as $cat)
-                    <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                <label for="kategori_id" class="form-label">Kategori</label>
+                <select name="kategori_id" id="kategori_id" class="form-control" required>
+                    <option value="">-- Pilih Kategori --</option>
+                    @foreach($kategoris as $kategori)
+                    <option value="{{ $kategori->id }}">{{ $kategori->nama }}</option>
                     @endforeach
                 </select>
             </div>

@@ -31,18 +31,6 @@
             <input type="number" name="urutan" class="form-control" value="{{ old('urutan') }}" required>
         </div>
 
-        <div class="mb-3">
-            <label>Parent Menu (Opsional)</label>
-            <select name="parent_id" class="form-control">
-                <option value="">-- Pilih Parent Menu --</option>
-                @foreach($parentMenus as $parent)
-                    <option value="{{ $parent->id }}" {{ old('parent_id') == $parent->id ? 'selected' : '' }}>
-                        {{ $parent->nama }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-
         <button type="submit" class="btn btn-success">
             <i class="fa fa-save"></i> Simpan
         </button>

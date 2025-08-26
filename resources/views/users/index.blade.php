@@ -54,6 +54,35 @@
                 @endif
             </tbody>
         </table>
+        <td>{{ $users->firstItem() + $index }}</td>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-end">
+            {{ $users->links('pagination::bootstrap-5') }}
+        </div>
+
+        <!-- Custom CSS untuk pagination -->
+        <style>
+            .pagination .page-link {
+                padding: 0.75rem 1.25rem;
+                /* buat tombol lebih besar */
+                font-size: 1rem;
+                /* ukuran font lebih besar */
+            }
+
+            .pagination .page-item.active .page-link {
+                background-color: #0d6efd;
+                /* warna aktif biru */
+                border-color: #0d6efd;
+            }
+
+            .pagination .page-item .page-link:hover {
+                background-color: #0b5ed7;
+                border-color: #0a58ca;
+                color: #fff;
+            }
+        </style>
+
     </div>
 </div>
 @endsection

@@ -15,7 +15,7 @@ class FileDownload extends Model
         'slug',
         'description',
         'file_path',
-        'category_id',
+        'kategori_id',
         'file_type',
         'file_size',
         'uploader',

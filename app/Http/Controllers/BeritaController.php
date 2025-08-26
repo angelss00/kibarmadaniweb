@@ -10,9 +10,10 @@ class BeritaController extends Controller
 {
     public function index()
     {
-        $berita = Berita::orderBy('id', 'asc')->paginate(10);
-        return view('beritas.admin.index', compact('berita'));
+        $berita = Berita::latest()->take(3)->get(); // ambil 3 berita terbaru
+        return view('index', compact('berita'));
     }
+
 
     public function frontendIndex()
     {

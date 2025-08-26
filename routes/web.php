@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\VisiMisiController;
 use App\Http\Controllers\Admin\PelatihanController;
 use App\Http\Controllers\GalerryCategoryController;
 use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,10 +36,7 @@ use App\Http\Controllers\AlbumController;
 
 // ✅ Homepage — ini SATU-SATUNYA route "/"
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/infos/{info}/delete', [InfoController::class, 'deleteConfirm'])->name('infos.delete');
-Route::resource('infos', InfoController::class);
 
 // Halaman statis
 Route::get('/tentang-kami', [PageController::class, 'about'])->name('about');
@@ -47,21 +45,23 @@ Route::get('/galeri', [GaleriFrontendController::class, 'index'])->name('galeri'
 // Kontak (form publik)
 Route::post('/kontak', [KontakController::class, 'store'])->name('kontak.store');
 
-Route::prefix('admin')->group(function () {
-    Route::resource('beritas', BeritaController::class)->names([
-        'index'   => 'beritas.admin.index',
-        'create'  => 'beritas.admin.create',
-        'store'   => 'beritas.admin.store',
-        'show'    => 'beritas.admin.show',
-        'edit'    => 'beritas.admin.edit',
-        'update'  => 'beritas.admin.update',
-        'destroy' => 'beritas.admin.destroy',
-    ]);
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/infos', [InfoController::class, 'index'])->name('infos.index');
+    Route::get('/infos/create', [InfoController::class, 'create'])->name('infos.create');
+    Route::post('/infos', [InfoController::class, 'store'])->name('infos.store');
+    Route::get('/infos/{info}/edit', [InfoController::class, 'edit'])->name('infos.edit');
+    Route::put('/infos/{info}', [InfoController::class, 'update'])->name('infos.update');
+    Route::delete('/infos/{info}', [InfoController::class, 'destroy'])->name('infos.destroy');
 });
 
 
 
-Route::get('/infos', [InfoController::class, 'index'])->name('infos.index');
+Route::get('/downloads', [FileDownloadController::class, 'index'])->name('file_downloads.index');
+Route::get('/downloads/{file}/download', [FileDownloadController::class, 'download'])->name('file_downloads.download');
+
+
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('sections', SectionController::class);
@@ -79,17 +79,15 @@ Route::get('/berita', [BeritaController::class, 'frontendIndex'])->name('berita.
 Route::get('/berita/{slug}', [BeritaController::class, 'show'])->name('berita.frontend.show');
 
 Route::get('pendaftarans/{id}/show', [PendaftaranController::class, 'show'])->name('pendaftarans.show');
- // Mengarahkan ke index() di BeritaController
+// Mengarahkan ke index() di BeritaController
 
-Route::resource('beritas', BeritaController::class);
+
 Route::get('kontaks/{id}/show', [KontakController::class, 'show'])->name('kontaks.show');
 Route::resource('infos', InfoController::class);
 
 // kalau mau fitur tambahan
 Route::post('infos/reorder', [InfoController::class, 'reorder'])->name('infos.reorder');
 Route::patch('infos/{info}/toggle', [InfoController::class, 'toggle'])->name('infos.toggle');
-
-
 
 Route::resource('testimonials', TestimonialController::class);
 
@@ -110,15 +108,23 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth'])->group(function () {
-
-    // Dashboard
-    Route::get('/admin/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Pendaftaran (manajemen)
     Route::get('pendaftarans', [PendaftaranController::class, 'index'])->name('pendaftarans.index');
     Route::delete('pendaftarans/{id}', [PendaftaranController::class, 'destroy'])->name('pendaftarans.destroy');
+
+    Route::prefix('admin')->group(function () {
+        Route::resource('beritas', BeritaController::class)->names([
+            'index'   => 'beritas.admin.index',
+            'create'  => 'beritas.admin.create',
+            'store'   => 'beritas.admin.store',
+            'show'    => 'beritas.admin.show',
+            'edit'    => 'beritas.admin.edit',
+            'update'  => 'beritas.admin.update',
+            'destroy' => 'beritas.admin.destroy',
+        ]);
+    });
 
     // Resources (CRUD)
     Route::resource('menus', MenuController::class);
@@ -143,9 +149,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('galerry_categories', GalerryCategoryController::class);
     Route::resource('albums', AlbumController::class);
 
-    // Infos (manajemen konten/slider)
-    // NOTE: resource('infos') disini aman untuk backend.
-    Route::resource('infos', \App\Http\Controllers\InfoController::class);
 });
 
 

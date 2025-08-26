@@ -13,7 +13,7 @@ class MenuController extends Controller
         $menus = Menu::whereNull('parent_id')->orderBy('urutan')->get();
 
         // Kirim data menu ke view 'index'
-        return view('index', compact('menus'));
+        return view('menus.index', compact('menus'));
     }
     public function create()
     {
@@ -26,9 +26,11 @@ class MenuController extends Controller
             'nama' => 'required|string|max:255',
             'url' => 'required|string|max:255',
             'type' => 'required|string|in:route,scroll,url',
+            'slug' => 'required|string',
+            'urutan' => 'required|string',
         ]);
 
-        Menu::create($request->only(['nama', 'url', 'type']));
+        Menu::create($request->only(['nama', 'url', 'type','slug','urutan',]));
 
         return redirect()->route('menus.index')->with('success', 'Menu berhasil ditambahkan.');
     }
@@ -45,10 +47,12 @@ class MenuController extends Controller
             'nama' => 'required|string|max:255',
             'url' => 'required|string|max:255',
             'type' => 'required|string|in:route,scroll,url',
+            'slug' => 'required|string',
+            'urutan' => 'required|string',
         ]);
 
         $menu = Menu::findOrFail($id);
-        $menu->update($request->only(['nama', 'url', 'type']));
+        $menu->update($request->only(['nama', 'url', 'type','slug','urutan',]));
 
         return redirect()->route('menus.index')->with('success', 'Menu berhasil diperbarui.');
     }

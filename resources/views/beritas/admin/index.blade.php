@@ -38,9 +38,9 @@
                                 <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin?')"><i class="fa fa-trash"></i> Hapus</button>
                             </form>
                         </div>
-    </div>
-    </td>
-    </tr>
+            </div>
+            </td>
+            </tr>
     @endforeach
     </tbody>
     </table>
