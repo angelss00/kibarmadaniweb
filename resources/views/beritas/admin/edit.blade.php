@@ -17,7 +17,7 @@
 
         <div class="mb-3">
             <label>Konten</label>
-            <textarea name="konten" class="form-control editor" rows="8" required>{{ $berita->konten }}</textarea>
+            <textarea name="konten" id="editor" class="form-control editor" rows="8" required>{{ $berita->konten }}</textarea>
         </div>
 
         <div class="d-flex gap-2">
@@ -33,31 +33,24 @@
 </div>
 @endsection
 
-@push('styles')
-<!-- Trumbowyg CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/trumbowyg/dist/ui/trumbowyg.min.css">
-@endpush
+
 
 @push('scripts')
-<!-- jQuery sudah ada dari layout -->
-<script src="https://cdn.jsdelivr.net/npm/trumbowyg/dist/trumbowyg.min.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
 <script>
-    $(document).ready(function() {
-        $('.editor').trumbowyg({
-            btns: [
-                ['viewHTML'],
-                ['undo', 'redo'],
-                ['formatting'],
-                ['strong', 'em', 'underline'],
-                ['superscript', 'subscript'],
-                ['link'],
-                ['insertImage'],
-                ['justifyLeft', 'justifyCenter', 'justifyRight'],
-                ['unorderedList', 'orderedList'],
-                ['horizontalRule'],
-                ['removeformat'],
-            ]
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        .then(editor => {
+            // Update textarea setiap kali konten berubah
+            editor.model.document.on('change:data', () => {
+                document.querySelector('#editor').value = editor.getData();
+            });
+
+            // Initialize textarea dengan data awal (kosong)
+            document.querySelector('#editor').value = editor.getData();
+        })
+        .catch(error => {
+            console.error(error);
         });
-    });
 </script>
 @endpush

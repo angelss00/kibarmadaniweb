@@ -29,6 +29,7 @@
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('themes/Medicio/assets/css/style.css') }}" rel="stylesheet">
+
 </head>
 
 <body>
@@ -58,6 +59,7 @@
     <script src="{{ asset('themes/Medicio/assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('themes/Medicio/assets/vendor/php-email-form/validate.js') }}"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
 
     <!-- Template Main JS File -->

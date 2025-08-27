@@ -84,12 +84,6 @@
 
                 </li>
                 <li>
-                    <a href="{{ route('admin.visi-misi.index') }}">
-                        <i class="bx bx-rocket"></i>
-                        <span>Halaman Visi Misi</span>
-                    </a>
-                </li>
-                <li>
                     <a href="{{ route('pelatihans.index') }}">
                         <i class="bx bx-calendar"></i>
                         <span>Jadwal Pelatihan</span>
@@ -97,7 +91,7 @@
                 </li>
                 <li>
                     <a href="{{ route('admin.sections.index') }}">
-                        <i class="bx bx-cog"></i>
+                        <i class="bx bx-rocket"></i>
                         <span>Halaman Statis</span>
                     </a>
                 </li>

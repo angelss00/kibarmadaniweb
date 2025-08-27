@@ -45,14 +45,4 @@
     </tbody>
     </table>
 </div>
-
-{{-- Pagination --}}
-<div class="mt-3">
-    {{ $berita->links() }}
-</div>
-<!-- Pagination links -->
-<div class="d-flex justify-content-center">
-    {{ $berita->links() }}
-</div>
-</div>
 @endsection

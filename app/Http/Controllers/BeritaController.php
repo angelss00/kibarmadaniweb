@@ -10,8 +10,8 @@ class BeritaController extends Controller
 {
     public function index()
     {
-        $berita = Berita::latest()->take(3)->get(); // ambil 3 berita terbaru
-        return view('index', compact('berita'));
+        $berita = Berita::orderBy('created_at', 'desc')->get(); // ambil 3 berita terbaru
+        return view('beritas.admin.index', compact('berita'));
     }
 
 
@@ -59,21 +59,21 @@ class BeritaController extends Controller
         return redirect()->route('beritas.admin.index')->with('success', 'Berita berhasil ditambahkan.');
     }
 
-    public function edit($id)
+    public function edit(Berita $berita)
     {
-        $berita = Berita::findOrFail($id);
+        // $berita = Berita::findOrFail(Berita $berita);
         return view('beritas.admin.edit', compact('berita'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Berita $berita)
     {
         $request->validate([
             'judul'  => 'required',
             'konten' => 'required',
-            'slug'   => 'required|unique:beritas,slug,' . $id,
+            'slug'   => 'required|unique:beritas,slug,' . $berita->id,
         ]);
 
-        $berita = Berita::findOrFail($id);
+        // $berita = Berita::findOrFail($id);
         $slug = $request->slug ? Str::slug($request->slug) : Str::slug($request->judul);
 
         $berita->update([

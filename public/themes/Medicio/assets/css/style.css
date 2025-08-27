@@ -1803,6 +1803,12 @@ section {
   padding: 80px 0;
 }
 
+/* Testimonials */
+#testimonials { padding: 60px 0; }             /* lebih lega */
+.testimonial-item { min-height: 180px; }       /* tinggi seragam */
+.swiper-pagination { bottom: 0 !important; }   /* pastikan di luar card */
+
+
 .testimonials .section-title {
   text-align: center;
   margin-bottom: 40px;

@@ -13,6 +13,9 @@
             <select name="type" class="form-select" required>
                 <option value="keunggulan" @selected(old('type',$section->type)=='keunggulan')>Keunggulan</option>
                 <option value="layanan" @selected(old('type',$section->type)=='layanan')>Layanan</option>
+                <option value="visi" @selected(old('type',$section->type)=='visi')>Visi</option>
+                <option value="misi" @selected(old('type',$section->type)=='misi')>Misi</option>
+                <option value="makna" @selected(old('type',$section->type)=='makna')>Makna</option>
             </select>
             @error('type') <div class="text-danger small">{{ $message }}</div> @enderror
         </div>

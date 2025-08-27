@@ -9,12 +9,12 @@ class SectionController extends Controller
 {
     public function index(Request $request)
     {
-        $type = $request->get('type'); // null | keunggulan | layanan
+        $type = $request->get('type'); // null | keunggulan | layanan | visi | misi | makna
 
         $sections = Section::query()
             ->when($type, fn($q) => $q->where('type', $type))
             ->orderBy('order')
-            ->paginate(10)
+            ->paginate(15)
             ->withQueryString();
 
         return view('admin.sections.index', compact('sections', 'type'));
@@ -23,25 +23,24 @@ class SectionController extends Controller
     public function create()
     {
         return view('admin.sections.create', [
-            'section' => new \App\Models\Section(), // <— kirim instance kosong
+            'section' => new Section(), // instance kosong untuk form
         ]);
     }
-
-
-
 
     public function store(Request $request)
     {
         $data = $request->validate([
-            'type'        => 'required|in:keunggulan,layanan',
+            'type'        => 'required|in:keunggulan,layanan,visi,misi,makna',
             'title'       => 'required|string|max:255',
             'description' => 'required|string',
-            'order'       => 'nullable|integer',
+            'order'       => 'nullable|integer|min:0',
         ]);
 
         Section::create($data);
-        return redirect()->route('sections.index')
-            ->with('success', 'Data berhasil ditambahkan');
+
+        return redirect()
+            ->route('sections.index')
+            ->with('success', 'Section berhasil ditambahkan.');
     }
 
     public function edit(Section $section)
@@ -52,21 +51,25 @@ class SectionController extends Controller
     public function update(Request $request, Section $section)
     {
         $data = $request->validate([
-            'type'        => 'required|in:keunggulan,layanan',
+            'type'        => 'required|in:keunggulan,layanan,visi,misi,makna',
             'title'       => 'required|string|max:255',
             'description' => 'required|string',
-            'order'       => 'nullable|integer',
+            'order'       => 'nullable|integer|min:0',
         ]);
 
         $section->update($data);
-        return redirect()->route('sections.index')
-            ->with('success', 'Data berhasil diperbarui');
+
+        return redirect()
+            ->route('sections.index')
+            ->with('success', 'Section berhasil diperbarui.');
     }
 
     public function destroy(Section $section)
     {
         $section->delete();
-        return redirect()->route('sections.index')
-            ->with('success', 'Data berhasil dihapus');
+
+        return redirect()
+            ->route('sections.index')
+            ->with('success', 'Section berhasil dihapus.');
     }
 }

@@ -4,58 +4,81 @@ namespace App\Http\Controllers;
 
 use App\Models\Menu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class MenuController extends Controller
 {
     public function index()
     {
-        // Ambil menu utama (yang parent_id-nya null) dan urutkan berdasarkan 'urutan'
-        $menus = Menu::whereNull('parent_id')->orderBy('urutan')->get();
+        $menus = Menu::with('parent')
+            ->orderBy('urutan')           // urutan utama
+            ->orderByDesc('created_at')   // kalau urutannya sama, terbaru duluan
+            ->get();
 
-        // Kirim data menu ke view 'index'
-        return view('menus.index', compact('menus'));
+
+        $parentOptions = Menu::orderBy('urutan')->get();
+        return view('menus.index', compact('menus', 'parentOptions'));
     }
+
     public function create()
     {
-        return view('menus.create');
+        $parentOptions = Menu::orderBy('urutan')->get();
+        return view('menus.create', compact('parentOptions'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required|string|max:255',
-            'url' => 'required|string|max:255',
-            'type' => 'required|string|in:route,scroll,url',
-            'slug' => 'required|string',
-            'urutan' => 'required|string',
+        $data = $request->validate([
+            'nama'      => ['required', 'string', 'max:255'],
+            'url'       => ['required', 'string', 'max:255'],
+            'type' => ['required', 'string', 'in:scroll,url,visi,misi,makna'],
+            // 'url' kamu isi anchor: visi/misi/makna
+            'slug'      => ['nullable', 'string', 'max:255'],
+            'parent_id' => ['nullable', 'integer', 'exists:menus,id'],
+            'urutan'    => ['nullable', 'integer', 'min:0'],
         ]);
 
-        Menu::create($request->only(['nama', 'url', 'type','slug','urutan',]));
+        // buat slug otomatis kalau kosong
+        $data['slug'] = $data['slug'] ?? \Illuminate\Support\Str::slug($data['nama']);
+
+        Menu::create($data);
 
         return redirect()->route('menus.index')->with('success', 'Menu berhasil ditambahkan.');
     }
 
+
     public function edit($id)
     {
         $menu = Menu::findOrFail($id);
-        return view('menus.edit', compact('menu'));
+        $parentOptions = Menu::where('id', '!=', $menu->id)
+            ->orderBy('urutan')
+            ->get();
+
+        return view('menus.edit', compact('menu', 'parentOptions'));
     }
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nama' => 'required|string|max:255',
-            'url' => 'required|string|max:255',
-            'type' => 'required|string|in:route,scroll,url',
-            'slug' => 'required|string',
-            'urutan' => 'required|string',
+        $data = $request->validate([
+            'nama'      => ['required', 'string', 'max:255'],
+            'url'       => ['required', 'string', 'max:255'],
+            'type' => ['required', 'string', 'in:scroll,url,visi,misi,makna'],
+            // 'url' kamu isi anchor: visi/misi/makna
+            'slug'      => ['nullable', 'string', 'max:255'],
+            'parent_id' => ['nullable', 'integer', 'exists:menus,id'],
+            'urutan'    => ['nullable', 'integer', 'min:0'],
         ]);
 
         $menu = Menu::findOrFail($id);
-        $menu->update($request->only(['nama', 'url', 'type','slug','urutan',]));
+
+        // slug otomatis kalau kosong
+        $data['slug'] = $data['slug'] ?? \Illuminate\Support\Str::slug($data['nama']);
+
+        $menu->update($data);
 
         return redirect()->route('menus.index')->with('success', 'Menu berhasil diperbarui.');
     }
+
 
     public function destroy($id)
     {

@@ -14,13 +14,13 @@
         <table class="table table-bordered table-striped">
             <thead class="table-dark text-center">
                 <tr>
-                    <th>Nama</th>
+                    <th width="100px">Nama</th>
                     <th>Email</th>
                     <th>Telepon</th>
                     <th>Alamat</th>
                     <th>Pelatihan</th>
                     <th width="180px">Catatan</th>
-                    <th>Tanggal Pendaftaran</th> <!-- Kolom untuk tanggal pendaftaran -->
+                    <th width="160px">Tanggal Pendaftaran</th> <!-- Kolom untuk tanggal pendaftaran -->
                     <th width="180px">Aksi</th>
                 </tr>
             </thead>

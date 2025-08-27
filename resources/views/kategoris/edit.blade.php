@@ -34,8 +34,32 @@
                 rows="3">{{ old('deskripsi', $kategori->deskripsi) }}</textarea>
         </div>
 
-        <a href="{{ route('kategoris.index') }}" class="btn btn-secondary">Batal</a>
-        <button type="submit" class="btn btn-success">Perbarui</button>
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-success">
+                <i class="fa fa-save"></i> Simpan
+            </button>
+            <a href="{{ route('kategoris.index') }}" class="btn btn-secondary">
+                <i class="fa fa-arrow-left"></i> Kembali
+            </a>
+        </div>
     </form>
 </div>
 @endsection
+
+@push('scripts')
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+<script>
+    let editorInstance;
+    ClassicEditor
+        .create(document.querySelector('#deskripsi'))
+        .then(editor => {
+            editorInstance = editor;
+
+            // Update textarea sebelum submit
+            document.getElementById('kategoriForm').addEventListener('submit', function(e) {
+                document.getElementById('deskripsi').value = editor.getData();
+            });
+        })
+        .catch(error => console.error(error));
+</script>
+@endpush

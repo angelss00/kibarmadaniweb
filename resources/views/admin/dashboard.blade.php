@@ -40,7 +40,23 @@
             </div>
         </div>
 
-        <!-- Tambahkan card horizontal lain jika mau -->
+        <!-- Card Pelatihan -->
+        <div class="col-lg-6">
+            <div class="card border-start border-4 border-warning shadow-sm">
+                <div class="card-body d-flex align-items-center justify-content-between">
+                    <div>
+                        <h5 class="card-title text-warning mb-1">Jadwal Pelatihan</h5>
+                        <h2 class="mb-0">{{ $jumlahPelatihan }}</h2>
+                    </div>
+                    <i class="bi bi-envelope" style="font-size: 3rem; color: #b88415ff;"></i>
+                </div>
+                <div class="card-footer text-end">
+                    <a href="{{ route('pelatihans.index') }}" class="text-decoration-none">Lihat Semua &raquo;</a>
+                </div>
+            </div>
+        </div>
+
+        
     </div>
 </div>
 @endsection

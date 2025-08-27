@@ -18,9 +18,11 @@ $currentType = $type ?? request('type');
     <form class="row g-2 mb-3" method="GET" action="{{ route('sections.index') }}">
         <div class="col-auto">
             <select name="type" class="form-select" onchange="this.form.submit()">
-                <option value="">Semua Type</option>
-                <option value="keunggulan" {{ $currentType==='keunggulan' ? 'selected' : '' }}>Keunggulan</option>
-                <option value="layanan" {{ $currentType==='layanan' ? 'selected' : '' }}>Layanan</option>
+                <option value="keunggulan" @selected(old('type')=='keunggulan' )>Keunggulan</option>
+                <option value="layanan" @selected(old('type')=='layanan' )>Layanan</option>
+                <option value="makna" @selected(old('type')=='makna' )>Makna</option>
+                <option value="visi" @selected(old('type')=='visi' )>Visi</option>
+                <option value="misi" @selected(old('type')=='misi' )>Misi</option>
             </select>
         </div>
         @if(!empty($currentType))

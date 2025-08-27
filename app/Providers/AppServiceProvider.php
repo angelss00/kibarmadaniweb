@@ -19,8 +19,15 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
+    public function boot()
     {
-        View::share('menus', Menu::all());
+        View::composer('partialss.header', function ($view) {
+            $menus = Menu::with(['children' => fn($q) => $q->orderBy('urutan')])
+                ->whereNull('parent_id')
+                ->orderBy('urutan')
+                ->get();
+
+            $view->with('menus', $menus);
+        });
     }
 }

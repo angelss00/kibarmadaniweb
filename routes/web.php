@@ -102,6 +102,8 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Admin (Backend) - protected
@@ -110,9 +112,22 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+    Route::get('/visi-misi', [PageController::class, 'visiMisi'])->name('visi.misi');
     // Pendaftaran (manajemen)
+    // daftar
     Route::get('pendaftarans', [PendaftaranController::class, 'index'])->name('pendaftarans.index');
+
+    // form tambah data
+    Route::get('pendaftarans/create', [PendaftaranController::class, 'create'])->name('pendaftarans.create');
+
+    // simpan data
+    Route::post('pendaftarans', [PendaftaranController::class, 'store'])->name('pendaftarans.store');
+
+    // hapus
     Route::delete('pendaftarans/{id}', [PendaftaranController::class, 'destroy'])->name('pendaftarans.destroy');
+
+    Route::get('/filedownload', [FileDownloadController::class, 'index']);
+
 
     Route::prefix('admin')->group(function () {
         Route::resource('beritas', BeritaController::class)->names([
@@ -148,7 +163,6 @@ Route::middleware(['auth'])->group(function () {
     // Galeri tambahan
     Route::resource('galerry_categories', GalerryCategoryController::class);
     Route::resource('albums', AlbumController::class);
-
 });
 
 

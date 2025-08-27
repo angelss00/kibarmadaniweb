@@ -1,301 +1,239 @@
 /**
-* Template Name: Medicio
-* Updated: Mar 10 2023 with Bootstrap v5.2.3
-* Template URL: https://bootstrapmade.com/medicio-free-bootstrap-theme/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
+* Template Name: Medicio (cleaned)
+* Bootstrap v5.x
 */
-(function() {
+(function () {
   "use strict";
 
-  /**
-   * Easy selector helper function
-   */
+  /* =========================
+   * Helpers
+   * ========================= */
   const select = (el, all = false) => {
-    el = el.trim()
-    if (all) {
-      return [...document.querySelectorAll(el)]
-    } else {
-      return document.querySelector(el)
-    }
-  }
+    el = el.trim();
+    if (all) return [...document.querySelectorAll(el)];
+    return document.querySelector(el);
+  };
 
-  /**
-   * Easy event listener function
-   */
   const on = (type, el, listener, all = false) => {
-    let selectEl = select(el, all)
-    if (selectEl) {
-      if (all) {
-        selectEl.forEach(e => e.addEventListener(type, listener))
-      } else {
-        selectEl.addEventListener(type, listener)
-      }
-    }
-  }
+    const sel = select(el, all);
+    if (!sel) return;
+    if (all) sel.forEach(e => e.addEventListener(type, listener));
+    else sel.addEventListener(type, listener);
+  };
 
-  /**
-   * Easy on scroll event listener 
-   */
+  // helper scroll listener
   const onscroll = (el, listener) => {
-    el.addEventListener('scroll', listener)
-  }
+    el.addEventListener('scroll', listener);
+  };
 
-  /**
+  /* =========================
+   * Scrollto (single source of truth)
+   * ========================= */
+  const scrollto = (hash) => {
+    const target = select(hash);
+    if (!target) return;
+    const header = select('#header');
+    const offset = header ? header.offsetHeight : 0;
+    const top = target.offsetTop - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+  };
+
+  /* =========================
    * Navbar links active state on scroll
-   */
-  let navbarlinks = select('#navbar .scrollto', true)
+   * ========================= */
+  const navbarlinks = select('#navbar .scrollto', true);
   const navbarlinksActive = () => {
-    let position = window.scrollY + 200
-    navbarlinks.forEach(navbarlink => {
-      if (!navbarlink.hash) return
-      let section = select(navbarlink.hash)
-      if (!section) return
+    const position = window.scrollY + 200;
+    navbarlinks.forEach(link => {
+      if (!link.hash) return;
+      const section = select(link.hash);
+      if (!section) return;
       if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
-        navbarlink.classList.add('active')
+        link.classList.add('active');
       } else {
-        navbarlink.classList.remove('active')
+        link.classList.remove('active');
       }
-    })
-  }
-  window.addEventListener('load', navbarlinksActive)
-  onscroll(document, navbarlinksActive)
+    });
+  };
+  window.addEventListener('load', navbarlinksActive);
+  onscroll(document, navbarlinksActive);
 
-  /**
-   * Scrolls to an element with header offset
-   */
-  const scrollto = (el) => {
-    let header = select('#header')
-    let offset = header.offsetHeight
+  /* =========================
+   * Mobile nav toggle & dropdown (Medicio)
+   * ========================= */
+  on('click', '.mobile-nav-toggle', function () {
+    const navbar = select('#navbar');
+    navbar.classList.toggle('navbar-mobile');
+    this.classList.toggle('bi-list');
+    this.classList.toggle('bi-x');
+  });
 
-    let elementPos = select(el).offsetTop
-    window.scrollTo({
-      top: elementPos - offset,
-      behavior: 'smooth'
-    })
-  }
+  // dropdown only intercept on mobile
+  on('click', '.navbar .dropdown > a', function (e) {
+    const navbar = select('#navbar');
+    if (navbar && navbar.classList.contains('navbar-mobile')) {
+      e.preventDefault();
+      this.nextElementSibling?.classList.toggle('dropdown-active');
+    }
+  }, true);
 
-  /**
-   * Toggle .header-scrolled class to #header when page is scrolled
-   */
-  let selectHeader = select('#header')
-  let selectTopbar = select('#topbar')
+  /* =========================
+   * Smooth scroll for .scrollto links
+   * ========================= */
+  on('click', '.scrollto', function (e) {
+    if (this.hash && select(this.hash)) {
+      e.preventDefault();
+      const navbar = select('#navbar');
+      if (navbar && navbar.classList.contains('navbar-mobile')) {
+        navbar.classList.remove('navbar-mobile');
+        const toggler = select('.mobile-nav-toggle');
+        if (toggler) {
+          toggler.classList.toggle('bi-list');
+          toggler.classList.toggle('bi-x');
+        }
+      }
+      scrollto(this.hash);
+    }
+  }, true);
+
+  // Scroll to hash on page load
+  window.addEventListener('load', () => {
+    if (window.location.hash && select(window.location.hash)) {
+      scrollto(window.location.hash);
+    }
+  });
+
+  /* =========================
+   * Header scrolled state
+   * ========================= */
+  const selectHeader = select('#header');
+  const selectTopbar = select('#topbar');
   if (selectHeader) {
     const headerScrolled = () => {
       if (window.scrollY > 100) {
-        selectHeader.classList.add('header-scrolled')
-        if (selectTopbar) {
-          selectTopbar.classList.add('topbar-scrolled')
-        }
+        selectHeader.classList.add('header-scrolled');
+        if (selectTopbar) selectTopbar.classList.add('topbar-scrolled');
       } else {
-        selectHeader.classList.remove('header-scrolled')
-        if (selectTopbar) {
-          selectTopbar.classList.remove('topbar-scrolled')
-        }
+        selectHeader.classList.remove('header-scrolled');
+        if (selectTopbar) selectTopbar.classList.remove('topbar-scrolled');
       }
-    }
-    window.addEventListener('load', headerScrolled)
-    onscroll(document, headerScrolled)
+    };
+    window.addEventListener('load', headerScrolled);
+    onscroll(document, headerScrolled);
   }
 
-  /**
+  /* =========================
    * Back to top button
-   */
-  let backtotop = select('.back-to-top')
+   * ========================= */
+  const backtotop = select('.back-to-top');
   if (backtotop) {
     const toggleBacktotop = () => {
-      if (window.scrollY > 100) {
-        backtotop.classList.add('active')
-      } else {
-        backtotop.classList.remove('active')
-      }
-    }
-    window.addEventListener('load', toggleBacktotop)
-    onscroll(document, toggleBacktotop)
+      if (window.scrollY > 100) backtotop.classList.add('active');
+      else backtotop.classList.remove('active');
+    };
+    window.addEventListener('load', toggleBacktotop);
+    onscroll(document, toggleBacktotop);
   }
 
-  /**
-   * Mobile nav toggle
-   */
-  on('click', '.mobile-nav-toggle', function(e) {
-    select('#navbar').classList.toggle('navbar-mobile')
-    this.classList.toggle('bi-list')
-    this.classList.toggle('bi-x')
-  })
-
-  /**
-   * Mobile nav dropdowns activate
-   */
-  on('click', '.navbar .dropdown > a', function(e) {
-    if (select('#navbar').classList.contains('navbar-mobile')) {
-      e.preventDefault()
-      this.nextElementSibling.classList.toggle('dropdown-active')
-    }
-  }, true)
-
-  /**
-   * Scrool with ofset on links with a class name .scrollto
-   */
-  on('click', '.scrollto', function(e) {
-    if (select(this.hash)) {
-      e.preventDefault()
-
-      let navbar = select('#navbar')
-      if (navbar.classList.contains('navbar-mobile')) {
-        navbar.classList.remove('navbar-mobile')
-        let navbarToggle = select('.mobile-nav-toggle')
-        navbarToggle.classList.toggle('bi-list')
-        navbarToggle.classList.toggle('bi-x')
-      }
-      scrollto(this.hash)
-    }
-  }, true)
-
-  /**
-   * Scroll with ofset on page load with hash links in the url
-   */
-  window.addEventListener('load', () => {
-    if (window.location.hash) {
-      if (select(window.location.hash)) {
-        scrollto(window.location.hash)
-      }
-    }
-  });
-
-  /**
+  /* =========================
    * Preloader
-   */
-  let preloader = select('#preloader');
+   * ========================= */
+  const preloader = select('#preloader');
   if (preloader) {
-    window.addEventListener('load', () => {
-      preloader.remove()
+    window.addEventListener('load', () => preloader.remove());
+  }
+
+  /* =========================
+   * Hero carousel indicators
+   * ========================= */
+  const heroCarouselIndicators = select('#hero-carousel-indicators');
+  const heroCarouselItems = select('#heroCarousel .carousel-item', true);
+  if (heroCarouselIndicators && heroCarouselItems.length) {
+    heroCarouselItems.forEach((_, index) => {
+      heroCarouselIndicators.innerHTML +=
+        `<li data-bs-target="#heroCarousel" data-bs-slide-to="${index}" class="${index === 0 ? 'active' : ''}"></li>`;
     });
   }
 
-  /**
-   * Hero carousel indicators
-   */
-  let heroCarouselIndicators = select("#hero-carousel-indicators")
-  let heroCarouselItems = select('#heroCarousel .carousel-item', true)
+  /* =========================
+   * Swiper sliders (init ONCE)
+   * ========================= */
+  if (typeof Swiper !== 'undefined') {
+  // Testimonials (rapih & stabil)
+const testiSwiper = new Swiper('.testimonials-slider', {
+  speed: 600,
+  loop: true,
+  spaceBetween: 24,
+  slidesPerView: 1,
+  centeredSlides: false,
+  grabCursor: true,
 
-  heroCarouselItems.forEach((item, index) => {
-    (index === 0) ?
-    heroCarouselIndicators.innerHTML += "<li data-bs-target='#heroCarousel' data-bs-slide-to='" + index + "' class='active'></li>":
-      heroCarouselIndicators.innerHTML += "<li data-bs-target='#heroCarousel' data-bs-slide-to='" + index + "'></li>"
-  });
+  // target pagination yg di section ini saja
+  pagination: {
+    el: '#testimonials .swiper-pagination',
+    type: 'bullets',
+    clickable: true
+  },
 
-  /**
-   * Testimonials slider
-   */
-  new Swiper('.testimonials-slider', {
-    speed: 600,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false
-    },
-    slidesPerView: 'auto',
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true
-    },
-    breakpoints: {
-      320: {
-        slidesPerView: 1,
-        spaceBetween: 20
-      },
+  autoplay: {
+    delay: 5000,
+    disableOnInteraction: false
+  },
 
-      1200: {
-        slidesPerView: 3,
-        spaceBetween: 20
-      }
-    }
-  });
+  // jumlah slide per layar
+  breakpoints: {
+    768:  { slidesPerView: 2, spaceBetween: 24 },
+    1200: { slidesPerView: 3, spaceBetween: 24 }
+  },
 
-  /**
-   * Clients Slider
-   */
-  new Swiper('.gallery-slider', {
-    speed: 400,
-    loop: true,
-    centeredSlides: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false
-    },
-    slidesPerView: 'auto',
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true
-    },
-    breakpoints: {
-      320: {
-        slidesPerView: 1,
-        spaceBetween: 20
-      },
-      640: {
-        slidesPerView: 3,
-        spaceBetween: 20
-      },
-      992: {
-        slidesPerView: 5,
-        spaceBetween: 20
-      }
-    }
-  });
-
-  /**
-   * Initiate gallery lightbox 
-   */
-  const galleryLightbox = GLightbox({
-    selector: '.gallery-lightbox'
-  });
-
-  /**
-   * Animation on scroll
-   */
-  window.addEventListener('load', () => {
-    AOS.init({
-      duration: 1000,
-      easing: 'ease-in-out',
-      once: true,
-      mirror: false
-    })
-  });
-
-  /**
-   * Initiate Pure Counter 
-   */
-  new PureCounter();
-
-})()
-
-// Swiper JS Initialization
-document.addEventListener("DOMContentLoaded", function() {
-    var swiper = new Swiper('.testimonials-slider', {
-        slidesPerView: 3,  // Menampilkan 3 testimoni per slide
-        spaceBetween: 20,   // Jarak antar testimoni
-        autoplay: {
-            delay: 3000,  // Otomatis bergulir setiap 3 detik
-        },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,  // Klik untuk navigasi ke slide
-        },
-        breakpoints: {
-            // Responsif
-            1024: {
-                slidesPerView: 2,  // Menampilkan 2 testimoni pada ukuran layar lebih kecil
-            },
-            600: {
-                slidesPerView: 1,  // Menampilkan 1 testimoni pada layar ponsel
-            },
-        }
-    });
+  // perbaiki ukuran saat gambar/AOS/resize
+  observer: true,
+  observeParents: true,
+  resizeObserver: true,
+  on: {
+    init(sw)       { sw.update(); },
+    imagesReady(sw){ sw.update(); },
+    resize(sw)     { sw.update(); }
+  }
 });
+
+
+
+    // Gallery
+    new Swiper('.gallery-slider', {
+      speed: 400,
+      loop: true,
+      centeredSlides: true,
+      autoplay: { delay: 5000, disableOnInteraction: false },
+      slidesPerView: 'auto',
+      pagination: { el: '.swiper-pagination', type: 'bullets', clickable: true },
+      breakpoints: {
+        320: { slidesPerView: 1, spaceBetween: 20 },
+        640: { slidesPerView: 3, spaceBetween: 20 },
+        992: { slidesPerView: 5, spaceBetween: 20 }
+      }
+    });
+  }
+
+  /* =========================
+   * Lightbox
+   * ========================= */
+  if (typeof GLightbox !== 'undefined') {
+    GLightbox({ selector: '.gallery-lightbox' });
+  }
+
+  /* =========================
+   * AOS (Animate on Scroll)
+   * ========================= */
+  window.addEventListener('load', () => {
+    if (typeof AOS !== 'undefined') {
+      AOS.init({ duration: 1000, easing: 'ease-in-out', once: true, mirror: false });
+    }
+  });
+
+  /* =========================
+   * Pure Counter
+   * ========================= */
+  if (typeof PureCounter !== 'undefined') new PureCounter();
+
+})(); 

@@ -15,6 +15,8 @@
                 <th width="170px">Nama</th>
                 <th>URL / Route</th>
                 <th>Type</th>
+                <th>Parent</th>
+                <th>Urutan</th>
                 <th width="180px">Aksi</th>
             </tr>
         </thead>
@@ -24,6 +26,11 @@
                 <td>{{ $menu->nama }}</td>
                 <td>{{ $menu->url }}</td>
                 <td>{{ ucfirst($menu->type) }}</td>
+                <td>
+                    {{-- kalau ada parent tampilkan namanya, kalau null tampil root --}}
+                    {{ $menu->parent ? $menu->parent->nama : '-' }}
+                </td>
+                <td>{{ $menu->urutan }}</td>
                 <td>
                     <div class="btn btn-group">
                         <a href="{{ route('menus.edit', $menu) }}" class="btn btn-warning btn-sm">

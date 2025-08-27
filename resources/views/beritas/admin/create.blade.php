@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
     <h3 class="mb-4">Tambah Berita</h3>
-    <form action="{{ route('berita.store') }}" method="POST">
+    <form action="{{ route('beritas.admin.store') }}" method="POST">
         @csrf
         <div class="mb-3">
             <label>Judul</label>

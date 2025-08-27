@@ -27,6 +27,22 @@
             </select>
         </div>
 
+        <div class="mb-3">
+            <label class="form-label">Parent</label>
+            <select name="parent_id" class="form-select">
+                <option value="">— Tanpa Parent (root) —</option>
+                @foreach($parentOptions as $opt)
+                <option value="{{ $opt->id }}">{{ $opt->nama }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Urutan</label>
+            <input type="number" name="urutan" class="form-control" value="0" min="0">
+        </div>
+
+
 
         <button type="submit" class="btn btn-success">
             <i class="fa fa-save"></i> Update
