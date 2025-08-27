@@ -126,7 +126,14 @@ Route::middleware(['auth'])->group(function () {
     // hapus
     Route::delete('pendaftarans/{id}', [PendaftaranController::class, 'destroy'])->name('pendaftarans.destroy');
 
-    Route::get('/filedownload', [FileDownloadController::class, 'index']);
+    // Untuk filedownload.blade.php
+    Route::get('/filedownload', function () {
+        return view('filedownload');
+    })->name('filedownload');
+
+    // Untuk file_downloads/index.blade.php
+    Route::get('/file_downloads', [FileDownloadController::class, 'index'])->name('file_downloads.index');
+    Route::get('/filedownload', [FileDownloadController::class, 'filedownloadPage'])->name('filedownload');
 
 
     Route::prefix('admin')->group(function () {

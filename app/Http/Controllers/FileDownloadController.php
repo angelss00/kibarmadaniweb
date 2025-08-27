@@ -19,7 +19,17 @@ class FileDownloadController extends Controller
             ->paginate(9);
 
         return view('file_downloads.index', compact('downloads'));
+        
     }
+    public function filedownloadPage()
+    {
+        $downloads = FileDownload::with('kategori')
+            ->orderBy('created_at', 'desc')
+            ->paginate(9);
+
+        return view('filedownload', compact('downloads'));
+    }
+
 
     public function download(FileDownload $file)
     {
