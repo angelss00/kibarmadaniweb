@@ -22,7 +22,7 @@
 
         <div class="d-flex gap-2">
             <button type="submit" class="btn btn-success">
-                <i class="fa fa-save"></i> Simpan
+                <i class="fa fa-save"></i> Update
             </button>
             <a href="{{ route('beritas.admin.index') }}" class="btn btn-secondary">
                 <i class="fa fa-arrow-left"></i> Kembali

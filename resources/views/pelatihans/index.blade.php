@@ -7,7 +7,7 @@
     <h1 class="mb-3">Manajemen Pelatihan</h1>
 
     <div class="mb-3">
-        <a href="{{ route('pelatihans.create') }}" class="btn btn-success me-2">+ Tambah Pelatihan</a>
+        <a href="{{ route('pelatihans.create') }}" class="btn btn-primary me-2">+ Tambah</a>
     </div>
 
     @if(session('success'))
