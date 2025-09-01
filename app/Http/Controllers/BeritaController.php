@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Berita;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class BeritaController extends Controller
 {
@@ -61,20 +62,24 @@ class BeritaController extends Controller
 
     public function edit(Berita $berita)
     {
-        // $berita = Berita::findOrFail(Berita $berita);
         return view('beritas.admin.edit', compact('berita'));
     }
 
     public function update(Request $request, Berita $berita)
     {
         $request->validate([
-            'judul'  => 'required',
-            'konten' => 'required',
-            'slug'   => 'required|unique:beritas,slug,' . $berita->id,
+            'judul'  => ['required'],
+            'konten' => ['required'],
+            // JANGAN required; biar boleh kosong kalau kamu gak edit slug
+            'slug'   => ['nullable', Rule::unique('beritas','slug')->ignore($berita->id)],
         ]);
 
-        // $berita = Berita::findOrFail($id);
-        $slug = $request->slug ? Str::slug($request->slug) : Str::slug($request->judul);
+        // Tentukan slug final:
+        // - kalau user isi slug -> pakai itu (di-slugify)
+        // - kalau kosong -> pertahankan slug lama (biar link lama gak rusak)
+        $slug = $request->filled('slug')
+            ? Str::slug($request->slug)
+            : $berita->slug;
 
         $berita->update([
             'judul'  => $request->judul,
@@ -82,8 +87,10 @@ class BeritaController extends Controller
             'konten' => $request->konten,
         ]);
 
+        // GUNAKAN nama rute yang memang ada (lihat bagian Routes di bawah)
         return redirect()->route('beritas.admin.index')->with('success', 'Berita berhasil diperbarui.');
     }
+
 
     public function destroy($id)
     {

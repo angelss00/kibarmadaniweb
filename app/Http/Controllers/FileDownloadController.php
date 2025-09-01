@@ -19,11 +19,11 @@ class FileDownloadController extends Controller
             ->paginate(9);
 
         return view('file_downloads.index', compact('downloads'));
-        
     }
     public function filedownloadPage()
     {
         $downloads = FileDownload::with('kategori')
+            ->where('status', 'published')   // ← penting
             ->orderBy('created_at', 'desc')
             ->paginate(9);
 
@@ -33,11 +33,24 @@ class FileDownloadController extends Controller
 
     public function download(FileDownload $file)
     {
-        $filePath = public_path($file->path); // misal path tersimpan di DB
-        if (file_exists($filePath)) {
-            return response()->download($filePath);
+        $path = $file->file_path ?? null;
+        if (!$path) {
+            return back()->with('error', 'Path file kosong.');
         }
-        return redirect()->back()->with('error', 'File tidak ditemukan.');
+
+        // Normalisasi: hapus leading slash, dan kalau diawali "storage/" ubah ke relative path di disk public
+        $path = ltrim($path, '/');
+        if (Str::startsWith($path, 'storage/')) {
+            $path = Str::after($path, 'storage/'); // hasil: downloads/xxx.ext
+        }
+
+        // Cek keberadaan di disk 'public' (storage/app/public)
+        if (!Storage::disk('public')->exists($path)) {
+            return back()->with('error', 'File tidak ditemukan.');
+        }
+
+        // Download via Storage (cross-platform, aman di Windows/Linux)
+        return Storage::disk('public')->download($path);
     }
     public function create()
     {
@@ -48,21 +61,20 @@ class FileDownloadController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title'      => 'required|max:255',
-            'file'       => 'required|file|max:20480', // max 20MB
-            'kategori_id' => 'nullable|id',
-            'status'     => 'required|in:draft,published,archived',
-            'uploader'   => 'nullable|max:100',
+            'title'       => 'required|max:255',
+            'file'        => 'required|file|max:20480',
+            'kategori_id' => 'nullable|exists:kategoris,id',
+            'status'      => 'required|in:draft,published,archived',
+            'uploader'    => 'nullable|max:100',
         ]);
 
-        // simpan file
         $path = $request->file('file')->store('downloads', 'public');
 
-        FileDownload::create([
+        \App\Models\FileDownload::create([
             'title'         => $request->title,
-            'slug'          => Str::slug($request->title),
+            'slug'          => \Illuminate\Support\Str::slug($request->title),
             'description'   => $request->description,
-            'file_path'     => '/storage/' . $path,
+            'file_path'     => '/storage/' . $path, // (boleh nanti dirapikan jadi relative)
             'kategori_id'   => $request->kategori_id,
             'file_type'     => $request->file->getClientOriginalExtension(),
             'file_size'     => $request->file->getSize(),
@@ -76,9 +88,11 @@ class FileDownloadController extends Controller
 
     public function edit(FileDownload $fileDownload)
     {
-        $categories = DownloadCategory::all();
-        return view('file_downloads.edit', compact('fileDownload', 'categories'));
+        $kategoris = \App\Models\Kategori::all();
+        return view('file_downloads.edit', compact('fileDownload', 'kategoris'));
     }
+
+
 
     public function update(Request $request, FileDownload $fileDownload)
     {

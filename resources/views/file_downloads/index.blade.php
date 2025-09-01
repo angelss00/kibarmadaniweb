@@ -16,9 +16,7 @@
             <tr>
                 <th style="width: 40px;">No</th>
                 <th>Judul</th>
-                <th>Kategori</th>
-                <th>Gambar</th>
-                <th>Deskripsi</th>
+                <th width="180px">Gambar</th>
                 <th>Ukuran</th>
                 <th>Status</th>
                 <th>Unduhan</th>
@@ -31,17 +29,22 @@
                 <td>{{ $index + 1 }}</td>
                 <td class="text-start">{{ $file->title }}</td>
                 {{-- kategori dengan fallback --}}
-                <td>{{ $file->kategori->nama ?? '-' }}</td>
-
                 {{-- tampilkan gambar thumbnail --}}
-                <td>
-                    @if($file->gambar)
-                    <img src="{{ asset($file->gambar) }}" alt="{{ $file->title }}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 4px;">
+                @php
+                $ext = strtolower($file->file_type ?? '');
+                $isImage = in_array($ext, ['jpg','jpeg','png','gif','webp','bmp','svg']);
+                @endphp
+
+                <td class="text-center">
+                    @if($isImage && $file->file_url)
+                    <img src="{{ $file->file_url }}"
+                        alt="{{ $file->title }}"
+                        class="img-thumbnail">
                     @else
-                    <span class="text-muted">-</span>
+                    <span class=" text-muted">-</span>
                     @endif
                 </td>
-                <td>{{ Str::limit($file->description, 50) }}</td>
+
                 <td>{{ number_format($file->file_size / 1024, 2) }} KB</td>
                 <td>{{ ucfirst($file->status) }}</td>
                 <td>{{ $file->download_count }}</td>
@@ -62,6 +65,14 @@
             @endforelse
         </tbody>
     </table>
+</div>
+
+@if ($downloads->hasPages())
+<div class="d-flex justify-content-end align-items-center mt-3">
+    {{ $downloads->onEachSide(1)->links('pagination::bootstrap-5') }}
+</div>
+@endif
+</div>
 </div>
 </div>
 </div>

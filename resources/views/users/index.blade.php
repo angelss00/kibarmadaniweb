@@ -12,8 +12,15 @@
     @endif
 
     {{-- Tombol Tambah --}}
-    <div class="mb-3">
+    <div class="mb-3 d-flex justify-content-between align-items-center">
         <a href="{{ route('users.create') }}" class="btn btn-primary">+ Tambah</a>
+
+        {{-- (Opsional) Info jumlah data yang tampil --}}
+        @if($users->total() > 0)
+        <small class="text-muted">
+            Menampilkan {{ $users->firstItem() }}–{{ $users->lastItem() }} dari {{ $users->total() }} data
+        </small>
+        @endif
     </div>
 
     {{-- Tabel Data User --}}
@@ -21,68 +28,51 @@
         <table class="table table-bordered table-striped">
             <thead class="table-dark text-center">
                 <tr>
-                    <th width="20px">No</th>
+                    <th width="60">No</th>
                     <th>Nama</th>
                     <th>Email</th>
                     <th>Role</th>
-                    <th width="180px">Aksi</th>
+                    <th width="220">Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                {{-- ISI TABEL TIDAK DIUBAH --}}
-                @foreach($users as $index => $user)
-                <tr>
-                    <td>{{ $index + 1 }}</td>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ ucfirst($user->role) }}</td>
+                @forelse($users as $user)
+                <tr class="text-center">
+                    {{-- Nomor urut yang benar di setiap halaman --}}
+                    <td>{{ $users->firstItem() + $loop->index }}</td>
+
+                    <td class="text-start">{{ $user->name }}</td>
+                    <td class="text-start">{{ $user->email }}</td>
+                    <td>{{ $user->role ? ucfirst($user->role) : '-' }}</td>
                     <td>
-                        <div class="btn btn-group">
-                            <a href="{{ route('users.edit', $user) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> Edit</a>
+                        <div class="btn-group" role="group" aria-label="Aksi">
+                            <a href="{{ route('users.edit', $user) }}" class="btn btn-warning btn-sm">
+                                <i class="fa fa-edit"></i> Edit
+                            </a>
                             <form action="{{ route('users.destroy', $user) }}" method="POST" class="d-inline">
-                                @csrf @method('DELETE')
-                                <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin?')"><i class="fa fa-trash"></i> Hapus</button>
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus user ini?')">
+                                    <i class="fa fa-trash"></i> Hapus
+                                </button>
                             </form>
                         </div>
                     </td>
                 </tr>
-                @endforeach
-                @if($users->isEmpty())
+                @empty
                 <tr>
                     <td colspan="5" class="text-center">Tidak ada data user.</td>
                 </tr>
-                @endif
+                @endforelse
             </tbody>
         </table>
-        <td>{{ $users->firstItem() + $index }}</td>
 
-        <!-- Pagination -->
+        {{-- Pagination --}}
         <div class="d-flex justify-content-end">
-            {{ $users->links('pagination::bootstrap-5') }}
+            {{ $users->onEachSide(1)->links() }}
+            {{-- Jika pakai Bootstrap 5:
+            {{ $users->onEachSide(1)->links('pagination::bootstrap-5') }} --}}
         </div>
-
-        <!-- Custom CSS untuk pagination -->
-        <style>
-            .pagination .page-link {
-                padding: 0.75rem 1.25rem;
-                /* buat tombol lebih besar */
-                font-size: 1rem;
-                /* ukuran font lebih besar */
-            }
-
-            .pagination .page-item.active .page-link {
-                background-color: #0d6efd;
-                /* warna aktif biru */
-                border-color: #0d6efd;
-            }
-
-            .pagination .page-item .page-link:hover {
-                background-color: #0b5ed7;
-                border-color: #0a58ca;
-                color: #fff;
-            }
-        </style>
-
     </div>
 </div>
 @endsection

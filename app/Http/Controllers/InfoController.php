@@ -10,9 +10,24 @@ use Illuminate\Support\Facades\Storage;
 
 class InfoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $infos = Info::orderByDesc('id')->get(); // ambil semua info
+        $perPage = (int) $request->input('per_page', 10);
+
+        $infos = Info::query()
+            // cari judul/isi (opsional, sesuaikan field di tabelmu)
+            ->when(
+                $request->filled('q'),
+                fn($q) =>
+                $q->where(function ($qq) use ($request) {
+                    $qq->where('title', 'like', '%' . $request->q . '%')
+                        ->orWhere('description', 'like', '%' . $request->q . '%');
+                })
+            )
+            ->orderByDesc('id')           // ganti ke ->latest() kalau punya created_at
+            ->paginate($perPage)
+            ->withQueryString();          // biar q & per_page ikut di link
+
         return view('infos.index', compact('infos'));
     }
 

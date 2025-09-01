@@ -45,4 +45,13 @@
         </tbody>
     </table>
 </div>
+
+{{-- Pagination (Bootstrap 5) --}}
+@if ($kategoris->hasPages())
+<div class="d-flex justify-content-end align-items-center mt-3">
+    {{ $kategoris->onEachSide(1)->links('pagination::bootstrap-5') }}
+</div>
+@endif
+</div>
+</div>
 @endsection

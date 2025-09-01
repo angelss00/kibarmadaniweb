@@ -7,9 +7,21 @@ use Illuminate\Http\Request;
 
 class KategoriController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $kategoris = Kategori::orderBy('created_at', 'desc')->get();
+        $perPage = (int) $request->input('per_page', 10);
+
+        $kategoris = Kategori::query()
+            // opsional: cari berdasarkan nama
+            ->when(
+                $request->filled('q'),
+                fn($q) =>
+                $q->where('nama', 'like', '%' . $request->q . '%')
+            )
+            ->orderBy('created_at', 'desc') // kalau tabel kategori TIDAK punya timestamps, ganti ke ->orderBy('id','desc')
+            ->paginate($perPage)
+            ->withQueryString(); // biar q/per_page ikut di link
+
         return view('kategoris.index', compact('kategoris'));
     }
 

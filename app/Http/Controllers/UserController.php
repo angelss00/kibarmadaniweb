@@ -9,13 +9,17 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    // Tampilkan semua user
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::orderBy('id', 'DESC')->get();
-        $users = User::orderBy('created_at', 'desc')->paginate(10);
+        $perPage = (int) $request->input('per_page', 10);
+
+        $users = User::orderBy('created_at', 'desc')
+            ->paginate($perPage)
+            ->withQueryString(); // jaga query string (mis. ?per_page=20)
+
         return view('users.index', compact('users'));
     }
+
 
     // Tampilkan form tambah user
     public function create()

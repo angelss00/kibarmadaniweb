@@ -6,7 +6,7 @@
     <h2 class="mb-4">Daftar Slider</h2>
 
     <!-- Tombol Tambah Data -->
-    <a href="{{ route('infos.create') }}" class="btn btn-primary mb-3"> + Tambah 
+    <a href="{{ route('infos.create') }}" class="btn btn-primary mb-3"> + Tambah
     </a>
 
     <!-- Tabel Data Slider -->
@@ -39,5 +39,13 @@
             @endforeach
         </tbody>
     </table>
+</div>
+
+@if ($infos->hasPages())
+<div class="d-flex justify-content-end align-items-center mt-3">
+    {{ $infos->onEachSide(1)->links('pagination::bootstrap-5') }}
+</div>
+@endif
+</div>
 </div>
 @endsection
