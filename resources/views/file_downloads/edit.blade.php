@@ -8,18 +8,13 @@
         <h5 class="mb-0">Edit File Download</h5>
     </div>
     <div class="card-body">
-        <form action="{{ route('file-downloads.update', $fileDownload->id) }}" method="POST">
+        <form action="{{ route('file_downloads.update', $fileDownload->id) }}" method="POST">
             @csrf
             @method('PUT')
 
             <div class="mb-3">
                 <label>Judul</label>
                 <input type="text" name="title" class="form-control" value="{{ $fileDownload->title }}" required>
-            </div>
-
-            <div class="mb-3">
-                <label>Deskripsi</label>
-                <textarea name="description" class="form-control">{{ $fileDownload->description }}</textarea>
             </div>
 
             <div class="mb-3">
@@ -45,8 +40,14 @@
                 <input type="text" name="uploader" class="form-control" value="{{ $fileDownload->uploader }}">
             </div>
 
-            <button type="submit" class="btn btn-success">Update</button>
-            <a href="{{ route('file-downloads.index') }}" class="btn btn-secondary">Batal</a>
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-success">
+                    <i class="fa fa-save"></i> Simpan
+                </button>
+                <a href="{{ route('beritas.admin.index') }}" class="btn btn-secondary">
+                    <i class="fa fa-arrow-left"></i> Kembali
+                </a>
+            </div>
         </form>
     </div>
 </div>

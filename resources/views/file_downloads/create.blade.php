@@ -15,12 +15,6 @@
                 <label>Judul</label>
                 <input type="text" name="title" class="form-control" required>
             </div>
-
-            <div class="mb-3">
-                <label>Deskripsi</label>
-                <textarea name="description" class="form-control"></textarea>
-            </div>
-
             <div class="mb-3">
                 <label for="kategori_id" class="form-label">Kategori</label>
                 <select name="kategori_id" id="kategori_id" class="form-control" required>
@@ -51,8 +45,13 @@
                 <input type="text" name="uploader" class="form-control">
             </div>
 
-            <button type="submit" class="btn btn-primary">Simpan</button>
-            <a href="{{ route('file_downloads.index') }}" class="btn btn-secondary">Kembali</a>
+
+            <button type="submit" class="btn btn-success">
+                <i class="fa fa-save"></i> Simpan
+            </button>
+            <a href="{{ route('file_downloads.index') }}" class="btn btn-secondary">
+                <i class="fa fa-arrow-left"></i> Kembali
+            </a>
         </form>
     </div>
 </div>
