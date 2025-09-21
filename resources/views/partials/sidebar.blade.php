@@ -103,6 +103,13 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="{{ route('admin.login_banners.index') }}">
+                        <i class="bx bx-message-square-quote"></i>
+                        <span>Login Banners</span>
+                    </a>
+                </li>
+
 
                 <li class="menu-title mt-2" data-key="t-other">Lainnya</li>
 

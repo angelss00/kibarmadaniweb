@@ -27,12 +27,29 @@ use App\Http\Controllers\Admin\PelatihanController;
 use App\Http\Controllers\GalerryCategoryController;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Admin\LoginBannerController;
 
 /*
 |--------------------------------------------------------------------------
 | Public (Frontend)
 |--------------------------------------------------------------------------
 */
+
+
+
+
+Route::middleware(['auth']) // atau pakai role admin
+    ->prefix('admin/login_banners')->name('admin.login_banners.')
+    ->group(function () {
+        Route::get('/', [LoginBannerController::class, 'index'])->name('index');
+        Route::get('/create', [LoginBannerController::class, 'create'])->name('create');
+        Route::post('/', [LoginBannerController::class, 'store'])->name('store');
+        Route::get('/{login_banner}/edit', [LoginBannerController::class, 'edit'])->name('edit');
+        Route::put('/{login_banner}', [LoginBannerController::class, 'update'])->name('update');
+        Route::delete('/{login_banner}', [LoginBannerController::class, 'destroy'])->name('destroy');
+        Route::patch('/{login_banner}/toggle', [LoginBannerController::class, 'toggle'])->name('toggle');
+        Route::post('/reorder', [LoginBannerController::class, 'reorder'])->name('reorder');
+    });
 
 // ✅ Homepage — ini SATU-SATUNYA route "/"
 Route::get('/', [HomeController::class, 'index'])->name('home');

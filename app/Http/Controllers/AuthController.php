@@ -5,13 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use App\Models\LoginBanner;
+
 
 class AuthController extends Controller
 {
     //
     public function showLogin()
     {
-        return view('auth.login');
+        $banners = LoginBanner::active()->ordered()->get();
+        return view('auth.login', compact('banners'));
     }
 
     public function login(Request $request)

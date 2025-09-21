@@ -133,18 +133,6 @@
                 <div class="col-xxl-9 col-lg-8 col-md-7">
                     <div class="auth-bg pt-md-5 p-4 d-flex">
                         <div class="bg-overlay bg-primary"></div>
-                        <ul class="bg-bubbles">
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ul>
                         <!-- end bubble effect -->
                         <div class="row justify-content-center align-items-center">
                             <div class="col-xl-7">
@@ -156,63 +144,42 @@
                                             <button type="button" data-bs-target="#reviewcarouselIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
                                         </div>
                                         <!-- end carouselIndicators -->
-                                        <div class="carousel-inner">
-                                            <div class="carousel-item active">
-                                                <div class="testi-contain text-white">
-                                                    <i class="bx bxs-quote-alt-left text-success display-6"></i>
-
-                                                    <h4 class="mt-4 fw-medium lh-base text-white">“Pendekatan pembelajaran mudah diterapkan dan langsung bisa diimplementasikan dalam kehidupan nyata.”
-                                                    </h4>
-                                                    <div class="mt-4 pt-3 pb-5">
-                                                        <div class="d-flex align-items-start">
-                                                            <div class="flex-shrink-0">
-                                                                <img src="{{ asset('themes/minia/assets/images/users/avatar-1.jpg') }}" class="avatar-md img-fluid rounded-circle" alt="...">
-                                                            </div>
-                                                            <div class="flex-grow-1 ms-3 mb-4">
-                                                                <h5 class="font-size-18 text-white">LPK KIBAR MADANI
-                                                                </h5>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                        <div id="reviewcarouselIndicators" class="carousel slide" data-bs-ride="carousel">
+                                            @if($banners->count() > 1)
+                                            <div class="carousel-indicators carousel-indicators-rounded justify-content-start ms-0 mb-0">
+                                                @foreach($banners as $i => $b)
+                                                <button type="button" data-bs-target="#reviewcarouselIndicators"
+                                                    data-bs-slide-to="{{ $i }}"
+                                                    class="{{ $i===0 ? 'active' : '' }}"
+                                                    @if($i===0) aria-current="true" @endif
+                                                    aria-label="Slide {{ $i+1 }}"></button>
+                                                @endforeach
                                             </div>
+                                            @endif
 
-                                            <div class="carousel-item">
-                                                <div class="testi-contain text-white">
-                                                    <i class="bx bxs-quote-alt-left text-success display-6"></i>
-
-                                                    <h4 class="mt-4 fw-medium lh-base text-white">“Lingkungan belajar yang menyenangkan dan mendorong kolaborasi serta partisipasi aktif.”</h4>
-                                                    <div class="mt-4 pt-3 pb-5">
-                                                        <div class="d-flex align-items-start">
-                                                            <div class="flex-shrink-0">
-                                                                <img src="{{ asset('themes/minia/assets/images/users/avatar-2.jpg') }}" class="avatar-md img-fluid rounded-circle" alt="...">
-                                                            </div>
-                                                            <div class="flex-grow-1 ms-3 mb-4">
-                                                                <h5 class="font-size-18 text-white">LPK KIBAR MADANI
-                                                                </h5>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="carousel-item">
-                                                <div class="testi-contain text-white">
-                                                    <i class="bx bxs-quote-alt-left text-success display-6"></i>
-
-                                                    <h4 class="mt-4 fw-medium lh-base text-white">“Program dirancang secara teliti untuk dampak karier dan pengembangan pribadi yang bermakna.”</h4>
-                                                    <div class="mt-4 pt-3 pb-5">
-                                                        <div class="d-flex align-items-start">
-                                                            <img src="{{ asset('themes/minia/assets/images/users/avatar-3.jpg') }}" class="avatar-md img-fluid rounded-circle" alt="...">
-                                                            <div class="flex-1 ms-3 mb-4">
-                                                                <h5 class="font-size-18 text-white">LPK KIBAR MADANI</h5>
-                                                                </p>
+                                            <div class="carousel-inner">
+                                                @foreach($banners as $i => $b)
+                                                <div class="carousel-item {{ $i===0 ? 'active' : '' }}">
+                                                    <div class="testi-contain text-white">
+                                                        <i class="bx bxs-quote-alt-left text-success display-6"></i>
+                                                        <h4 class="mt-4 fw-medium lh-base text-white">“{{ $b->quote }}”</h4>
+                                                        <div class="mt-4 pt-3 pb-5">
+                                                            <div class="d-flex align-items-start">
+                                                                <div class="flex-shrink-0">
+                                                                    <img src="{{ asset('storage/'.$b->image_path) }}"
+                                                                        class="avatar-md img-fluid rounded-circle" alt="...">
+                                                                </div>
+                                                                <div class="flex-grow-1 ms-3 mb-4">
+                                                                    <h5 class="font-size-18 text-white">{{ $b->author ?? 'LPK KIBAR MADANI' }}</h5>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                @endforeach
                                             </div>
                                         </div>
+
                                         <!-- end carousel-inner -->
                                     </div>
                                     <!-- end review carousel -->
