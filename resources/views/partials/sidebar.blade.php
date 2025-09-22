@@ -105,7 +105,7 @@
 
                 <li>
                     <a href="{{ route('admin.login_banners.index') }}">
-                        <i class="bx bx-message-square-quote"></i>
+                        <i class="bx bx-collection"></i>
                         <span>Login Banners</span>
                     </a>
                 </li>
