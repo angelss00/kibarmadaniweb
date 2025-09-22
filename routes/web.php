@@ -38,7 +38,7 @@ use App\Http\Controllers\Admin\LoginBannerController;
 
 
 
-Route::middleware(['auth']) // atau pakai role admin
+Route::middleware(['auth'])
     ->prefix('admin/login_banners')->name('admin.login_banners.')
     ->group(function () {
         Route::get('/', [LoginBannerController::class, 'index'])->name('index');
@@ -50,6 +50,7 @@ Route::middleware(['auth']) // atau pakai role admin
         Route::patch('/{login_banner}/toggle', [LoginBannerController::class, 'toggle'])->name('toggle');
         Route::post('/reorder', [LoginBannerController::class, 'reorder'])->name('reorder');
     });
+
 
 // ✅ Homepage — ini SATU-SATUNYA route "/"
 Route::get('/', [HomeController::class, 'index'])->name('home');

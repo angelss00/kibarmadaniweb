@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\LoginBanner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Log;
 
 class LoginBannerController extends Controller
 {
@@ -26,30 +25,23 @@ class LoginBannerController extends Controller
     // SIMPAN BARU
     public function store(Request $request)
     {
-        Log::info('Store called', $request->all());
-
         $data = $request->validate([
             'image'      => ['required', 'image', 'max:4096'],
             'quote'      => ['required', 'string', 'max:1000'],
             'author'     => ['nullable', 'string', 'max:255'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
-            'is_active'  => ['nullable', 'boolean'],
+            // is_active jangan divalidasi boolean, nanti error
         ]);
 
-        Log::info('Validated data', $data);
-
         $path = $request->file('image')->store('login/banners', 'public');
-        Log::info('Uploaded file path: ' . $path);
 
-        $banner = \App\Models\LoginBanner::create([
+        LoginBanner::create([
             'image_path' => $path,
             'quote'      => $data['quote'],
             'author'     => $data['author'] ?? null,
             'sort_order' => $data['sort_order'] ?? 0,
-            'is_active'  => (bool)($request->boolean('is_active', true)),
+            'is_active'  => $request->has('is_active'),
         ]);
-
-        Log::info('Banner saved', $banner->toArray());
 
         return redirect()->route('admin.login_banners.index')->with('success', 'Banner dibuat.');
     }
@@ -68,7 +60,6 @@ class LoginBannerController extends Controller
             'quote'      => ['required', 'string', 'max:1000'],
             'author'     => ['nullable', 'string', 'max:255'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
-            'is_active'  => ['nullable', 'boolean'],
         ]);
 
         if ($request->hasFile('image')) {
@@ -81,7 +72,7 @@ class LoginBannerController extends Controller
         $login_banner->quote      = $data['quote'];
         $login_banner->author     = $data['author'] ?? null;
         $login_banner->sort_order = $data['sort_order'] ?? $login_banner->sort_order;
-        $login_banner->is_active  = (bool)($data['is_active'] ?? false);
+        $login_banner->is_active  = $request->has('is_active');
         $login_banner->save();
 
         return redirect()->route('admin.login_banners.index')->with('success', 'Banner diupdate.');

@@ -41,7 +41,7 @@
                     <td class="text-start">{{ Str::limit($banner->quote, 60) }}</td>
                     <td>{{ $banner->author ?? '-' }}</td>
                     <td>
-                        <form method="POST" action="{{ route('admin.login-banners.reorder') }}" class="d-flex justify-content-center gap-1">
+                        <form method="POST" action="{{ route('admin.login_banners.reorder') }}" class="d-flex justify-content-center gap-1">
                             @csrf
                             <input type="number" name="orders[{{ $banner->id }}]" 
                                    value="{{ $banner->sort_order }}" min="0" 
@@ -50,7 +50,7 @@
                         </form>
                     </td>
                     <td>
-                        <form method="POST" action="{{ route('admin.login-banners.toggle',$banner) }}">
+                        <form method="POST" action="{{ route('admin.login_banners.toggle',$banner) }}">
                             @csrf @method('PATCH')
                             <button class="btn btn-sm {{ $banner->is_active?'btn-success':'btn-secondary' }}">
                                 {{ $banner->is_active ? 'Aktif' : 'Nonaktif' }}
@@ -59,10 +59,10 @@
                     </td>
                     <td>
                         <div class="btn-group">
-                            <a href="{{ route('admin.login-banners.edit',$banner) }}" class="btn btn-warning btn-sm">
+                            <a href="{{ route('admin.login_banners.edit',$banner) }}" class="btn btn-warning btn-sm">
                                 <i class="fa fa-edit"></i> Edit
                             </a>
-                            <form action="{{ route('admin.login-banners.destroy',$banner) }}" method="POST" class="d-inline">
+                            <form action="{{ route('admin.login_banners.destroy',$banner) }}" method="POST" class="d-inline">
                                 @csrf @method('DELETE')
                                 <button class="btn btn-danger btn-sm" onclick="return confirm('Hapus banner ini?')">
                                     <i class="fa fa-trash"></i> Hapus
